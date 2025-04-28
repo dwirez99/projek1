@@ -1,0 +1,101 @@
+.navbar {
+    display: flex;
+    background-color: white;    
+    align-items: center;
+    width: 1122px;
+    height: 76px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px;
+    margin-bottom: 76px;
+    padding: 0 20px;
+    border: 2px solid black;
+    border-radius: 28px;
+    box-shadow: 7px 7px black;
+}
+
+
+.navbar img {
+    background-color: white;
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.nav-menu {
+    background-color: white;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-item {
+    padding: 10px;
+    background-color: white;
+    color: #F58B05;
+    text-decoration: none;
+}
+
+.nav-item.active {
+    background-color: #F58B05;
+    color: white;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.navbar a:hover{
+    background-color: #F58B05;
+    color: black;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    bottom: 100%; /* dropdown muncul di atas tombol */
+    left: 0;
+    background: white;
+    border: 2px solid black;
+    box-shadow: 7px 7px black;
+    border-radius: 5px;
+    min-width: 200px;
+    z-index: 1000;
+    color: black;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #F58B05;
+}
+
+.show {
+    display: block;
+}
+
+@media (max-width: 1200px) {
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border-radius: 5px;
+        background: white;
+        min-width: 100%;
+    }
+    .dropdown-menu a {
+        padding: 10px;
+        border-top: 1px solid #444;
+    }
+}
