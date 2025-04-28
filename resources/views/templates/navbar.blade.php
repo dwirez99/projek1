@@ -139,6 +139,52 @@
         }
     }
 
+    @media (max-width: 1200px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        max-width: 20%;
+        margin-bottom: 10px;
+      }
+    
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        min-width: 200%;
+        max-width: 200%;
+        height: auto;
+        margin-top: 10px;
+        position: absolute;
+        bottom: 80px; /* tampil di atas navbar */
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 28px;
+        padding: 10px;
+      }
+    
+      .nav-menu.active {
+        display: flex;
+        margin: auto;
+      }
+
+    .nav-item {
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .navbar img.logo {
+        max-width: 48px;
+        max-height: 48px;
+    }
+
+    .nav-menu {
+        transition: max-height 0.3s ease;
+        overflow: hidden;
+    }
+}
+
     </style>
 </head>
 <body>
