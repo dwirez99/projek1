@@ -139,10 +139,10 @@
       <div class="section-about">
         <div class="container">
             <div class="row">
-                <div class="col-2">
+                <div class="col-4">
                   <img src="{{asset('build/assets/logo/GKL33_Dharma Wanita - Koleksilogo.com 3.png')}}" alt="LOGO DHARMA WANITA" style="width: 90%">
                 </div>
-                <div class="col-5">
+                <div class="col-8">
                   <p id="intro">
                     Biro Organisasi Sekretariat Daerah Provinsi Jawa Timur didukung oleh tiga bagian yaitu Bagian Kelembagaan dan Analisis Jabatan, Bagian Reformasi Birokrasi dan Akuntablitas Kinerja, serta Bagian Tata Laksana. Masing-masing bagian terdapat sub bagian dan kelompok jabatan fungsional yang mendukung dalam kinerja di bidang tersebut. Sebagai wujud transaparansi informasi dalam menuju reformasi birokrasi, Biro Organisasi menyajikan berbagai layanan informasi baik terkait dengan kegiatan sehari-hari maupun layanan lain yang terkait dengan informasi pelayanan publik.
                   </p>
@@ -192,17 +192,19 @@
                     <p class="mb-0">Phone: 021-5725610</p>
                     <p class="mb-2">Fax: 021-5725610</p>
                     <div class="d-flex gap-3">
-                        <a href="#"><img src="{{ asset('img/youtube.png') }}" alt="YouTube" width="24"></a>
-                        <a href="#"><img src="{{ asset('img/facebook.png') }}" alt="Facebook" width="24"></a>
-                        <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="Instagram" width="24"></a>
-                        <a href="#"><img src="{{ asset('img/whatsapp.png') }}" alt="WhatsApp" width="24"></a>
+                        <a href="#"><img src="{{ asset('build/assets/logo/youtube.png') }}" alt="YouTube" width="24"></a>
+                        <a href="#"><img src="{{ asset('build/assets/logo/facebook.png') }}" alt="Facebook" width="24"></a>
+                        <a href="#"><img src="{{ asset('build/assets/logo/instagram.png') }}" alt="Instagram" width="24"></a>
+                        <a href="#"><img src="{{ asset('build/assets/logo/whatsapp.png') }}" alt="WhatsApp" width="24"></a>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
       {{-- Akhir Footer --}}
+      <div class="fornav" style="width: 1122px; height: 130px;">
+
+      </div>
 
 
 
