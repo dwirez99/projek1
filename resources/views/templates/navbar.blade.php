@@ -39,7 +39,7 @@
 
     .navbar {
     display: flex;
-    background-color: white;    
+    background-color: white;
     align-items: center;
     width: 1122px;
     height: 76px;
@@ -147,7 +147,7 @@
         max-width: 20%;
         margin-bottom: 10px;
       }
-    
+
       .nav-menu {
         display: none;
         flex-direction: column;
@@ -162,7 +162,7 @@
         border-radius: 28px;
         padding: 10px;
       }
-    
+
       .nav-menu.active {
         display: flex;
         margin: auto;
@@ -223,6 +223,6 @@
           </li>
         </ul>
         </div>
-          
+
 </body>
 </html>
