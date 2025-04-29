@@ -1,0 +1,177 @@
+* {
+    padding: 0px;
+    margin: 10;
+}
+
+
+body {
+    background-image: url('/build/bg.png');
+    background-color: #00B7FF; /* warna jika gambar tidak dimuat */
+    background-repeat: repeat;
+    background-size:auto;
+    padding: auto;
+}
+
+
+#welcome {
+    font-family: "Baloo Thambi 2", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size:80px;
+    color: aliceblue;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    padding-left: 50px;
+
+
+}
+
+#name {
+    font-family: "Newsreader", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: bold;
+    color: aliceblue;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-size: 70px;
+    padding-top: 5px;
+    padding-left: 50px;
+
+
+}
+
+#intro {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 32px;
+    text-align: justify;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: 10px;
+}
+
+#tag{
+    font-family: "Baloo Thambi 2", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size:80px;
+    color: aliceblue;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    padding-left: 50px;
+    padding-top: 30px;
+    margin-top: 50px;
+}
+
+.section-kegiatan {
+    padding: 50px 20px;
+    background: white;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align:start;
+    box-shadow: 5px 5px 0px black;
+  }
+
+.card-custom {
+    border-radius: 20px;
+    box-shadow: 5px 5px 0px black;
+    background-color: #24c1ff;
+  }
+
+.card-title{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.card-text{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 10px;
+}
+
+.btn-lihat {
+    background: orange;
+    border: none;
+    color: black;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px black;
+    margin-top: 30px;
+    transition: 0.3s;
+    display: block; /* Or inline-block */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+  .img-fixed {
+    width: 100%;
+    height: 200px; /* Sesuaikan tingginya sesuai kebutuhan */
+    object-fit: cover;
+    border-radius: 20px 20px 0 0; /* kalau mau tetap pakai radius */
+  }
+
+  /* Bagian Guru */
+
+  .section-guru{
+    padding: 50px 20px;
+    background: white;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align:start;
+    box-shadow: 5px 5px 0px black;
+  }
+
+  .profile-card {
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.profile-header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.profile-title {
+    font-size: 1rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.img-profil {
+    width: 100%;
+    height: 250px; /* Sesuaikan tingginya sesuai kebutuhan */
+    object-fit: cover;
+    border-radius: 20px 20px 0 0; /* kalau mau tetap pakai radius */
+  }
+
+/* Akhir Guru  */
+.section-about{
+    padding: 50px 20px;
+    background: white;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align:start;
+    box-shadow: 5px 5px 0px black;
+  }
