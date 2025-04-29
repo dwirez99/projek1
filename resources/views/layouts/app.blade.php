@@ -15,6 +15,8 @@
         @yield('content')
     </div>
 
+    @include('templates.footer')
+
     {{-- Tambahkan script JS jika perlu --}}
 </body>
 </html>
