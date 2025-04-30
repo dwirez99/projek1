@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -18,5 +19,12 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
+
+//SISWA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Route::get('/', [SiswaController::class, 'daftarsiswa']);
+Route::post('/siswa', [SiswaController::class, 'store']);
+Route::put('/siswa/{id}', [SiswaController::class, 'update']);
+Route::delete('/siswa/{id}', [SiswaController::class, 'destroy']);
+Route::get('/siswa/zscore/{id}', [SiswaController::class, 'zscore']);
 
 require __DIR__.'/auth.php';
