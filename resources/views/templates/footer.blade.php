@@ -1,3 +1,4 @@
+
 <footer class="bg-warning text-dark pt-5 pb-3">
     <div class="container">
         <div class="row text-start">
@@ -43,6 +44,9 @@
                     <a href="#"><img src="{{ asset('build/assets/logo/instagram.png') }}" alt="Instagram" width="24"></a>
                     <a href="#"><img src="{{ asset('build/assets/logo/whatsapp.png') }}" alt="WhatsApp" width="24"></a>
                 </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <img src="" alt="">
             </div>
         </div>
     </div>

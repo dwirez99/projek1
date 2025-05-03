@@ -53,6 +53,7 @@
     border: 2px solid black;
     border-radius: 28px;
     box-shadow: 7px 7px black;
+    transition: all 0.3s linear;
     }
 
 
@@ -144,15 +145,16 @@
         flex-direction: column;
         height: auto;
         padding: 10px;
-        max-width: 20%;
         margin-bottom: 10px;
+        max-width: 15vw;
+        transition: all 0.3s ease;
       }
 
       .nav-menu {
         display: none;
         flex-direction: column;
-        min-width: 200%;
-        max-width: 200%;
+        min-width: 70vh;
+        max-width: 100%;
         height: auto;
         margin-top: 10px;
         position: absolute;
@@ -161,11 +163,17 @@
         border: 2px solid black;
         border-radius: 28px;
         padding: 10px;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+        gap: 25px;
       }
 
       .nav-menu.active {
         display: flex;
         margin: auto;
+        opacity: 1;
+        transform: translateY(0);
       }
 
     .nav-item {
@@ -180,10 +188,54 @@
     }
 
     .nav-menu {
-        transition: max-height 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         overflow: hidden;
     }
 }
+
+    .navbar.force-responsive {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        max-width: 20%;
+        margin-bottom: 10px;
+        transition: all 0.3s linear;
+    }
+
+    .navbar.force-responsive .nav-menu {
+        display: none;
+        flex-direction: column;
+        min-width: 200%;
+        max-width: 200%;
+        height: auto;
+        margin-top: 10px;
+        position: absolute;
+        bottom: 80px;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 28px;
+        padding: 10px;
+    }
+    .navbar.force-responsive .nav-menu.active {
+        display: flex;
+        flex-direction: column;
+        min-width: 200%;
+        max-width: 200%;
+        height: auto;
+        margin-top: 10px;
+        position: absolute;
+        bottom: 80px;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 28px;
+        padding: 10px;
+    }
+
+    .navbar.force-responsive .nav-item {
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+    }
 
     </style>
 </head>
@@ -193,7 +245,7 @@
           src="{{ asset('img/logo-dwp.png') }}" alt="Logo" class="logo" onclick="toggleMenu()"/>
         <ul class="nav-menu" id="nav">
           <li>
-            <a href="../home/home.html#welcome-page" class="nav-item">Halaman Utama</a>
+            <a href="/" class="nav-item" wire:navigate>Halaman Utama</a>
           </li>
           <li>
             <a href="../home/home.html#artikel" class="nav-item">Kegiatan</a>
@@ -214,10 +266,10 @@
           <li>
             <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
             <div class="dropdown-menu" id="dropdownGuru">
-              <a href="../biodata peserta didik/biodata.html">Biodata Peserta Didik</a>
+              <a href="../siswas" wire:navigate>Biodata Peserta Didik</a>
               <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
               <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
-              <a href="../artikel/kelolaartikel.html">Kelola Kegiatan Instansi</a>
+              <a href="/artikels" wire:navigate>Kelola Kegiatan Instansi</a>
               <a href="../akun ortu/crudortu.html">Kelola Akun</a>
             </div>
           </li>

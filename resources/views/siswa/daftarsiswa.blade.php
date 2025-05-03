@@ -122,6 +122,7 @@
         }
     </style>
 </head>
+@extends('layouts.app')
 <body>
 
 <div class="container" x-data="siswaApp()">
