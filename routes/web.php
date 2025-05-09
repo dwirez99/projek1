@@ -5,14 +5,16 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\CKEditorController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Illuminate\Support\Facades\Auth;
+use App\Livewire\Dashboard;
+
+
 
 Route::get('/', function () {
     return view('landingpages');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -36,3 +38,5 @@ require __DIR__.'/auth.php';
 Route::get('artikels', [ArtikelController::class, 'index']);
 Route::resource('artikel', ArtikelController::class);
 Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
+

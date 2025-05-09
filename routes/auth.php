@@ -33,3 +33,22 @@ Route::middleware('auth')->group(function () {
 
 Route::post('logout', App\Livewire\Actions\Logout::class)
     ->name('logout');
+
+    Route::middleware(['auth', 'role:guru'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+    });
+
+    Route::middleware(['auth', 'role:orangtua'])->group(function () {
+        Route::get('/landingpages', function () {
+            return view('orangtua.landingpages');
+        })->name('landingpages');
+    });
+
+    // Route::middleware(['auth', 'role:guest'])->group(function () {
+    //     Route::get('/landingpages', function () {
+    //         return view('landingpages');
+    //     })->name('landingpages');
+    // });
+

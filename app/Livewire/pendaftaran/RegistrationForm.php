@@ -52,7 +52,6 @@ class RegistrationForm extends Component
             'name' => $this->nama_ibu,
             'email' => $this->email,
             'password' => Hash::make($password),
-            'role' => 'orangtua',
             'username' => Str::slug($this->nama_ibu) . rand(100, 999),
         ]);
 
@@ -62,6 +61,7 @@ class RegistrationForm extends Component
             'nama' => $this->nama_ibu,
             'no_telp' => $this->no_telp,
             'email' => $this->email,
+            $user->assignRole('orangtua')
         ]);
 
         // Create Siswa record linked to Orangtua or User if needed

@@ -10,6 +10,7 @@ use Livewire\Volt\Component;
 
 new #[Layout('components.layouts.auth')] class extends Component {
     public string $name = '';
+    public string $username = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -21,17 +22,25 @@ new #[Layout('components.layouts.auth')] class extends Component {
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
 
-        event(new Registered(($user = User::create($validated))));
+        $user = User::create($validated);
+
+        $user->assignRole('orangtua');
+
+        event(new Registered($user));
+
+
+        // event(new Registered(($user = User::create($validated))));
 
         Auth::login($user);
 
-        $this->redirectIntended(route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(route('login', absolute: false), navigate: true);
     }
 }; ?>
 
@@ -45,12 +54,23 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Name -->
         <flux:input
             wire:model="name"
-            :label="__('Name')"
+            :label="__('name')"
             type="text"
             required
             autofocus
             autocomplete="name"
             :placeholder="__('Full name')"
+        />
+
+
+        <flux:input
+            wire:model="username"
+            :label="__('Name')"
+            type="text"
+            required
+            autofocus
+            autocomplete="username"
+            :placeholder="__('Masukan Username')"
         />
 
         <!-- Email Address -->
