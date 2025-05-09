@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Kelola Artikel</title>
+<title>Daftar Kegiatan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -149,11 +149,7 @@
 
     @section('content')
     <div class="judul-halaman">
-        <h4 class="judul-halaman">Daftar Artikel</h4>
-    </div>
-
-    <div class="btn-container">
-        <a href="{{route('artikel.create')}}" class="btn-tambah">+Tambah Artikel</a>
+        <h4 class="judul-halaman">Daftar Kegiatan</h4>
     </div>
 
     <div class="container-artikel">
@@ -169,14 +165,6 @@
                     {!! Str::limit($artikel->konten, 100) !!}
                 </div> --}}
                 <a href="{{ route('artikel.show', $artikel->id)}}" class="btn-selengkapnya" style="min-width: 100%">Selengkapnya</a>
-                <div class="btn-container">
-                    <a href="{{route('artikel.edit', $artikel->id)}}" class="btn-edit">Edit</a>
-                <form action="{{route('artikel.destroy', $artikel->id)}}" method="POST" style="display: inline-block">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus artikel?')">Hapus</button>
-                </form>
-                </div>
                 
             </div>
         </div>

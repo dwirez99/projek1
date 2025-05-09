@@ -35,14 +35,14 @@
             <img src="{{ asset('build/assets/car3.png') }}" class="d-block w-100" alt="Slide 3">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
-        </button>
+        </button> --}}
       </div>
       <div>
         <h3 id="welcome">Selamat Datang</h3>
@@ -56,31 +56,22 @@
       <div class="section-kegiatan">
         <div class="container">
           <div class="row justify-content-center g-4">
-
-            <div class="col-md-5">
+            @foreach($artikels as $artikel)
+            <div class="col-md-5">  
               <div class="card card-custom h-100">
-                <img src="{{ asset('build/assets/artikelkegiatan/artikel1.jpg') }}" class="card-img-top img-fixed" alt="Kegiatan 1" style="border-radius: 20px 20px 0 0;">
+                <img src="{{asset('storage/' . $artikel->thumbnail)}}" class="card-img-top img-fixed" alt="Kegiatan 1" style="border-radius: 20px 20px 0 0;">
                 <div class="card-body">
-                  <h5 class="card-title">Menggambar bersama</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis nulla massa.</p>
-                  <a href="#" class="text-dark text-decoration-underline fw-standar">Selengkapnya</a>
+                  <h5 class="card-title">{{$artikel->judul}}</h5>
+                  <div class="card-text">
+                    {!! Str::limit($artikel->konten, 25) !!}
+                  </div>
+                  <a href="{{ route('artikel.show', $artikel->id)}}" class="text-dark text-decoration-underline fw-standar">Selengkapnya</a>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-5">
-              <div class="card card-custom h-100">
-                <img src="{{ asset('build/assets/artikelkegiatan/artikel2.jpeg') }}" class="card-img-top img-fixed" alt="Kegiatan 2" style="border-radius: 20px 20px 0 0;">
-                <div class="card-body">
-                  <h5 class="card-title">Makan Bersama</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis nulla massa.</p>
-                  <a href="#" class="text-dark text-decoration-underline fw-standar">Selengkapnya</a>
-
-                </div>
-              </div>
-            </div>
+            @endforeach
           </div>
-          <button class="btn-lihat">Lihat Semua Kegiatan</button>
+          <button class="btn-lihat"><a href="/kegiatan" wire:navigate>Lihat Semua Kegiatan</a></button>
         </div>
       </div>
       </div>
@@ -137,13 +128,13 @@
       {{-- Akhir Guru --}}
       {{-- Mulai Tentang Kami --}}
       <h4 id="tag">Tentang Kami</h4>
-      <div class="section-about">
+      <div class="section-about" >
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="row-8">
                   <img src="{{asset('build/assets/logo/GKL33_Dharma Wanita - Koleksilogo.com 3.png')}}" alt="LOGO DHARMA WANITA" style="width: 90%">
                 </div>
-                <div class="col-8">
+                <div class="row-4">
                   <p id="intro">
                     Biro Organisasi Sekretariat Daerah Provinsi Jawa Timur didukung oleh tiga bagian yaitu Bagian Kelembagaan dan Analisis Jabatan, Bagian Reformasi Birokrasi dan Akuntablitas Kinerja, serta Bagian Tata Laksana. Masing-masing bagian terdapat sub bagian dan kelompok jabatan fungsional yang mendukung dalam kinerja di bidang tersebut. Sebagai wujud transaparansi informasi dalam menuju reformasi birokrasi, Biro Organisasi menyajikan berbagai layanan informasi baik terkait dengan kegiatan sehari-hari maupun layanan lain yang terkait dengan informasi pelayanan publik.
                   </p>
@@ -154,9 +145,6 @@
       {{-- Akhir Tentang kami --}}
       {{-- Awal Footer --}}
       {{-- Akhir Footer --}}
-      <div class="fornav" style="width: 1122px; height: 130px;">
-
-      </div>
 
 
 

@@ -1,0 +1,10 @@
+{
+  "name": "ckeditor5-custom-project",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "http-server -o ./index.html"
+  },
+  "devDependencies": {
+    "http-server": "^14.0.0"
+  }
+}

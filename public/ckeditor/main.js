@@ -1,112 +1,9 @@
-@extends('layouts.app')
-<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/96x96.png" sizes="96x96">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/120x120.png" sizes="120x120">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/152x152.png" sizes="152x152">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/167x167.png" sizes="167x167">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/180x180.png" sizes="180x180">
-<link rel="stylesheet" href="{{asset('ckeditor/style.css')}}">
-<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/45.0.0/ckeditor5.css" crossorigin>
-@push('style')
-<style>
-    .headingArtikel{
-        font-family: "Baloo Thambi 2", system-ui;
-        font-optical-sizing: auto;
-        font-weight: 700;
-        font-style: normal;
-        font-size:80px;
-        color: aliceblue;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-        padding-left: 50px;
-        min-width: 100vw;
-    }
+/**
+ * This configuration was generated using the CKEditor 5 Builder. You can modify it anytime using this link:
+ * https://ckeditor.com/ckeditor-5/builder/?redirect=portal#installation/NoRgNARATAdArDADBSAOA7CEAWbqCchAbFAMyqpymJGIhXb5T6pGn71FxHZFOlQUEAKYA7FIjCgw4SeFkBdSFiIAjfOgBmEBUA==
+ */
 
-    .containerForm{
-        padding: 28px;
-        display: flex;
-        flex-direction: column;
-        max-width: 100vw;
-        position: relative;
-        z-index: 1;
 
-    }
-
-    form{
-        display: flex;
-        flex-direction: column;
-        color: white;
-        padding: 28px;
-    }
-
-    input{
-        width: auto;
-        margin-bottom: 18px;
-        padding: 18px;
-        border: 2px solid black;
-        border-radius: 7px;
-
-    }
-
-    .ck.ck-editor__main {
-    z-index: 1;
-    color: black;
-    }
-
-    .ck.ck-editor__editable_inline {
-        min-height: 300px;
-        background-color: white;
-        z-index: 1;
-    }
-
-    
-
-</style>
-@endpush
-@section('content')
-
-<div class="headingArtikel">
-    <h2>Buat Artikel baru</h2>
-</div>
-
-<div class="containerForm">
-    <form action="{{ route('artikel.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <label for="judul"><h2>Judul Artikel</h2></label>
-    <input type="text" name="judul" placeholder="Judul Artikel" class="judulArtikel">
-    
-    <label for="thumbnail"><h2>Thumbnail Artikel:</h2></label>
-    <input type="file" name="thumbnail" class="thumbnailArtikel" id="thumbnail" accept="image/*">
-
-    <label for="konten"><h2>Konten Artikel:</h2></label>
-    <img id="preview-thumbnail" src="#" alt="Preview Thumbnail" style="max-width: 300px; display: none;">
-
-    <textarea name="konten" id="konten" class="kontenArtikel" cols="30" rows="10"></textarea>
-	<script>
-		ClassicEditor
-			.create(document.querySelector('#konten'), {
-				simpleUpload: {
-					uploadUrl: '{{ route('ckeditor.upload') }}',
-					headers: {
-						'X-CSRF-TOKEN': '{{ csrf_token() }}'
-					}
-				}
-			})
-			.then(editor => {
-				window.editor = editor;
-			})
-			.catch(error => {
-				console.error(error);
-			});
-		</script>
-    <button type="submit" class="btn-artikel">Simpan</button>
-    </form>
-</div>
-
-@endsection
-
-<script src="https://cdn.ckeditor.com/ckeditor5/45.0.0/ckeditor5.umd.js" crossorigin></script>
-
-<script>
 const {
 	ClassicEditor,
 	Autoformat,
@@ -183,7 +80,7 @@ const {
 } = window.CKEDITOR;
 
 const LICENSE_KEY =
-	'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzgxOTgzOTksImp0aSI6IjA5MDNiMjJhLWI3YWUtNDVlYi05MWM5LWM1NjhhNmQ5NjI1YSIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIl0sInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCJdLCJ2YyI6ImJkZDc4N2VjIn0.d-BqNP26xkRECdqqLNLBdQG5vIBO7MJQdeqtB_RW0YD2bHclpSsD4G0ZQDyVNtZc1op6VRBzsaOLMZqkAxqu1g';
+	'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzgxMTE5OTksImp0aSI6IjZjOGFlNDU3LTZmMmUtNGY4Ny05MmYzLWEyMGNlNDU3YzFiMSIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIiwibG9jYWxob3N0IiwiMTkyLjE2OC4qLioiLCIxMC4qLiouKiIsIjE3Mi4qLiouKiIsIioudGVzdCIsIioubG9jYWxob3N0IiwiKi5sb2NhbCJdLCJ1c2FnZUVuZHBvaW50IjoiaHR0cHM6Ly9wcm94eS1ldmVudC5ja2VkaXRvci5jb20iLCJkaXN0cmlidXRpb25DaGFubmVsIjpbImNsb3VkIiwiZHJ1cGFsIl0sImxpY2Vuc2VUeXBlIjoiZGV2ZWxvcG1lbnQiLCJmZWF0dXJlcyI6WyJEUlVQIl0sInZjIjoiNzdmNzBlMDMifQ.YS91Iya_UYw0NlmG2yLdZIpqpIZeBX-u5XLkfTm0KpLBrWDo3ynQIpsngRGYn1QGZIJMVgGfwD0Fy188hkPKXw';
 
 const editorConfig = {
 	
@@ -404,29 +301,15 @@ const editorConfig = {
 		isVisible: true
 	},
     simpleUpload: {
-        uploadUrl: '{{ route('ckeditor.upload') }}', // Laravel route
-        headers: {
-        	'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
+    uploadUrl: '{{ route("ckeditor.upload") }}?_token={{ csrf_token() }}',
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    }
 },
-
 	placeholder: 'Tulis Sesuatu...',
 	table: {
 		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
 	}
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-    ClassicEditor.create(document.querySelector('#konten'), editorConfig);
-});
-
-    // Preview gambar thumbnail
-    document.getElementById('thumbnail').addEventListener('change', function (event) {
-        const [file] = this.files;
-        if (file) {
-            const preview = document.getElementById('preview-thumbnail');
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-        }
-    });
-</script>
+ClassicEditor.create(document.querySelector('#konten'), editorConfig);

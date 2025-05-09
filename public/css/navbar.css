@@ -5,6 +5,7 @@
     width: 1122px;
     height: 76px;
     position: fixed;
+    z-index: 9999;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
