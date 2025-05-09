@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('statusgizis', function (Blueprint $table) {
+            $table->id('idstatus');
+            $table->unsignedBigInteger('nisn');
+            $table->float('z_score');
+            $table->string('status');
+            $table->date('tanggalpembuatan');
+            $table->timestamps();
+
+            $table->foreign('nisn')->references('nisn')->on('pesertadidiks')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('statusgizis');
+    }
+};
