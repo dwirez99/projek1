@@ -16,7 +16,7 @@ use App\Models\Artikel;
 //     return view('landingpages');
 // })->name('home');
 
-Route::get('/',[HomeController::class, 'getArtikel']);
+Route::get('/',[HomeController::class, 'getArtikel'])->name('home');
 
 
 

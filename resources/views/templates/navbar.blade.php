@@ -333,25 +333,13 @@
               >Guru</a
             >
             <div class="dropdown-menu" id="dropdownGuru">
-              <a href="../siswas" wire:navigate>Biodata Peserta Didik</a>
+              <a href="/pesertadidiks" wire:navigate>Biodata Peserta Didik</a>
               <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
               <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
-              <a href="/artikel" wire:navigate>Kelola Kegiatan Instansi</a>
+              <a href="/artikels" wire:navigate>Kelola Kegiatan Instansi</a>
               <a href="../akun ortu/crudortu.html">Kelola Akun</a>
             </div>
           </li>
-          @role('guru')
-<li>
-  <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
-  <div class="dropdown-menu" id="dropdownGuru">
-    <a href="/pesertadidik" wire:navigate>Biodata Peserta Didik</a>
-    <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
-    <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
-    <a href="/artikels" wire:navigate>Kelola Kegiatan Instansi</a>
-    <a href="../akun ortu/crudortu.html">Kelola Akun</a>
-  </div>
-</li>
-@endrole
           <li>
             <!-- User Icon with dropdown -->
             @auth
@@ -440,3 +428,4 @@
     </script>
 </body>
 </html>
+
