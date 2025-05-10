@@ -50,7 +50,7 @@ class PesertadidikController extends Controller
             $foto = $request->file('foto')->store('foto', 'public');
             $validated['foto'] = $foto;
         }
-    
+
         Pesertadidik::create($validated);
         return redirect()->route('pesertadidik.index')->with('success', 'Data ditambahkan!');
     }
