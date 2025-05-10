@@ -2,18 +2,15 @@
 
 
 use App\Http\Controllers\ArtikelController;
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\PesertadidikController;
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\StatusgiziController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\Dashboard;
-
-
+use App\Models\Artikel;
 
 // Route::get('/', function () {
 //     return view('landingpages');
@@ -31,12 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-//SISWA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Route::get('/siswas', [SiswaController::class, 'daftarsiswa']);
-Route::post('/siswa', [SiswaController::class, 'store']);
-Route::put('/siswa/{id}', [SiswaController::class, 'update']);
-Route::delete('/siswa/{id}', [SiswaController::class, 'destroy']);
-Route::get('/siswa/zscore/{id}', [SiswaController::class, 'zscore']);
 //Pesertadidik..
 Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
 Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
@@ -49,13 +40,17 @@ Route::get('/statusgizi', [StatusgiziController::class, 'index'])->name('statusg
 Route::get('/statusgizi/create/{nisn}', [StatusgiziController::class, 'create'])->name('statusgizi.create');
 Route::post('/statusgizi', [StatusgiziController::class, 'store'])->name('statusgizi.store');
 
-//ARTIKEL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Route::get('artikels', [ArtikelController::class, 'index']);
-Route::resource('artikel', ArtikelController::class);
-Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+//ARTIKEL
+// Route::resource('artikel', ArtikelController::class);
+Route::get('/artikels', [ArtikelController::class, 'index'])->name('artikel.index');        // Menampilkan semua artikel
+Route::get('/artikels/create', [ArtikelController::class, 'create'])->name('artikel.create'); // Form tambah artikel
+Route::post('/artikels', [ArtikelController::class, 'store'])->name('artikel.store');         // Simpan artikel baru
 
-
-
+Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');  // Tampilkan detail artikel
+Route::get('/artikels/{artikel}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit'); // Form edit artikel
+Route::put('/artikels/{artikel}', [ArtikelController::class, 'update'])->name('artikel.update');  // Update artikel
+Route::delete('/artikels/{artikel}', [ArtikelController::class, 'destroy'])->name('artikel.destroy'); // Hapus artikel
+Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 Route::get('/kegiatan', [HomeController::class,'listArtikel']);
 
 

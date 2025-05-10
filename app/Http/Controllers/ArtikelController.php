@@ -46,7 +46,7 @@ class ArtikelController extends Controller
 
         Artikel::create($data);
 
-        return redirect()->route('artikel.index')->with('succes', 'Artikel berhasil dibuat');
+        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil dibuat');
     }
 
     /**
@@ -83,7 +83,7 @@ class ArtikelController extends Controller
         }
 
         $artikel->update($data);
-        return redirect()->route('artikel.index')->with('succes', 'Artikel berhasil diperbarui');
+        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil diperbarui');
 
     }
 
@@ -93,7 +93,7 @@ class ArtikelController extends Controller
     public function destroy(Artikel $artikel)
     {
         $artikel->delete();
-        return redirect()->route('artikel.index')->with('succes', 'Artikel berhasil dihapus');
+        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil dihapus');
 
     }
 }

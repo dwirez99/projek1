@@ -11,21 +11,16 @@ class CKEditorController extends Controller
     {
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
-            $path = $file->store('storage/uploads'); // Simpan di storage/app/public/uploads
-            $url = Storage::url($path); // hasilnya: /storage/uploads/namafile.jpg
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('media', $filename, 'public');
 
             return response()->json([
-                'url' => $url
+                'uploaded' => 1,
+                'fileName' => $filename,
+                'url' => asset('storage/media/' . $filename) // ⬅️ pastikan ini betul
             ]);
         }
 
-        return response()->json(['error' => 'Tidak ada file yang diunggah.'], 400);
+        return response()->json(['uploaded' => 0, 'error' => ['message' => 'Upload failed']]);
     }
 }
-
-
-
-
-
-
-

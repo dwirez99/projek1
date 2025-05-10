@@ -13,6 +13,8 @@
     
     @stack('style')
 
+    @stack('script')
+
     <script src="{{asset('js/navbar.js')}}"></script>
 
     <script>
@@ -62,7 +64,7 @@
             <a href="../siswas" wire:navigate>Biodata Peserta Didik</a>
             <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
             <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
-            <a href="/artikels" wire:navigate>Kelola Kegiatan Instansi</a>
+            <a href="{{ route('artikel.index') }}">Kelola Kegiatan Instansi</a>
             <a href="../akun ortu/crudortu.html">Kelola Akun</a>
           </div>
         </li>
@@ -83,4 +85,5 @@
     
     {{-- Tambahkan script JS jika perlu --}}
 </body>
+
 </html>
