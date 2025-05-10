@@ -54,4 +54,5 @@ Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.up
 Route::get('/kegiatan', [HomeController::class,'listArtikel']);
 
 
+
 require __DIR__.'/auth.php';
