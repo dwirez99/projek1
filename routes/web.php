@@ -12,6 +12,11 @@ use App\Livewire\Dashboard;
 use App\Models\Artikel;
 
 Route::get('/', [HomeController::class, 'getArtikel']);
+// Route::get('/', function () {
+//     return view('landingpages');
+// })->name('home');
+
+Route::get('/',[HomeController::class, 'getArtikel'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
