@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('namaortu');
             $table->string('notelportu');
-            $table->string('emailortu');
+            $table->string('alamat');
             $table->timestamps();
         });
     }

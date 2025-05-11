@@ -26,12 +26,21 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+
 // Pesertadidik..
 Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
 Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
 Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
 Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
 Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
+//Pesertadidik..
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
+    Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
+    Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
+    Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
+    Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
+});
 
 // Statusgizi..
 Route::prefix('statusgizi')->name('statusgizi.')->group(function () {
