@@ -12,6 +12,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
     public string $name = '';
     public string $username = '';
     public string $email = '';
+    public string $notelp = '';
+    public string $alamat = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -24,6 +26,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'notelp' => ['required', 'regex:/^[0-9]{10,15}$/', 'unique:' . User::class],
+            'alamat' => ['required','string','max:255'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -40,12 +44,12 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         Auth::login($user);
 
-        $this->redirectIntended(route('login', absolute: false), navigate: true);
+        $this->redirectIntended(route('home', absolute: false), navigate: true);
     }
 }; ?>
 
 <div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+    <x-auth-header :title="__('Buat Akun Baru')" :description="__('Masukan Detail Infromasi Di bawah sini')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
@@ -54,18 +58,18 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Name -->
         <flux:input
             wire:model="name"
-            :label="__('name')"
+            :label="__('Nama Lengkap')"
             type="text"
             required
             autofocus
             autocomplete="name"
-            :placeholder="__('Full name')"
+            :placeholder="__('Nama Lengkap')"
         />
 
 
         <flux:input
             wire:model="username"
-            :label="__('Name')"
+            :label="__('Nama Panggilan')"
             type="text"
             required
             autofocus
@@ -76,12 +80,31 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Email Address -->
         <flux:input
             wire:model="email"
-            :label="__('Email address')"
+            :label="__('Alamat Email')"
             type="email"
             required
             autocomplete="email"
             placeholder="email@example.com"
         />
+
+        <flux:input
+            wire:model="notelp"
+            :label="__('Nomor Telepon')"
+            type="tel"
+            required
+            autocomplete="tel"
+            placeholder="08123456789"
+        />
+
+        <flux:input
+            wire:model="alamat"
+            :label="__('Alamat Rumah')"
+            type="alamat"
+            required
+            autocomplete="alamat"
+            placeholder="Rt000,RW000,Ds...,Kec....,"
+        />
+
 
         <!-- Password -->
         <flux:input
@@ -96,11 +119,11 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Confirm Password -->
         <flux:input
             wire:model="password_confirmation"
-            :label="__('Confirm password')"
+            :label="__('Pastikan password')"
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Confirm password')"
+            :placeholder="__('Pastikan password')"
         />
 
         <div class="flex items-center justify-end">
@@ -111,7 +134,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     </form>
 
     <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-        {{ __('Already have an account?') }}
+        {{ __('Sudah Punya Akun?') }}
         <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
     </div>
 </div>

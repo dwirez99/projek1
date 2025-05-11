@@ -29,11 +29,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Pesertadidik..
-Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
-Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
-Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
-Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
-Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
+    Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
+    Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
+    Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
+    Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
+});
 
 // StatusgiziController..
 Route::get('/statusgizi', [StatusgiziController::class, 'index'])->name('statusgizi.index');

@@ -111,6 +111,7 @@
                         <a href="#">Status Gizi Siswa</a>
                     </div>
                 </li>
+                @role('guru')
                 <li>
                     <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
                     <div class="dropdown-menu" id="dropdownGuru">
@@ -121,6 +122,7 @@
                         <a href="../akun ortu/crudortu.html">Kelola Akun</a>
                     </div>
                 </li>
+                @endrole
                 {{-- Authentication Links --}}
                 @auth
                 <li>
