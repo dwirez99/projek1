@@ -79,7 +79,6 @@
                             <label>Tahun Ajar</label>
                             <select name="tahunajar" class="form-select">
                                 <option value="">Pilih Tahun Ajar</option>
-                                <option value="2023/2024" {{ old('tahunajar') == '2023/2024' ? 'selected' : '' }}>2023/2024</option>
                                 <option value="2024/2025" {{ old('tahunajar') == '2024/2025' ? 'selected' : '' }}>2024/2025</option>
                                 <option value="2025/2026" {{ old('tahunajar') == '2025/2026' ? 'selected' : '' }}>2025/2026</option>
                             </select>

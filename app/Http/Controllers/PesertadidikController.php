@@ -9,10 +9,18 @@ use Illuminate\Http\Request;
 class PesertadidikController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $pesertadidiks = Pesertadidik::with('orangtua')->get();
+        $query = Pesertadidik::with('orangtua');
+
+        if($request->has('cari') && !empty($request->cari)) {
+            $query->where('namapd', 'like', '%' . $request->cari. '%');
+        }
+
+        $pesertadidiks = $query->get();
+        // $pesertadidiks = Pesertadidik::with('orangtua')->get();
         $orangtuas = Orangtua::all();
+        
         return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
     }
 
