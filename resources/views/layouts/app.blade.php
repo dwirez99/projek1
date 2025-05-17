@@ -104,6 +104,7 @@
                 <li><a href="/#artikel" class="nav-item">Kegiatan</a></li>
                 <li><a href="/#tentang-kami" class="nav-item">Tentang Kami</a></li>
                 <li><a href="/bagian bita/guru.html" class="nav-item">Daftar Guru</a></li>
+                @role('orangtua')
                 <li>
                     <a href="#siswa" class="nav-item" onclick="toggleDropdownSiswa(event)">Siswa</a>
                     <div class="dropdown-menu" id="dropdownSiswa">
@@ -115,7 +116,7 @@
                 <li>
                     <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
                     <div class="dropdown-menu" id="dropdownGuru">
-                        <a href="../siswas" wire:navigate>Biodata Peserta Didik</a>
+                        <a href="{{ route('pesertadidik.index') }}" wire:navigate>Biodata Peserta Didik</a>
                         <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
                         <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
                         <a href="{{ route('artikel.index') }}">Kelola Kegiatan Instansi</a>

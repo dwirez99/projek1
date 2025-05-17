@@ -16,7 +16,7 @@ Route::get('/', [HomeController::class, 'getArtikel']);
 //     return view('landingpages');
 // })->name('home');
 
-Route::get('/',[HomeController::class, 'getArtikel'])->name('home');
+Route::get('/', [HomeController::class, 'getArtikel'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -54,15 +54,17 @@ Route::prefix('statusgizi')->name('statusgizi.')->group(function () {
 });
 
 // Artikel
-Route::get('/artikels', [ArtikelController::class, 'index'])->name('artikel.index');
-Route::get('/artikels/create', [ArtikelController::class, 'create'])->name('artikel.create');
-Route::post('/artikels', [ArtikelController::class, 'store'])->name('artikel.store');
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/artikels', [ArtikelController::class, 'index'])->name('artikel.index');
+    Route::get('/artikels/create', [ArtikelController::class, 'create'])->name('artikel.create');
+    Route::post('/artikels', [ArtikelController::class, 'store'])->name('artikel.store');
+    Route::get('/artikels/{artikel}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
+    Route::put('/artikels/{artikel}', [ArtikelController::class, 'update'])->name('artikel.update');
+    Route::delete('/artikels/{artikel}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
+    Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+});
 Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');
-Route::get('/artikels/{artikel}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
-Route::put('/artikels/{artikel}', [ArtikelController::class, 'update'])->name('artikel.update');
-Route::delete('/artikels/{artikel}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtikel');
 
-Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
-Route::get('/kegiatan', [HomeController::class,'listArtikel']);
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

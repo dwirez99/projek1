@@ -358,7 +358,7 @@
 			isVisible: true
 		},
 		simpleUpload: {
-			uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}", // Laravel route
+			uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
 		},
 		table: {
 			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']

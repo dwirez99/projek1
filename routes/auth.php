@@ -35,7 +35,7 @@ Route::post('logout', App\Livewire\Actions\Logout::class)
     ->name('logout');
 
     Route::middleware(['auth', 'role:guru'])->group(function () {
-        Route::get('/dashboard', function () {
+        Route::get('/landingpages', function () {
             return view('dashboard');
         })->name('dashboard');
     });

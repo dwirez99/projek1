@@ -17,7 +17,7 @@ class CKEditorController extends Controller
             return response()->json([
                 'uploaded' => 1,
                 'fileName' => $filename,
-                'url' => asset('storage/media/' . $filename) // ⬅️ pastikan ini betul
+                'url' => asset('storage/media/' . $filename)
             ]);
         }
 
