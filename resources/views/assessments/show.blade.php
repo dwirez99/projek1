@@ -15,11 +15,13 @@
             <h5 class="mb-0">Penilaian tanggal: {{ $assessment->assessment_date->format('d/m/Y') }}</h5>
             <form action="{{ route('assessments.destroy', $assessment->id) }}" method="POST">
                 @csrf
+                @role('guru')
                 @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-danger"
                         onclick="return confirm('Hapus penilaian ini?')">
                     <i class="fas fa-trash"></i> Hapus
                 </button>
+                @endrole
             </form>
         </div>
         <div class="card-body">

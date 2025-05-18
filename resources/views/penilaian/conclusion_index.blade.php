@@ -9,16 +9,63 @@
     @else
         <div class="row">
             @foreach($children as $child)
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $child->namapd }}</h5>
-                            <p class="card-text"><strong>NISN:</strong> {{ $child->nisn }}</p>
-                            <p class="card-text"><strong>Status Gizi Terakhir:</strong> {{ $child->statusgizi ? $child->statusgizi->status : 'Tidak ada data' }}</p>
-                            <a href="{{ route('penilaian.conclusion', $child->nisn) }}" class="btn btn-primary">Lihat Kesimpulan</a>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="row g-0 h-100">
+                        <!-- Left Side - Information -->
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">{{ $child->namapd }}</h5>
+
+                                <div class="student-info">
+                                    <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                                        <span class="text-muted">NISN:</span>
+                                        <strong>{{ $child->nisn }}</strong>
+                                    </div>
+
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-6">
+                                            <div class="bg-light rounded p-2">
+                                                <small class="text-muted d-block">Berat Badan</small>
+                                                <strong class="text-primary">{{ $child->beratbadan }} kg</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="bg-light rounded p-2">
+                                                <small class="text-muted d-block">Tinggi Badan</small>
+                                                <strong class="text-primary">{{ $child->tinggibadan }} cm</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <span class="badge bg-{{ $child->statusgizi ? 'success' : 'secondary' }} p-2 w-100">
+                                            Status Gizi: {{ $child->statusgizi ? $child->statusgizi->status : 'Belum dinilai' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <a href="{{ route('penilaian.conclusion', $child->nisn) }}"
+                                       class="btn btn-primary btn-sm">
+                                       <i class="fas fa-chart-line me-1"></i> Lihat Kesimpulan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Photo -->
+                        <div class="col-md-5">
+                            <div class="h-100">
+                                <img src="{{ $child->foto ? asset('storage/' . $child->foto) : asset('images/default-student.jpg') }}"
+                                     class="img-fluid h-100 w-100 object-fit-cover rounded-end"
+                                     alt="Foto {{ $child->namapd }}"
+                                     style="min-height: 200px;">
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
     @endif
