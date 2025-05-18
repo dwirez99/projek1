@@ -17,7 +17,9 @@ Route::get('/', [HomeController::class, 'getArtikel']);
 //     return view('landingpages');
 // })->name('home');
 
-Route::get('/', [HomeController::class, 'getArtikel'])->name('home');
+Route::get('/',[HomeController::class, 'getArtikel'])->name('home');
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -27,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-Route::middleware(['auth', 'role:orangtua'])->group(function () { 
+Route::middleware(['auth', 'role:orangtua'])->group(function () {
     Route::get('/statusgiziOrtu', [StatusgiziController::class, 'indexOrtu'])->name('statusOrtu.index');
 });
 

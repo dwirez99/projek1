@@ -58,7 +58,7 @@
         <div class="container">
           <div class="row justify-content-center g-4">
             @foreach($artikels as $artikel)
-            <div class="col-md-5">  
+            <div class="col-md-5">
               <div class="card card-custom h-100">
                 <img src="{{asset('storage/' . $artikel->thumbnail)}}" class="card-img-top img-fixed" alt="Kegiatan 1" style="border-radius: 20px 20px 0 0;">
                 <div class="card-body">
@@ -127,22 +127,34 @@
         </div>
       </div>
       {{-- Akhir Guru --}}
+
       {{-- Mulai Tentang Kami --}}
       <h4 id="tag">Tentang Kami</h4>
-      <div class="section-about" >
+      <div class="section-about">
         <div class="container">
-            <div class="row">
-                <div class="row-8">
-                  <img src="{{asset('build/assets/logo/GKL33_Dharma Wanita - Koleksilogo.com 3.png')}}" alt="LOGO DHARMA WANITA" style="width: 90%">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="{{ asset('build/assets/logo/GKL33_Dharma Wanita - Koleksilogo.com 3.png') }}" alt="LOGO DHARMA WANITA" class="img-fluid">
                 </div>
-                <div class="row-4">
-                  <p id="intro">
-                    Biro Organisasi Sekretariat Daerah Provinsi Jawa Timur didukung oleh tiga bagian yaitu Bagian Kelembagaan dan Analisis Jabatan, Bagian Reformasi Birokrasi dan Akuntablitas Kinerja, serta Bagian Tata Laksana. Masing-masing bagian terdapat sub bagian dan kelompok jabatan fungsional yang mendukung dalam kinerja di bidang tersebut. Sebagai wujud transaparansi informasi dalam menuju reformasi birokrasi, Biro Organisasi menyajikan berbagai layanan informasi baik terkait dengan kegiatan sehari-hari maupun layanan lain yang terkait dengan informasi pelayanan publik.
-                  </p>
+                <div class="col-md-8">
+                    <p id="intro">
+                        Biro Organisasi Sekretariat Daerah Provinsi Jawa Timur didukung oleh tiga bagian yaitu Bagian Kelembagaan dan Analisis Jabatan, Bagian Reformasi Birokrasi dan Akuntablitas Kinerja, serta Bagian Tata Laksana. Masing-masing bagian terdapat sub bagian dan kelompok jabatan fungsional yang mendukung dalam kinerja di bidang tersebut. Sebagai wujud transparansi informasi dalam menuju reformasi birokrasi, Biro Organisasi menyajikan berbagai layanan informasi baik terkait dengan kegiatan sehari-hari maupun layanan lain yang terkait dengan informasi pelayanan publik.
+                    </p>
                 </div>
-          </div>
+            </div>
+            <div class="map-container" style="width: 100%; height: 400px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.289730510619!2d112.20740907595419!3d-7.7590656769486825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e785d48f5702d4f%3A0xb219f218217474dd!2sTK%20DHARMA%20WANITA%20LAMONG!5e0!3m2!1sen!2snl!4v1747543215535!5m2!1sen!2snl"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            </div>
+
         </div>
-      </div>
+    </div>
+
       {{-- Akhir Tentang kami --}}
       {{-- Awal Footer --}}
       {{-- Akhir Footer --}}
