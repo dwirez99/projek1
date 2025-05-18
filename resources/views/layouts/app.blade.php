@@ -105,15 +105,15 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar">
             <img src="{{ asset('img/logo-dwp.png') }}" alt="Logo" class="logo" onclick="toggleMenu()"/>
             <ul class="nav-menu" id="nav">
                 <li><a href="{{ route('home') }}" class="nav-item">Halaman Utama</a></li>
-                <li><a href="/#artikel" class="nav-item">Kegiatan</a></li>
-                <li><a href="/#tentang-kami" class="nav-item">Tentang Kami</a></li>
-                <li><a href="/bagian bita/guru.html" class="nav-item">Daftar Guru</a></li>
+                <li><a href="/kegiatan" wire:navigate class="nav-item">Kegiatan</a></li>
+                <li><a href="{{ route('home') }}#about" class="nav-item">Tentang Kami</a></li>
+                <li><a href="" class="nav-item">Daftar Guru</a></li>
                 @role('orangtua')
                 <li>
                     <a href="#siswa" class="nav-item" onclick="toggleDropdownSiswa(event)">Siswa</a>

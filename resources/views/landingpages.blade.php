@@ -129,7 +129,7 @@
       {{-- Akhir Guru --}}
 
       {{-- Mulai Tentang Kami --}}
-      <h4 id="tag">Tentang Kami</h4>
+      <h4 id="about">Tentang Kami</h4>
       <div class="section-about">
         <div class="container">
             <div class="row align-items-center">
