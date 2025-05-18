@@ -21,14 +21,17 @@
             const navbarBottom = navbar.getBoundingClientRect().bottom;
             const footerTop = footer.getBoundingClientRect().top;
 
+            // Jika bawah navbar melewati atas footer
             if (navbarBottom >= footerTop) {
                 navbar.classList.add("force-responsive");
             } else {
                 navbar.classList.remove("force-responsive");
             }
         });
+
+
     </script>
-    @include('livewire.daftar-popout')
+    {{-- @include('livewire.daftar-popout') --}}
     <style>
         .user-menu {
             position: relative;
@@ -93,6 +96,13 @@
             color: black;
         }
     </style>
+
+
+    {{-- @include('livewire.daftar-popout') --}}
+    {{-- @include('templates.navbar') --}}
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+
+
 </head>
 
 <body>
@@ -133,7 +143,6 @@
                             {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
                         </div>
                     </div>
-
                     <div class="user-dropdown" id="userDropdown" role="menu" aria-hidden="true">
                         <a href="#" class="user-name" tabindex="0">{{ Auth::user()->name }}</a>
                         <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
@@ -142,14 +151,22 @@
                                 Logout
                             </a>
                         </form>
-
                     </div>
                 </li>
                 @endauth
 
+    {{-- Panggil navbar dari folder template --}}
+
+    {{-- <div class="content">
+        @yield('content')
+    </div> --}}
+
+
+
+
                 @guest
                 <li><a href="{{ route('login') }}" class="nav-item">Login</a></li>
-                <li><a href="{{ route('register') }}" class="nav-item">Register</a></li>
+                {{-- <li><a href="{{ route('register') }}" class="nav-item">Register</a></li> --}}
                 @endguest
             </ul>
         </nav>
@@ -163,6 +180,31 @@
         @include('templates.footer')
 
     </footer>
+
+    {{-- Tambahkan script JS jika perlu --}}
+    <script>
+        function toggleUserDropdown(event) {
+            event.stopPropagation(); // Prevent closing immediately
+
+            const dropdown = document.getElementById('userDropdown');
+            const userMenu = document.getElementById('userMenu');
+
+            // Toggle the .show class
+            dropdown.classList.toggle('show');
+            userMenu.classList.toggle('show');
+        }
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('userDropdown');
+            const userMenu = document.getElementById('userMenu');
+
+            if (!userMenu.contains(event.target)) {
+                dropdown.classList.remove('show');
+                userMenu.classList.remove('show');
+            }
+        });
+    </script>
 
 </body>
 </html>
