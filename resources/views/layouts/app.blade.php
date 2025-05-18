@@ -119,7 +119,7 @@
                 <li>
                     <a href="#siswa" class="nav-item" onclick="toggleDropdownSiswa(event)">Siswa</a>
                     <div class="dropdown-menu" id="dropdownSiswa">
-                        <a href="#">Penilaian Siswa</a>
+                        <a href="{{route('penilaian.conclusion.index')}}">Penilaian Siswa</a>
                         <a href="{{ route('statusOrtu.index') }}">Status Gizi Siswa</a>
                     </div>
                 </li>

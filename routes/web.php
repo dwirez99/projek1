@@ -88,8 +88,14 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/assessments/create/{nisn}', [AssesmentController::class, 'create'])->name('assessments.create');
     Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
     Route::post('/assessments', [AssesmentController::class, 'store'])->name('assessment.store');
-
     Route::delete('/assessments/{id}', [AssesmentController::class, 'destroy'])->name('assessments.destroy');
+
+});
+
+Route::middleware(['auth', 'role:orangtua'])->group(function () {
+    Route::get('/penilaian/conclusion', [AssesmentController::class, 'conclusionIndex'])->name('penilaian.conclusion.index');
+Route::get('/penilaian/conclusion/{nisn}', [AssesmentController::class, 'conclusion'])->name('penilaian.conclusion');
+Route::get('/penilaian/conclusion/{nisn}/pdf', [AssesmentController::class, 'exportConclusionPdf'])->name('penilaian.conclusion.pdf');
 
 });
 
