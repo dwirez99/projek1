@@ -5,6 +5,7 @@ use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\PesertadidikController;
 use App\Http\Controllers\StatusgiziController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrangtuaController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,18 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Route::middleware(['auth', 'role:orangtua'])->group(function () { 
+    Route::get('/statusgiziOrtu', [StatusgiziController::class, 'indexOrtu'])->name('statusOrtu.index');
+});
+
+//Orang Tua
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/orangtuas', [OrangtuaController::class, 'index'])->name('orangtua.index');
+    Route::get('/orangtuas/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
+    Route::post('/orangtuas', [OrangtuaController::class, 'store'])->name('orangtua.store');
+    Route::patch('/orangtuas/{id}', [OrangtuaController::class, 'update'])->name('orangtua.update');
+    Route::delete('orangtuas/{orangtua}', [OrangtuaController::class, 'destroy'])->name('orangtua.destroy');
+});
 
 // Pesertadidik..
 Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');

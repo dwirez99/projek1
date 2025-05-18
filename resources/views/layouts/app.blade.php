@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-
     @stack('style')
+    @stack('script')
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script>
         window.addEventListener("scroll", function () {
@@ -109,18 +109,19 @@
                     <a href="#siswa" class="nav-item" onclick="toggleDropdownSiswa(event)">Siswa</a>
                     <div class="dropdown-menu" id="dropdownSiswa">
                         <a href="#">Nilai Siswa</a>
-                        <a href="#">Status Gizi Siswa</a>
+                        <a href="{{ route('statusOrtu.index') }}">Status Gizi Siswa</a>
                     </div>
                 </li>
+                @endrole
                 @role('guru')
                 <li>
                     <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
                     <div class="dropdown-menu" id="dropdownGuru">
                         <a href="{{ route('pesertadidik.index') }}" wire:navigate>Biodata Peserta Didik</a>
+                        <a href="{{ route('orangtua.index') }}">Biodata Orang Tua</a>
                         <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
-                        <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
+                        <a href=" {{ route('statusgizi.index') }} ">Deteksi Stunting</a>
                         <a href="{{ route('artikel.index') }}">Kelola Kegiatan Instansi</a>
-                        <a href="../akun ortu/crudortu.html">Kelola Akun</a>
                     </div>
                 </li>
                 @endrole
@@ -160,9 +161,9 @@
 
     <footer>
         @include('templates.footer')
+
     </footer>
 
-    @stack('script')
 </body>
 </html>
 

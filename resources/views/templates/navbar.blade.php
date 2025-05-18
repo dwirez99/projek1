@@ -337,7 +337,7 @@
               <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
               <a href="../hitung zscore/zscore.html">Deteksi Stunting</a>
               <a href="/artikels" wire:navigate>Kelola Kegiatan Instansi</a>
-              <a href="../akun ortu/crudortu.html">Kelola Akun</a>
+              <a href="/orangtuas" wire:navigate>Kelola Akun</a>
             </div>
           </li>
           <li>
