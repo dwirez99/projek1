@@ -1,171 +1,119 @@
 @extends('layouts.app')
-<title>Daftar Kegiatan</title>
+@section('title', 'Daftar Kegiatan')
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-    body::-webkit-scrollbar{
-        display: none
-    }
-    .judul-halaman{
-        font-family: "Baloo Thambi 2", system-ui;
-        font-optical-sizing: auto;
-        font-weight: 700;
-        font-style: normal;
-        font-size:80px;
-        color: aliceblue;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-        padding-left: 50px;
-        min-width: 100vw;
-    }
-
-    .btn-container{
-        margin: 28px;
-        padding: 12px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 28px;
-    }
-    .btn-tambah{
-        text-decoration: none;
-        color:black;
-        background-color: greenyellow;
-        width: auto;
-        height: auto;
-        padding: 18px;
-        text-align: center;
-        border: 2px solid black;
-        border-radius: 18px;
-        box-shadow: 7px 7px black;
-        margin: 28px;
+    body {
+        background-color: #f4f4f4;
         font-family: "Poppins", sans-serif;
-        font-size: 18px;
-        margin: auto;
+        margin: 0;
+        padding: 0;
     }
 
-    .btn-tambah:hover{
-        background-color: white;
-        transform: translateY(-5px);
-        transition: all 0.3s ease;
+    body::-webkit-scrollbar {
+        display: none;
     }
-    .container-artikel{
+
+    .judul-halaman {
+        font-family: "Baloo Thambi 2", system-ui;
+        font-size: 60px;
+        color: #fff;
+        background: linear-gradient(to right, #1c92d2, #f2fcfe);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        padding: 40px 50px;
+        margin-bottom: 20px;
+    }
+
+    .container-artikel {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
         display: flex;
-        justify-content: flex-start;
-        align-content: center;
-        min-width: 100vw;
-        flex-wrap: wrap;
-        padding: 28px;
-        gap: 18px;
         flex-direction: column;
+        gap: 24px;
     }
 
-    .card-artikel{
-        background-color: white;
+    .card-artikel {
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         display: flex;
-        min-width: 100%;
-        flex-wrap: wrap;
-        padding: 18px;
-        border-radius: 14px;
-        gap: 18px;
-
+        flex-direction: row;
+        gap: 24px;
+        padding: 20px;
     }
 
-    .thumb-artikel{
-        max-width: 100%;
+    .thumb-artikel {
+        width: 250px;
+        height: 160px;
         object-fit: cover;
-        border-radius: 7px;
+        border-radius: 8px;
+        flex-shrink: 0;
     }
-    .konten-artikel{
-        max-width: 100%;
+
+    .konten-artikel {
         display: flex;
-        flex-wrap: wrap;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px
-    }
-    .judul-artikel{
-        min-width: 100%;
-        font-family: "Baloo Thambi 2", system-ui;
-        font-size: 28px;
-    }
-    .deskripsi-artikel{
-        display: flex;
-        width: 1200px;
-        max-width: 100%;
-        word-wrap: break-word;
-        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
     }
 
-    .btn-edit{
+    .judul-artikel {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        color: #222;
+    }
+
+    .artikel-meta {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 12px;
+    }
+
+    .deskripsi-artikel {
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 16px;
+    }
+
+    .btn-selengkapnya {
+        align-self: flex-start;
         text-decoration: none;
-        color:black;
-        background-color: yellow;
-        width: auto;
-        height: auto;
-        padding: 18px;
-        text-align: center;
-        border: 2px solid black;
-        border-radius: 18px;
-        box-shadow: 7px 7px black;
-        margin: 28px;
-        font-family: "Poppins", sans-serif;
-        font-size: 18px;
-        margin: auto;
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
     }
 
-    .btn-edit:hover{
-        background-color: white;
-        transform: translateY(-5px);
-        transition: all 0.3s ease;
+    .btn-selengkapnya:hover {
+        background-color: #0056b3;
     }
-    .btn-hapus{
-        text-decoration: none;
-        color:black;
-        background-color: red;
-        width: auto;
-        height: auto;
-        padding: 18px;
-        text-align: center;
-        border: 2px solid black;
-        border-radius: 18px;
-        box-shadow: 7px 7px black;
-        margin: 28px;
-        font-family: "Poppins", sans-serif;
-        font-size: 18px;
-        margin: auto;
-    }
-
-    .btn-hapus:hover{
-        background-color: white;
-        transform: translateY(-5px);
-        transition: all 0.3s ease;
-    }
-    .heading-artikel{
-        min-width: 100%;
-    }
-
-
 </style>
 
-    @section('content')
+@section('content')
     <div class="judul-halaman">
-        <h4 class="judul-halaman">Daftar Kegiatan</h4>
+        Daftar Kegiatan
     </div>
 
     <div class="container-artikel">
         @foreach($artikels as $artikel)
         <div class="card-artikel">
-            <img src="{{asset('storage/' . $artikel->thumbnail)}}" class="thumb-artikel" alt="Thumbnail">
-            <div class="heading-artikel">
-                <h5 class="judul-artikel">{{ $artikel->judul }}<br></h5>
-                <p>Oleh TKDW Lamong | {{ $artikel->created_at }}</p>
-            </div>
+            <img src="{{ asset('storage/' . $artikel->thumbnail) }}" class="thumb-artikel" alt="Thumbnail Artikel">
             <div class="konten-artikel">
-                {{-- <div class="deskripsi-artikel">
-                    {!! Str::limit($artikel->konten, 100) !!}
-                </div> --}}
-                <a href="{{ route('artikel.show', $artikel->id)}}" class="btn-selengkapnya" style="min-width: 100%">Selengkapnya</a>
-                
+                <div>
+                    <h2 class="judul-artikel">{{ $artikel->judul }}</h2>
+                    <p class="artikel-meta">Oleh TKDW Lamong | {{ $artikel->created_at->format('d M Y') }}</p>
+                    <p class="deskripsi-artikel">{!! Str::limit(strip_tags($artikel->konten), 150) !!}</p>
+                </div>
+                <a href="{{ route('artikel.show', $artikel->id) }}" class="btn-selengkapnya">Baca Selengkapnya</a>
             </div>
         </div>
         @endforeach
