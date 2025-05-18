@@ -66,14 +66,17 @@ public function conclusionIndex()
 // Show conclusion for a specific peserta didik
 public function conclusion($nisn)
 {
-    $peserta = Pesertadidik::with(['statusgizi', 'assessments.details'])->findOrFail($nisn);
+    $peserta = Pesertadidik::with(['statusgizi'])->findOrFail($nisn);
 
-    // Collect all assessment details
+    // Get the last assessment_id from assessment_details for this peserta
+    $lastAssessmentId = AssessmentDetail::whereHas('assessment', function ($query) use ($nisn) {
+        $query->where('nisn', $nisn);
+    })->max('assessment_id');
+
+    // Get assessment details for the last assessment_id
     $assessmentDetails = [];
-    foreach ($peserta->assessments as $assessment) {
-        foreach ($assessment->details as $detail) {
-            $assessmentDetails[] = $detail;
-        }
+    if ($lastAssessmentId) {
+        $assessmentDetails = AssessmentDetail::where('assessment_id', $lastAssessmentId)->get();
     }
 
     return view('penilaian.conclusion', compact('peserta', 'assessmentDetails'));
@@ -128,18 +131,22 @@ public function conclusion($nisn)
 
     }
 
-    public function exportConclusionPdf($nisn)
-    {
-        $peserta = Pesertadidik::with(['statusgizi', 'assessments.details'])->findOrFail($nisn);
+public function exportConclusionPdf($nisn)
+{
+    $peserta = Pesertadidik::with(['statusgizi'])->findOrFail($nisn);
 
-        $assessmentDetails = [];
-        foreach ($peserta->assessments as $assessment) {
-            foreach ($assessment->details as $detail) {
-                $assessmentDetails[] = $detail;
-            }
-        }
+    // Get the last assessment_id from assessment_details for this peserta
+    $lastAssessmentId = AssessmentDetail::whereHas('assessment', function ($query) use ($nisn) {
+        $query->where('nisn', $nisn);
+    })->max('assessment_id');
 
-        $pdf = PDF::loadView('penilaian.conclusion_pdf', compact('peserta', 'assessmentDetails'));
-        return $pdf->stream('kesimpulan_penilaian_' . $peserta->nisn . '.pdf');
+    // Get assessment details for the last assessment_id
+    $assessmentDetails = [];
+    if ($lastAssessmentId) {
+        $assessmentDetails = AssessmentDetail::where('assessment_id', $lastAssessmentId)->get();
     }
+
+    $pdf = PDF::loadView('penilaian.conclusion_pdf', compact('peserta', 'assessmentDetails'));
+    return $pdf->stream('kesimpulan_penilaian_' . $peserta->nisn . '.pdf');
+}
 }
