@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'role:orangtua'])->group(function () { 
     Route::get('/statusgiziOrtu', [StatusgiziController::class, 'indexOrtu'])->name('statusOrtu.index');
+    Route::get('/anakanaks', [OrangtuaController::class, 'nilaiSiswa'])->name('orangtua.anak');
 });
 
 //Orang Tua
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::post('/orangtuas', [OrangtuaController::class, 'store'])->name('orangtua.store');
     Route::patch('/orangtuas/{id}', [OrangtuaController::class, 'update'])->name('orangtua.update');
     Route::delete('orangtuas/{orangtua}', [OrangtuaController::class, 'destroy'])->name('orangtua.destroy');
+
 });
 
 // Pesertadidik..

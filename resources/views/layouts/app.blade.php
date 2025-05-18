@@ -108,7 +108,7 @@
                 <li>
                     <a href="#siswa" class="nav-item" onclick="toggleDropdownSiswa(event)">Siswa</a>
                     <div class="dropdown-menu" id="dropdownSiswa">
-                        <a href="#">Nilai Siswa</a>
+                        <a href="{{ route('orangtua.anak') }}">Nilai Siswa</a>
                         <a href="{{ route('statusOrtu.index') }}">Status Gizi Siswa</a>
                     </div>
                 </li>
