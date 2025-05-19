@@ -52,12 +52,30 @@
                                    <i class="fas fa-plus"></i>
                                 </a>
 
-                                @if($peserta->assessments->count() > 0)
-                                <a href="{{ route('assessments.show', $peserta->nisn) }}"
-                                   class="btn btn-sm btn-info" title="Lihat History">
-                                   <i class="fas fa-history"></i>
+                                @php
+                                    $role = auth()->user()->getRoleNames()->first();
+                                @endphp
+                                                            
+                                <a href="{{ route('assessments.create', $peserta->nisn) }}"
+                                   class="btn btn-sm btn-primary" title="Tambah Penilaian">
+                                   <i class="fas fa-plus"></i>
                                 </a>
+                                
+                                @if($peserta->assessments->count() > 0)
+                                    @if($role === 'guru')
+                                        <a href="{{ route('assessments.show.guru', $peserta->nisn) }}"
+                                           class="btn btn-sm btn-info" title="Lihat History">
+                                           <i class="fas fa-history"></i>
+                                        </a>
+                                    @elseif($role === 'orangtua')
+                                        <a href="{{ route('assessments.show.ortu', $peserta->nisn) }}"
+                                           class="btn btn-sm btn-info" title="Lihat History">
+                                           <i class="fas fa-history"></i>
+                                        </a>
+                                    @endif
                                 @endif
+
+
 
                                 <!-- Tombol edit bisa ditambahkan sesuai kebutuhan -->
                             </td>

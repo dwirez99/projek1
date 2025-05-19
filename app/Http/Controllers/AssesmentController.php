@@ -149,4 +149,18 @@ public function exportConclusionPdf($nisn)
     $pdf = PDF::loadView('penilaian.conclusion_pdf', compact('peserta', 'assessmentDetails'));
     return $pdf->stream('kesimpulan_penilaian_' . $peserta->nisn . '.pdf');
 }
+// Untuk guru
+public function showGuru($nisn)
+{
+    $peserta = Pesertadidik::with('assessments')->where('nisn', $nisn)->firstOrFail();
+    return view('assessments.show', compact('peserta'));
+}
+
+// Untuk orangtua
+public function showOrtu($nisn)
+{
+    $peserta = Pesertadidik::with('assessments')->where('nisn', $nisn)->firstOrFail();
+    return view('assessments.show', compact('peserta'));
+}
+
 }

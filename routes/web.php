@@ -88,20 +88,20 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/assessments', [AssesmentController::class, 'index'])->name('assessments.index');
     Route::get('/assessments/create/{nisn}', [AssesmentController::class, 'create'])->name('assessments.create');
-    Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
+    // Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
+    Route::get('/assessments/{nisn}/guru', [AssesmentController::class, 'showGuru'])->name('assessments.show.guru');
     Route::post('/assessments', [AssesmentController::class, 'store'])->name('assessment.store');
     Route::delete('/assessments/{id}', [AssesmentController::class, 'destroy'])->name('assessments.destroy');
-
 });
 
 Route::middleware(['auth', 'role:orangtua'])->group(function () {
     Route::get('/penilaian/conclusion', [AssesmentController::class, 'conclusionIndex'])->name('penilaian.conclusion.index');
     Route::get('/penilaian/conclusion/{nisn}', [AssesmentController::class, 'conclusion'])->name('penilaian.conclusion');
     Route::get('/penilaian/conclusion/{nisn}/pdf', [AssesmentController::class, 'exportConclusionPdf'])->name('penilaian.conclusion.pdf');
-    Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
-
-
+    // Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
+    Route::get('/assessments/{nisn}/ortu', [AssesmentController::class, 'showOrtu'])->name('assessments.show.ortu');
 });
+
 
 
 Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');
