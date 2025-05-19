@@ -8,7 +8,10 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+ --}}
 
     <title>SIPENDIKAR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,14 +39,14 @@
             <img src="{{ asset('build/assets/car3.png') }}" class="d-block w-100" alt="Slide 3">
           </div>
         </div>
-        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
-        </button> --}}
+        </button>
       </div>
       <div>
         <h3 id="welcome">Selamat Datang</h3>
@@ -56,25 +59,43 @@
       <h4 id="tag">Kegiatan Kami </h4>
       <div class="section-kegiatan">
         <div class="container">
-          <div class="row justify-content-center g-4">
-            @foreach($artikels as $artikel)
-            <div class="col-md-5">
-              <div class="card card-custom h-100">
-                <img src="{{asset('storage/' . $artikel->thumbnail)}}" class="card-img-top img-fixed" alt="Kegiatan 1" style="border-radius: 20px 20px 0 0;">
-                <div class="card-body">
-                  <h5 class="card-title">{{$artikel->judul}}</h5>
-                  <div class="card-text">
-                    {!! Str::limit($artikel->konten, 25) !!}
+          <div id="artikelCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              @foreach($artikels->chunk(2) as $chunk)
+              <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                <div class="row justify-content-center g-4">
+                  @foreach($chunk as $artikel)
+                  <div class="col-md-5">
+                    <div class="card card-custom h-100">
+                      <img src="{{asset('storage/' . $artikel->thumbnail)}}" class="card-img-top img-fixed" alt="Kegiatan 1" style="border-radius: 20px 20px 0 0;">
+                      <div class="card-body">
+                        <h5 class="card-title">{{$artikel->judul}}</h5>
+                        <div class="card-text">
+                          {!! Str::limit($artikel->konten, 25) !!}
+                        </div>
+                        <a href="{{ route('artikel.show', $artikel->id)}}" class="text-dark text-decoration-underline fw-standar">Selengkapnya</a>
+                      </div>
+                    </div>
                   </div>
-                  <a href="{{ route('artikel.show', $artikel->id)}}" class="text-dark text-decoration-underline fw-standar">Selengkapnya</a>
+                  @endforeach
                 </div>
               </div>
+              @endforeach
             </div>
-            @endforeach
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#artikelCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#artikelCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-          <button class="btn-lihat"><a href="/kegiatan" wire:navigate>Lihat Semua Kegiatan</a></button>
+
+          <button class="btn-lihat mt-4"><a href="/kegiatan" wire:navigate>Lihat Semua Kegiatan</a></button>
         </div>
-      </div>
       </div>
       {{-- Mulai Guru --}}
       <h4 id="tag">Profil Guru</h4>
@@ -169,8 +190,8 @@
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> --}}
 
   </body>
 </html>

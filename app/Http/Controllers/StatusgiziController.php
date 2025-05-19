@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pesertadidik;
-use App\Models\Statusgizi;
+use App\Models\StatusGizi;
 use App\Models\Orangtua;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
