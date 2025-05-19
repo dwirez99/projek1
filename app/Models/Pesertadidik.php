@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Assessment;
 
 class Pesertadidik extends Model
 {
     use HasFactory;
-    
+
     protected $primaryKey = 'nisn';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -22,5 +23,11 @@ class Pesertadidik extends Model
     {
         return $this->belongsTo(Orangtua::class, 'idortu');
     }
+
+    public function assessments()
+    {
+    return $this->hasMany(Assessment::class, 'nisn', 'nisn');
+    }
+
 }
 

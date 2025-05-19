@@ -20,7 +20,7 @@ class PesertadidikController extends Controller
         $pesertadidiks = $query->get();
         // $pesertadidiks = Pesertadidik::with('orangtua')->get();
         $orangtuas = Orangtua::all();
-        
+
         return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
     }
 
@@ -76,6 +76,10 @@ class PesertadidikController extends Controller
         $pesertadidik = Pesertadidik::findOrFail($nisn);
         $pesertadidik->delete();
         return redirect()->back()->with('success', 'Data dihapus!');
+    }
+
+    public function assessments() {
+        return $this->hasMany(Assessment::class, 'nisn');
     }
 }
 

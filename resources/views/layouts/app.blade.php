@@ -101,6 +101,7 @@
     {{-- @include('livewire.daftar-popout') --}}
     {{-- @include('templates.navbar') --}}
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 
 </head>
@@ -129,7 +130,7 @@
                     <div class="dropdown-menu" id="dropdownGuru">
                         <a href="{{ route('pesertadidik.index') }}" wire:navigate>Biodata Peserta Didik</a>
                         <a href="{{ route('orangtua.index') }}">Biodata Orang Tua</a>
-                        <a href="../penilaian siswa/penilaianSiswa.html">Nilai Peserta Didik</a>
+                        <a href="{{ route('assessments.index') }}">Nilai Peserta Didik</a>
                         <a href=" {{ route('statusgizi.index') }} ">Deteksi Stunting</a>
                         <a href="{{ route('artikel.index') }}">Kelola Kegiatan Instansi</a>
                     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\PesertadidikController;
 use App\Http\Controllers\StatusgiziController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangtuaController;
+use App\Http\Controllers\AssesmentController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Auth;
@@ -81,6 +82,20 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 
     Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 });
+
+
+// Nilai peserta didik
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/assessments', [AssesmentController::class, 'index'])->name('assessments.index');
+    Route::get('/assessments/create/{nisn}', [AssesmentController::class, 'create'])->name('assessments.create');
+    Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
+    Route::post('/assessments', [AssesmentController::class, 'store'])->name('assessment.store');
+
+    Route::delete('/assessments/{id}', [AssesmentController::class, 'destroy'])->name('assessments.destroy');
+
+});
+
+
 Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtikel');
 
