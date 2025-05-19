@@ -128,9 +128,8 @@
                 <li>
                     <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
                     <div class="dropdown-menu" id="dropdownGuru">
-                        <a href="{{ route('pesertadidik.index') }}" wire:navigate>Biodata Peserta Didik</a>
+                        <a href="{{ route('pesertadidik.index') }}" wire:navigate>Kelola Peserta Didik</a>
                         <a href="{{ route('orangtua.index') }}">Biodata Orang Tua</a>
-                        <a href="{{ route('assessments.index') }}">Nilai Peserta Didik</a>
                         <a href=" {{ route('statusgizi.index') }} ">Deteksi Stunting</a>
                         <a href="{{ route('artikel.index') }}">Kelola Kegiatan Instansi</a>
                     </div>

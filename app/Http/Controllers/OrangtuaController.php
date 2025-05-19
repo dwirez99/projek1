@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orangtua;
 use App\Models\Pesertadidik;
-use App\Models\Statusgizi;
+use App\Models\StatusGizi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -131,6 +131,10 @@ class OrangtuaController extends Controller
         $user = Auth::user();
         $orangTua = $user->orangtua;
 
+        if (!$orangTua) {
+            return redirect()->route('orangtua.index')->with('error', 'Orangtua tidak ditemukan untuk pengguna ini.');
+        }
+
         $anakanaks = Pesertadidik::with('orangtua')->where('idortu', $orangTua->id)->get();
 
         // Ambil semua status gizi terbaru per anak
@@ -143,7 +147,7 @@ class OrangtuaController extends Controller
 
             $statusgizis[$anak->nisn] = $status;
         }
-        
+
         return view('orangtuas.anakanak', compact('anakanaks', 'statusgizis'));
     }
 }

@@ -5,24 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\Pesertadidik;
 use App\Models\Orangtua;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PesertadidikController extends Controller
 {
 
     public function index(Request $request)
-    {
-        $query = Pesertadidik::with('orangtua');
+{
+    $query = Pesertadidik::with('orangtua');
 
-        if($request->has('cari') && !empty($request->cari)) {
-            $query->where('namapd', 'like', '%' . $request->cari. '%');
-        }
-
-        $pesertadidiks = $query->get();
-        // $pesertadidiks = Pesertadidik::with('orangtua')->get();
-        $orangtuas = Orangtua::all();
-
-        return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
+    // Pencarian Nama
+    if ($request->filled('cari')) {
+        $query->where('namapd', 'like', '%' . $request->cari . '%');
     }
+
+    // Filter Kelas
+    if ($request->filled('kelas')) {
+        $query->where('kelas', $request->kelas);
+    }
+
+    // Filter Tahun Ajar
+    if ($request->filled('tahunajar')) {
+        $query->where('tahunajar', $request->tahunajar);
+    }
+
+    // Sorting Nama
+    if ($request->sort == 'nama_asc') {
+        $query->orderBy('namapd', 'asc');
+    } elseif ($request->sort == 'nama_desc') {
+        $query->orderBy('namapd', 'desc');
+    } else {
+        $query->orderBy('namapd', 'asc'); // Default
+    }
+
+    $pesertadidiks = $query->paginate(5);
+    $orangtuas = Orangtua::all();
+
+    return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
+}
+
 
     public function create()
     {
@@ -50,10 +71,11 @@ class PesertadidikController extends Controller
             $foto = $request->file('foto')->store('foto', 'public');
             $validated['foto'] = $foto;
         }
-
         Pesertadidik::create($validated);
         return redirect()->route('pesertadidik.index')->with('success', 'Data ditambahkan!');
+
     }
+
 
     public function update(Request $request, $nisn)
     {
@@ -77,9 +99,27 @@ class PesertadidikController extends Controller
         $pesertadidik->delete();
         return redirect()->back()->with('success', 'Data dihapus!');
     }
+public function uploadPenilaian(Request $request, $nisn)
+{
+    $request->validate([
+        'file_penilaian' => 'required|mimes:pdf,doc,docx|max:2048', // max 2MB
+    ]);
 
-    public function assessments() {
-        return $this->hasMany(Assessment::class, 'nisn');
+    $pd = Pesertadidik::where('nisn', $nisn)->firstOrFail();
+
+    // Hapus file lama jika ada
+    if ($pd->file_penilaian && Storage::exists('public/' . $pd->file_penilaian)) {
+        Storage::delete('public/' . $pd->file_penilaian);
     }
+
+    // Simpan file baru
+    $path = $request->file('file_penilaian')->store('penilaian', 'public');
+    $pd->file_penilaian = $path;
+    $pd->save();
+
+    return redirect()->back()->with('success', 'File penilaian berhasil diunggah.');
+}
+
+
 }
 

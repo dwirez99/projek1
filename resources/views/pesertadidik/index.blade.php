@@ -55,10 +55,7 @@
     {{-- Header dan Pencarian --}}
     <div class="header-bar d-flex flex-wrap justify-content-between align-items-center mb-4">
         <h1 class="fw-bold mb-2 mb-md-0">Daftar Siswa</h1>
-        <form action="{{ route('pesertadidik.index') }}" method="GET" class="d-flex" style="gap: 0.5rem;">
-            <input type="text" name="cari" class="form-control rounded-pill" placeholder="Cari nama siswa..." value="{{ request('cari') }}" style="max-width: 200px;">
-            <button type="submit" class="btn btn-light rounded-pill shadow-sm">Cari</button>
-        </form>
+
     </div>
 
     {{-- Tombol Tambah Data --}}
@@ -69,6 +66,34 @@
     @if (session('success'))
         <div class="alert alert-success text-center">{{ session('success') }}</div>
     @endif
+
+    <form action="{{ route('pesertadidik.index') }}" method="GET" class="d-flex flex-wrap align-items-center gap-2">
+        <input type="text" name="cari" class="form-control rounded-pill" placeholder="Cari nama siswa..." value="{{ request('cari') }}" style="max-width: 200px;">
+
+        {{-- Filter Kelas --}}
+        <select name="kelas" class="form-select form-select-sm" style="max-width: 150px;">
+            <option value="">Semua Kelas</option>
+            <option value="A" {{ request('kelas') == 'A' ? 'selected' : '' }}>Kelas A</option>
+            <option value="B" {{ request('kelas') == 'B' ? 'selected' : '' }}>Kelas B</option>
+        </select>
+
+        {{-- Filter Tahun Ajar --}}
+        <select name="tahunajar" class="form-select form-select-sm" style="max-width: 160px;">
+            <option value="">Semua Tahun Ajar</option>
+            <option value="2024/2025" {{ request('tahunajar') == '2024/2025' ? 'selected' : '' }}>2024/2025</option>
+            <option value="2025/2026" {{ request('tahunajar') == '2025/2026' ? 'selected' : '' }}>2025/2026</option>
+        </select>
+
+        {{-- Sort Nama --}}
+        <select name="sort" class="form-select form-select-sm" style="max-width: 180px;">
+            <option value="">Urutkan Nama</option>
+            <option value="nama_asc" {{ request('sort') == 'nama_asc' ? 'selected' : '' }}>Nama A-Z</option>
+            <option value="nama_desc" {{ request('sort') == 'nama_desc' ? 'selected' : '' }}>Nama Z-A</option>
+        </select>
+
+        <button type="submit" class="btn btn-light rounded-pill shadow-sm">Terapkan</button>
+    </form>
+
 
     <div class="list-group">
         @forelse ($pesertadidiks as $pd)
@@ -185,6 +210,25 @@
                     @csrf
                     @method('DELETE')
                 </form>
+                <form action="{{ route('pesertadidik.upload_penilaian', $pd->nisn) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mt-2">
+                        <label class="form-label">Upload File Penilaian (.pdf/.doc/.docx)</label>
+                        <input type="file" name="file_penilaian" accept=".pdf,.doc,.docx" class="form-control form-control-sm" required>
+
+                        @if ($pd->file_penilaian)
+                            <small class="text-success">File saat ini:
+                                <a href="{{ asset('storage/' . $pd->file_penilaian) }}" target="_blank">Lihat File</a>
+                            </small>
+                        @endif
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-sm btn-primary">Simpan File Penilaian</button>
+                    </div>
+                </form>
+
             </div>
         @empty
             <div class="list-group-item text-center py-4">
@@ -192,6 +236,12 @@
             </div>
         @endforelse
     </div>
+    <div class="mt-4 d-flex justify-content-center">
+        <nav class="pagination-sm">
+            {{ $pesertadidiks->withQueryString()->links() }}
+        </nav>
+    </div>
+
 </div>
 </body>
 </html>

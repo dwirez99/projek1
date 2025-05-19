@@ -6,7 +6,6 @@ use App\Http\Controllers\PesertadidikController;
 use App\Http\Controllers\StatusgiziController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangtuaController;
-use App\Http\Controllers\AssesmentController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +24,6 @@ Route::get('/',[HomeController::class, 'getArtikel'])->name('home');
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
-    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
-    Volt::route('settings/password', 'settings.password')->name('settings.password');
-    Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
 Route::middleware(['auth', 'role:orangtua'])->group(function () {
@@ -45,12 +41,6 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 
 });
 
-// Pesertadidik..
-Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
-Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
-Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
-Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
-Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
 //Pesertadidik..
 Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
@@ -58,6 +48,7 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
     Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
     Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
+    Route::post('/pesertadidik/{nisn}/upload-penilaian', [PesertaDidikController::class, 'uploadPenilaian'])->name('pesertadidik.upload_penilaian');
 });
 
 // Statusgizi..
@@ -82,26 +73,6 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 
     Route::post('/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 });
-
-
-// Nilai peserta didik
-Route::middleware(['auth', 'role:guru'])->group(function () {
-    Route::get('/assessments', [AssesmentController::class, 'index'])->name('assessments.index');
-    Route::get('/assessments/create/{nisn}', [AssesmentController::class, 'create'])->name('assessments.create');
-    // Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
-    Route::get('/assessments/{nisn}/guru', [AssesmentController::class, 'showGuru'])->name('assessments.show.guru');
-    Route::post('/assessments', [AssesmentController::class, 'store'])->name('assessment.store');
-    Route::delete('/assessments/{id}', [AssesmentController::class, 'destroy'])->name('assessments.destroy');
-});
-
-Route::middleware(['auth', 'role:orangtua'])->group(function () {
-    Route::get('/penilaian/conclusion', [AssesmentController::class, 'conclusionIndex'])->name('penilaian.conclusion.index');
-    Route::get('/penilaian/conclusion/{nisn}', [AssesmentController::class, 'conclusion'])->name('penilaian.conclusion');
-    Route::get('/penilaian/conclusion/{nisn}/pdf', [AssesmentController::class, 'exportConclusionPdf'])->name('penilaian.conclusion.pdf');
-    // Route::get('/assessments/{nisn}', [AssesmentController::class, 'show'])->name('assessments.show');
-    Route::get('/assessments/{nisn}/ortu', [AssesmentController::class, 'showOrtu'])->name('assessments.show.ortu');
-});
-
 
 
 Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');
