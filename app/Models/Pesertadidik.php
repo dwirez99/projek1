@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Assessment;
+use App\Models\StatusGizi;
 
 class Pesertadidik extends Model
 {
@@ -27,6 +28,11 @@ class Pesertadidik extends Model
     public function assessments()
     {
     return $this->hasMany(Assessment::class, 'nisn', 'nisn');
+    }
+
+    public function statusgizi()
+    {
+        return $this->hasOne(Statusgizi::class, 'nisn', 'nisn');
     }
 
 }

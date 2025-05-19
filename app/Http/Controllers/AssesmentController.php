@@ -8,6 +8,8 @@ use App\Models\AssessmentDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use PDF;
+
 class AssesmentController extends Controller // Perbaikan typo nama class
 {
     // Menampilkan daftar peserta didik
@@ -42,6 +44,41 @@ class AssesmentController extends Controller // Perbaikan typo nama class
 
         return view('assessments.show', compact('peserta'));
     }
+
+    // Show conclusion index for logged-in parent's children
+public function conclusionIndex()
+{
+    $user = auth()->user();
+
+    if (!$user || !$user->orangtua) {
+        abort(403, 'Unauthorized');
+    }
+
+    $orangtua = $user->orangtua;
+
+    $children = \App\Models\Pesertadidik::with(['assessments.details', 'statusgizi'])
+                ->where('idortu', $orangtua->id)
+                ->get();
+
+    return view('penilaian.conclusion_index', compact('children'));
+}
+
+// Show conclusion for a specific peserta didik
+public function conclusion($nisn)
+{
+    $peserta = Pesertadidik::with(['statusgizi', 'assessments.details'])->findOrFail($nisn);
+
+    // Collect all assessment details
+    $assessmentDetails = [];
+    foreach ($peserta->assessments as $assessment) {
+        foreach ($assessment->details as $detail) {
+            $assessmentDetails[] = $detail;
+        }
+    }
+
+    return view('penilaian.conclusion', compact('peserta', 'assessmentDetails'));
+}
+
 
     // Menyimpan penilaian baru
     public function store(Request $request)
@@ -78,7 +115,6 @@ class AssesmentController extends Controller // Perbaikan typo nama class
                 ]);
             }
         }
-
         DB::commit();
 
         return redirect()->route('assessments.show', $request->nisn)
@@ -89,5 +125,21 @@ class AssesmentController extends Controller // Perbaikan typo nama class
         return back()->withInput()
                     ->with('error', 'Gagal menyimpan: ' . $e->getMessage());
     }
-}
+
+    }
+
+    public function exportConclusionPdf($nisn)
+    {
+        $peserta = Pesertadidik::with(['statusgizi', 'assessments.details'])->findOrFail($nisn);
+
+        $assessmentDetails = [];
+        foreach ($peserta->assessments as $assessment) {
+            foreach ($assessment->details as $detail) {
+                $assessmentDetails[] = $detail;
+            }
+        }
+
+        $pdf = PDF::loadView('penilaian.conclusion_pdf', compact('peserta', 'assessmentDetails'));
+        return $pdf->stream('kesimpulan_penilaian_' . $peserta->nisn . '.pdf');
+    }
 }
