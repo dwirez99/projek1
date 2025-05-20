@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orangtua;
+use App\Models\Pesertadidik;
+use App\Models\StatusGizi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class OrangtuaController extends Controller
@@ -15,6 +19,15 @@ class OrangtuaController extends Controller
     {
         $orangtuas = Orangtua::all();
         return view('orangtuas.index', compact('orangtuas'));
+
+        $search = request('cari');
+
+    $orangtuas = Orangtua::with('user')
+        ->when($search, function($query) use ($search) {
+            return $query->where('namaortu', 'like', '%'.$search.'%')
+                         ->orWhere('nickname', 'like', '%'.$search.'%');
+        })
+        ->paginate(10); // This is the key change - use paginate() instead of get()
     }
 
     public function create()
@@ -120,5 +133,30 @@ class OrangtuaController extends Controller
         }
 
         return redirect()->route('orangtua.index')->with('success', 'Akun orang tua berhasil dihapus.');
+    }
+
+    public function nilaiSiswa()
+    {
+        $user = Auth::user();
+        $orangTua = $user->orangtua;
+
+        if (!$orangTua) {
+            return redirect()->route('orangtua.index')->with('error', 'Orangtua tidak ditemukan untuk pengguna ini.');
+        }
+
+        $anakanaks = Pesertadidik::with('orangtua')->where('idortu', $orangTua->id)->get();
+
+        // Ambil semua status gizi terbaru per anak
+        $statusgizis = [];
+        foreach ($anakanaks as $anak) {
+            $status = Statusgizi::with('pesertadidik')
+                ->where('nisn', $anak->nisn)
+                ->latest('created_at')
+                ->first();
+
+            $statusgizis[$anak->nisn] = $status;
+        }
+
+        return view('orangtuas.anakanak', compact('anakanaks', 'statusgizis'));
     }
 }

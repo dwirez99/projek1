@@ -1,27 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <div class="header-bar d-flex flex-wrap justify-content-between align-items-center mb-4">
-        <h1 class="fw-bold mb-2 mb-md-0">Daftar Orang Tua</h1>
-        <form action="{{ route('orangtua.index') }}" method="GET" class="d-flex" style="gap: 0.5rem;">
-            <input type="text" name="cari" class="form-control rounded-pill" placeholder="Cari nama orangtua..." value="{{ request('cari') }}" style="max-width: 200px;">
-            <button type="submit" class="btn btn-light rounded-pill shadow-sm">Cari</button>
+<div class="container mt-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold mb-3 mb-md-0">Daftar Orang Tua</h1>
+        <form action="{{ route('orangtua.index') }}" method="GET" class="d-flex gap-2">
+            <input type="text" name="cari" class="form-control rounded-pill" placeholder="Cari nama orang tua..." value="{{ request('cari') }}" style="max-width: 220px;">
+            <button type="submit" class="btn btn-outline-primary rounded-pill">Cari</button>
         </form>
-    </div>
-
-    <div class="mb-4">
-        <a href="{{ route('orangtua.create') }}" class="btn btn-success">Tambah Orang Tua</a>
     </div>
 
     @if(session('success'))
         <div class="alert alert-success text-center">{{ session('success') }}</div>
     @endif
 
+    <div class="mb-4">
+        <a href="{{ route('orangtua.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Tambah Orang Tua
+        </a>
+    </div>
+
     <div class="row">
         @forelse ($orangtuas as $ortu)
             <div class="col-md-6 mb-4" x-data="{ edit: false }">
-                <div class="card">
+                <div class="card shadow-sm">
                     <form method="POST" action="{{ route('orangtua.update', $ortu->id) }}">
                         @csrf
                         @method('PATCH')
@@ -29,13 +31,11 @@
                             <template x-if="!edit">
                                 <div>
                                     <h5 class="card-title">{{ $ortu->namaortu }}</h5>
-                                    <p class="card-text">{{ $ortu->nickname }}</p>
-                                    <p class="card-text">
-                                        Email: {{ $ortu->emailortu }}<br>
-                                        Alamat: {{ $ortu->user->alamat }}<br>
-                                        No. Telp: {{ $ortu->notelportu }}<br>
-                                        Username: {{ $ortu->user->username }}<br>
-                                    </p>
+                                    <p class="mb-1"><strong>Nama Panggilan:</strong> {{ $ortu->nickname }}</p>
+                                    <p class="mb-1"><strong>Email:</strong> {{ $ortu->emailortu }}</p>
+                                    <p class="mb-1"><strong>Alamat:</strong> {{ $ortu->user->alamat }}</p>
+                                    <p class="mb-1"><strong>No. Telp:</strong> {{ $ortu->notelportu }}</p>
+                                    <p class="mb-0"><strong>Username:</strong> {{ $ortu->user->username }}</p>
                                 </div>
                             </template>
 
@@ -69,7 +69,7 @@
                                         <label class="form-label">Password</label>
                                         <input type="password" name="password" class="form-control" placeholder="Isi jika ingin mengganti password">
                                     </div>
-                                    <div class="mb-2">
+                                    <div class="mb-3">
                                         <label class="form-label">Konfirmasi Password</label>
                                         <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi password baru">
                                     </div>
@@ -93,7 +93,11 @@
                 </div>
             </div>
         @empty
-            <p class="text-center">Tidak ada data orang tua ditemukan.</p>
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    Tidak ada data orang tua ditemukan.
+                </div>
+            </div>
         @endforelse
     </div>
 
