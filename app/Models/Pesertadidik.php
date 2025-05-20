@@ -15,7 +15,7 @@ class Pesertadidik extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'nisn', 'idortu', 'namapd', 'tanggallahir', 'jeniskelamin',
+         'idortu', 'namapd', 'tanggallahir', 'jeniskelamin',
         'kelas', 'tahunajar', 'semester', 'fase', 'tinggibadan', 'beratbadan', 'foto'
     ];
 

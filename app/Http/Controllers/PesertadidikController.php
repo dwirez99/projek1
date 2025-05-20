@@ -38,7 +38,7 @@ class PesertadidikController extends Controller
         $query->orderBy('namapd', 'asc'); // Default
     }
 
-    $pesertadidiks = $query->paginate(5);
+    $pesertadidiks = $query->paginate(20);
     $orangtuas = Orangtua::all();
 
     return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
@@ -54,7 +54,6 @@ class PesertadidikController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nisn' => 'required|unique:pesertadidiks',
             'idortu' => 'required',
             'namapd' => 'required',
             'tanggallahir' => 'required|date',
@@ -119,7 +118,5 @@ public function uploadPenilaian(Request $request, $nisn)
 
     return redirect()->back()->with('success', 'File penilaian berhasil diunggah.');
 }
-
-
 }
 

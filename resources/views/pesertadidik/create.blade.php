@@ -33,11 +33,6 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label>NISN</label>
-                            <input type="text" name="nisn" class="form-control" placeholder="NISN" value="{{ old('nisn') }}">
-                        </div>
-
-                        <div class="mb-3">
                             <label>Orang Tua</label>
                             <select name="idortu" class="form-select">
                                 <option value="">Pilih Orang Tua</option>

@@ -67,8 +67,8 @@
         <div class="alert alert-success text-center">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('pesertadidik.index') }}" method="GET" class="d-flex flex-wrap align-items-center gap-2">
-        <input type="text" name="cari" class="form-control rounded-pill" placeholder="Cari nama siswa..." value="{{ request('cari') }}" style="max-width: 200px;">
+    <form action="{{ route('pesertadidik.index') }}" method="GET" class="d-flex flex-wrap align-items-center gap-2 mb-4">
+        <input type="text" name="cari" class="form-control " placeholder="Cari nama siswa..." value="{{ request('cari') }}" style="max-width: 200px;">
 
         {{-- Filter Kelas --}}
         <select name="kelas" class="form-select form-select-sm" style="max-width: 150px;">

@@ -19,6 +19,15 @@ class OrangtuaController extends Controller
     {
         $orangtuas = Orangtua::all();
         return view('orangtuas.index', compact('orangtuas'));
+
+        $search = request('cari');
+
+    $orangtuas = Orangtua::with('user')
+        ->when($search, function($query) use ($search) {
+            return $query->where('namaortu', 'like', '%'.$search.'%')
+                         ->orWhere('nickname', 'like', '%'.$search.'%');
+        })
+        ->paginate(10); // This is the key change - use paginate() instead of get()
     }
 
     public function create()
