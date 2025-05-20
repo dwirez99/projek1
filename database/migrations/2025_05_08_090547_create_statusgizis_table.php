@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tanggalpembuatan');
             $table->timestamps();
 
-            $table->foreign('nisn')->references('nisn')->on('pesertadidiks')->onDelete('cascade');
+            $table->foreign('nisn')->references('nis')->on('pesertadidiks')->onDelete('cascade');
         });
     }
 

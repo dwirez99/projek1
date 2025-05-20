@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nisn')->constrained('pesertadidiks', 'nisn'); // Sesuai primary key di pesertadidiks
+            $table->foreignId('nis')->constrained('pesertadidiks', 'nis'); // Sesuai primary key di pesertadidiks
             $table->foreignId('teacher_id')->constrained('users');
             $table->date('assessment_date');
             $table->text('notes')->nullable();
