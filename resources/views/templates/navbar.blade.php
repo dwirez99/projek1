@@ -89,7 +89,7 @@
         <li><a href="{{ route('home') }}" class="nav-item">Halaman Utama</a></li>
         <li><a href="/kegiatan" wire:navigate class="nav-item">Kegiatan</a></li>
         <li><a href="{{ route('home') }}#about" class="nav-item">Tentang Kami</a></li>
-        <li><a href="" class="nav-item">Daftar Guru</a></li>
+        <li><a href="{{ route('guru.index') }}" class="nav-item">Daftar Guru</a></li>
         @role('orangtua')
         <li>
             <a href="#siswa" class="nav-item" onclick="toggleDropdownSiswa(event)">Siswa</a>

@@ -97,57 +97,71 @@
           <button class="btn-lihat mt-4"><a href="/kegiatan" wire:navigate>Lihat Semua Kegiatan</a></button>
         </div>
       </div>
-      {{-- Mulai Guru --}}
-      <h4 id="tag">Profil Guru</h4>
+      
+{{-- Mulai Guru --}}
+<h4 id="tag">Profil Guru</h4>
       <div class="section-guru">
         <div class="container">
+          <style>
+            .fixed-aspect-ratio {
+              width: 100%;
+              height: 250px;
+              object-fit: cover;
+              object-position: center;
+            }
+            .profile-card {
+              width: 300px;
+              height: 400px;
+              background-color: white;
+              border-radius: 1rem;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              overflow: hidden;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              transition: transform 0.3s ease;
+            }
+            .profile-card:hover {
+              transform: scale(1.05);
+            }
+            .profile-header {
+              width: 100%;
+              text-align: center;
+            }
+            .profile-name {
+              font-weight: 300;
+              font-size: 5px;
+              margin-top:5px;
+            }
+            .profile-title {
+              font-size: 20px;
+              color: #666;
+              margin-bottom: 10px;
+            }
+          </style>
+
           <div class="row justify-content-center g-4">
-
-            <div class="col-md-3">
+            @foreach($gurus as $guru)
+              <div class="col-md-3 d-flex justify-content-center">
                 <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="{{ asset('build/assets/fotoguru/takerusato.png') }}" class="card-img-top img-profil" alt="takeru sato" style="border-radius: 30px 10px 0 0;">
-                        <div class="profile-name">Takeru Sato</div>
-                        <div class="profile-title">Kepala Sekolah</div>
-                    </div>
+                  <div class="profile-header">
+                    <img src="{{ asset($guru->image) }}"
+                         class="card-img-top img-profil fixed-aspect-ratio"
+                         alt="{{ $guru->name }}"
+                         style="border-radius: 30px 10px 0 0;">
+                    <div class="profile-name">{{ $guru->name }}</div>
+                    <div class="profile-title">{{ $guru->position }}</div>
+                  </div>
                 </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="{{ asset('build/assets/fotoguru/dankuruto.png') }}" class="card-img-top img-profil" alt="takeru sato" style="border-radius: 30px 10px 0 0;">
-                        <div class="profile-name">Dan Kuruto</div>
-                        <div class="profile-title">Guru</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="{{ asset('build/assets/fotoguru/eichiro_oda.png') }}" class="card-img-top img-profil" alt="takeru sato" style="border-radius: 30px 10px 0 0;">
-                        <div class="profile-name">Eichiro Oda</div>
-                        <div class="profile-title">Guru</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="{{ asset('build/assets/fotoguru/karl_marks.png') }}" class="card-img-top img-profil" alt="takeru sato" style="border-radius: 30px 10px 0 0;">
-                        <div class="profile-name">Karl Marks</div>
-                        <div class="profile-title">Guru</div>
-                    </div>
-                </div>
-            </div>
-
+              </div>
+            @endforeach
           </div>
-          <button class="btn-lihat">Lihat Semua Guru</button>
-        </div>
-      </div>
-      {{-- Akhir Guru --}}
+
+    <button class="btn-lihat">Lihat Semua Guru</button>
+  </div>
+</div>
+{{-- Akhir Guru --}}
+
 
       {{-- Mulai Tentang Kami --}}
       <h4 id="about">Tentang Kami</h4>

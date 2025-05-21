@@ -6,7 +6,7 @@ use App\Http\Controllers\PesertadidikController;
 use App\Http\Controllers\StatusgiziController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangtuaController;
-use App\Http\Controllers\AssesmentController;
+use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Auth;
@@ -80,3 +80,6 @@ Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('art
 Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtikel');
 
 require __DIR__ . '/auth.php';
+
+Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
+

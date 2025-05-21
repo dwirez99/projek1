@@ -9,7 +9,7 @@ class Guru extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $table = 'gurus';
 
     public function user()
     {
