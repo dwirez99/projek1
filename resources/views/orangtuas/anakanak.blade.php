@@ -60,7 +60,7 @@
                                 <p>Semester: {{ $pd->semester }}</p>
                                 <p>Tinggi Badan: {{ $pd->tinggibadan }} cm</p>
                                 <p>Berat Badan: {{ $pd->beratbadan }} kg</p>
-                                <p>Status Gizi: {{ $statusgizis[$pd->nisn]->status ?? 'Belum ada data' }}</p>
+                                <p>Status Gizi: {{ $statusgizis[$pd->nis]->status ?? 'Belum ada data' }}</p>
 
                                 @if ($pd->file_penilaian)
                                     <a href="{{ asset('storage/' . $pd->file_penilaian) }}" target="_blank" class="btn btn-sm btn-primary mt-2">Lihat Penilaian</a>

@@ -6,6 +6,8 @@ use App\Models\Pesertadidik;
 use App\Models\Orangtua;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class PesertadidikController extends Controller
 {
@@ -98,25 +100,60 @@ class PesertadidikController extends Controller
         $pesertadidik->delete();
         return redirect()->back()->with('success', 'Data dihapus!');
     }
-public function uploadPenilaian(Request $request, $nis)
-{
-    $request->validate([
-        'file_penilaian' => 'required|mimes:pdf,doc,docx|max:2048', // max 2MB
-    ]);
 
-    $pd = Pesertadidik::where('nis', $nis)->firstOrFail();
+    public function uploadPenilaian(Request $request, $nis)
+    {
+        Log::info('Proses unggah dimulai untuk NIS: ' . $nis);
 
-    // Hapus file lama jika ada
-    if ($pd->file_penilaian && Storage::exists('public/' . $pd->file_penilaian)) {
-        Storage::delete('public/' . $pd->file_penilaian);
+        try {
+            // Validasi file input
+            $request->validate([
+                'file' => 'required|file|mimes:pdf,docx,doc,xlsx|max:10240',
+            ]);
+            Log::info("Validasi berhasil untuk NIS: $nis");
+
+            if ($request->hasFile('file')) {
+                // Ambil data peserta didik
+                $pd = Pesertadidik::where('nis', $nis)->first();
+
+                if (!$pd) {
+                    Log::warning("Peserta didik dengan NIS $nis tidak ditemukan.");
+                    return redirect()->back()->withErrors(['file' => 'Peserta didik tidak ditemukan.']);
+                }
+
+                // Hapus file lama jika ada
+                if ($pd->file_penilaian && Storage::exists('public/' . $pd->file_penilaian)) {
+                    Storage::delete('public/' . $pd->file_penilaian);
+                    Log::info("File lama dihapus untuk NIS: $nis, path: public/{$pd->file_penilaian}");
+                } else {
+                    Log::info("Tidak ada file lama untuk NIS: $nis");
+                }
+
+                // Simpan file baru
+                $file = $request->file('file');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('penilaian', $filename, 'public');
+
+                Log::info("File baru berhasil diunggah ke: $path");
+
+                // Simpan path ke database
+                $pd->file_penilaian = $path;
+                $pd->save();
+
+                Log::info("Path file disimpan di kolom file_penilaian untuk NIS: $nis");
+
+                return redirect()->back()->with('success', 'File berhasil diunggah dan disimpan!');
+            } else {
+                Log::warning("Tidak ada file yang dikirim pada form upload untuk NIS: $nis");
+                return redirect()->back()->withErrors(['file' => 'File tidak ditemukan.']);
+            }
+        } catch (ValidationException $e) {
+            Log::error("Validasi gagal untuk NIS $nis: " . json_encode($e->errors()));
+            return redirect()->back()->withErrors($e->errors());
+        } catch (\Exception $e) {
+            Log::error("Terjadi kesalahan saat upload untuk NIS $nis: " . $e->getMessage());
+            return redirect()->back()->withErrors(['file' => 'Gagal mengunggah file.']);
+        }
     }
-
-    // Simpan file baru
-    $path = $request->file('file_penilaian')->store('penilaian', 'public');
-    $pd->file_penilaian = $path;
-    $pd->save();
-
-    return redirect()->back()->with('success', 'File penilaian berhasil diunggah.');
-}
 }
 

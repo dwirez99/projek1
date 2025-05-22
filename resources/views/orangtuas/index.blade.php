@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@section('title','Daftar Orang Tua')
 <div class="container mt-5">
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
         <h1 class="fw-bold mb-3 mb-md-0">Daftar Orang Tua</h1>

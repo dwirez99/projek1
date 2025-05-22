@@ -43,14 +43,14 @@ new #[Layout('components.layouts.auth')] class extends Component {
         // $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
         $user = Auth::user();
 
-if ($user->role === 'guru') {
-    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
-} elseif ($user->role === 'orangtua') {
-    $this->redirectIntended(default: route('landingpages', absolute: false), navigate: true);
-} else {
-    // fallback kalau role tidak dikenali
-    $this->redirectIntended(default: route('home', absolute: false), navigate: true);
-}
+        if ($user->role === 'guru') {
+            $this->redirectIntended(default: '/landingpages', navigate: true);
+        } elseif ($user->role === 'orangtua') {
+            $this->redirectIntended(default: '/landingpages', navigate: true);
+        } else {
+            // fallback kalau role tidak dikenali
+            $this->redirectIntended(default: '/landingpages', navigate: true);
+        }
 
     }
 
@@ -128,10 +128,10 @@ if ($user->role === 'guru') {
         </div>
     </form>
 
-    @if (Route::has('register'))
+    {{-- @if (Route::has('register'))
         <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
             {{ __('Don\'t have an account?') }}
             <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
         </div>
-    @endif
+    @endif --}}
 </div>

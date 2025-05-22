@@ -8,6 +8,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/style.css">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .list-item {
@@ -77,12 +78,12 @@
             <option value="B" {{ request('kelas') == 'B' ? 'selected' : '' }}>Kelas B</option>
         </select>
 
-        {{-- Filter Tahun Ajar --}}
+        {{-- Filter Tahun Ajar
         <select name="tahunajar" class="form-select form-select-sm" style="max-width: 160px;">
             <option value="">Semua Tahun Ajar</option>
             <option value="2024/2025" {{ request('tahunajar') == '2024/2025' ? 'selected' : '' }}>2024/2025</option>
             <option value="2025/2026" {{ request('tahunajar') == '2025/2026' ? 'selected' : '' }}>2025/2026</option>
-        </select>
+        </select> --}}
 
         {{-- Sort Nama --}}
         <select name="sort" class="form-select form-select-sm" style="max-width: 180px;">
@@ -120,9 +121,11 @@
                                     <div class="student-detail mb-2">
                                         <div>Orang Tua: {{ $pd->orangtua->namaortu }} ({{ $pd->orangtua->nickname }})</div>
                                         <div>Lahir: {{ $pd->tanggallahir }} | {{ $pd->jeniskelamin }}</div>
+                                        <div>Kelas: {{ $pd->kelas }}</div>
+                                        <div>TB/BB: {{ $pd->tinggibadan }} cm / {{ $pd->beratbadan }} kg</div>
                                     </div>
 
-                                    <button type="button" class="btn btn-sm btn-outline-secondary mb-2"
+                                    {{-- <button type="button" class="btn btn-sm btn-outline-secondary mb-2"
                                             @click="showDetails = !showDetails">
                                         <span x-text="showDetails ? 'Sembunyikan' : 'Lihat'">Lihat</span> Detail
                                     </button>
@@ -130,13 +133,13 @@
                                     <div class="detail-row" x-show="showDetails" x-transition>
                                         <div class="detail-col">
                                             <div><strong>Kelas:</strong> {{ $pd->kelas }}</div>
-                                            <div><strong>Tahun Ajar:</strong> {{ $pd->tahunajar }}</div>
+                                            {{-- <div><strong>Tahun Ajar:</strong> {{ $pd->tahunajar }}</div> --}}
                                         </div>
                                         <div class="detail-col">
-                                            <div><strong>Semester:</strong> {{ $pd->semester }}</div>
+                                            {{-- <div><strong>Semester:</strong> {{ $pd->semester }}</div> --}}
                                             <div><strong>TB/BB:</strong> {{ $pd->tinggibadan }} cm / {{ $pd->beratbadan }} kg</div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </template>
 
@@ -215,7 +218,7 @@
 
                     <div class="mt-2">
                         <label class="form-label">Upload File Penilaian (.pdf/.doc/.docx)</label>
-                        <input type="file" name="file_penilaian" accept=".pdf,.doc,.docx" class="form-control form-control-sm" required>
+                        <input type="file" name="file" accept=".pdf,.doc,.docx" class="form-control form-control-sm" required>
 
                         @if ($pd->file_penilaian)
                             <small class="text-success">File saat ini:

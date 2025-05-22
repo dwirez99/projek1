@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@section('title','Tambah Akun Orang Tua')
 <div class="container mt-4" style="padding-bottom: 100px;">
     <h2 class="mb-4" id="tag2">Tambah Akun Orang Tua</h2>
 
