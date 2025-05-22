@@ -46,9 +46,9 @@ Route::post('logout', App\Livewire\Actions\Logout::class)
     //     })->name('landingpages');
     // });
 
-    Route::get('/landingpages', function () {
-        return view('landingpages');
-    })->name('landingpages');
+    use App\Http\Controllers\HomeController;
+
+    Route::get('/landingpages', [HomeController::class, 'getArtikel'])->name('landingpages');
 
     // Route::middleware(['auth', 'role:guest'])->group(function () {
     //     Route::get('/landingpages', function () {
