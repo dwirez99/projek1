@@ -22,12 +22,12 @@ class OrangtuaController extends Controller
 
         $search = request('cari');
 
-    $orangtuas = Orangtua::with('user')
-        ->when($search, function($query) use ($search) {
-            return $query->where('namaortu', 'like', '%'.$search.'%')
-                         ->orWhere('nickname', 'like', '%'.$search.'%');
-        })
-        ->paginate(10); // This is the key change - use paginate() instead of get()
+        $orangtuas = Orangtua::with('user')
+            ->when($search, function($query) use ($search) {
+                return $query->where('namaortu', 'like', '%'.$search.'%')
+                            ->orWhere('nickname', 'like', '%'.$search.'%');
+            })
+            ->paginate(1); // This is the key change - use paginate() instead of get()
     }
 
     public function create()

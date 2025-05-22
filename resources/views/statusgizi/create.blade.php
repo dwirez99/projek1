@@ -149,14 +149,14 @@
                 <div class="d-flex gap-2 mt-3 flex-wrap">
                     <form action="{{ route('statusgizi.hitung') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="nisn" value="{{ $pd->nisn }}">
+                        <input type="hidden" name="nis" value="{{ $pd->nis }}">
                         <button type="submit" class="btn btn-dark btn-rounded">Hitung Z-Score</button>
                     </form>
 
                     @isset($status_gizi)
                     <form action="{{ route('statusgizi.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="nisn" value="{{ $pd->nisn }}">
+                        <input type="hidden" name="nis" value="{{ $pd->nis }}">
                         <input type="hidden" name="status_gizi" value="{{ $status_gizi }}">
                         <input type="hidden" name="z_score" value="{{ $z_score }}">
                         <button type="submit" class="btn btn-secondary btn-rounded">Simpan</button>

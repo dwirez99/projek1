@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statusgizis', function (Blueprint $table) {
             $table->id('idstatus');
-            $table->unsignedBigInteger('nisn');
+            $table->unsignedBigInteger('nis');
             $table->float('z_score');
             $table->string('status');
             $table->date('tanggalpembuatan');

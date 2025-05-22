@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangtuaController;
 use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\Dashboard;
@@ -47,19 +48,19 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/pesertadidik', [PesertadidikController::class, 'index'])->name('pesertadidik.index');
     Route::get('/pesertadidik/create', [PesertadidikController::class, 'create'])->name('pesertadidik.create');
     Route::post('/pesertadidik', [PesertadidikController::class, 'store'])->name('pesertadidik.store');
-    Route::patch('/pesertadidik/{nisn}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
-    Route::delete('/pesertadidik/{nisn}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
-    Route::post('/pesertadidik/{nisn}/upload-penilaian', [PesertaDidikController::class, 'uploadPenilaian'])->name('pesertadidik.upload_penilaian');
+    Route::patch('/pesertadidik/{nis}', [PesertadidikController::class, 'update'])->name('pesertadidik.update');
+    Route::delete('/pesertadidik/{nis}', [PesertadidikController::class, 'destroy'])->name('pesertadidik.destroy');
+    Route::post('/pesertadidik/{nis}/upload-penilaian', [PesertaDidikController::class, 'uploadPenilaian'])->name('pesertadidik.upload_penilaian');
 });
 
 // Statusgizi..
 Route::prefix('statusgizi')->name('statusgizi.')->group(function () {
     Route::get('/', [StatusgiziController::class, 'index'])->name('index');
-    Route::get('/create/{nisn}', [StatusgiziController::class, 'create'])->name('create');
+    Route::get('/create/{nis}', [StatusgiziController::class, 'create'])->name('create');
     Route::post('/hitung', [StatusgiziController::class, 'hitung'])->name('hitung');
     Route::post('/store', [StatusgiziController::class, 'store'])->name('store');
     Route::delete('/bulk-delete', [StatusgiziController::class, 'bulkDelete'])->name('bulkDelete');
-    Route::delete('/{nisn}', [StatusgiziController::class, 'destroy'])->name('destroy');
+    Route::delete('/{nis}', [StatusgiziController::class, 'destroy'])->name('destroy');
     Route::get('/export-pdf', [StatusgiziController::class, 'exportPdf'])->name('exportPdf');
 });
 
@@ -78,6 +79,11 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 
 Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtikel');
+
+Route::get('/log-check', function () {
+    Log::info('Log test berhasil!');
+    return 'Cek file log sekarang';
+});
 
 require __DIR__ . '/auth.php';
 

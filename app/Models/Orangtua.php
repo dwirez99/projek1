@@ -10,7 +10,7 @@ class Orangtua extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $fillable = ['namaortu', 'notelportu', 'emailortu','nickname'];
+    protected $fillable = ['namaortu', 'notelportu', 'alamat', 'emailortu','nickname'];
 
     public function user()
     {

@@ -10,12 +10,12 @@ class Pesertadidik extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'nisn';
+    protected $primaryKey = 'nis';
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-         'idortu', 'namapd', 'tanggallahir', 'jeniskelamin',
+        'idortu', 'namapd', 'tanggallahir', 'jeniskelamin',
         'kelas', 'tahunajar', 'semester', 'fase', 'tinggibadan', 'beratbadan', 'foto'
     ];
 
