@@ -99,7 +99,7 @@
     <div class="list-group">
         @forelse ($pesertadidiks as $pd)
             <div class="list-group-item list-item mb-3 p-3" x-data="{ edit: false, showDetails: false }">
-<form method="POST" action="{{ route('pesertadidik.update', $pd->nis) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('pesertadidik.update', $pd->nis) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
