@@ -74,7 +74,7 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>NISN</th>
+            <th>NIS</th>
             <th>Nama</th>
             <th>Tinggi Badan (cm)</th>
             <th>Berat Badan (kg)</th>
@@ -87,7 +87,7 @@
         @foreach ($filteredStatus as $index => $item)
         <tr>
             <td>{{ $index + 1 }}</td>
-            <td>{{ $item->nisn }}</td>
+            <td>{{ $item->nis }}</td>
             <td>{{ $item->pesertaDidik->namapd ?? '-' }}</td>
             <td>{{ $item->pesertaDidik->tinggibadan ?? '-' }}</td>
             <td>{{ $item->pesertaDidik->beratbadan ?? '-' }}</td>

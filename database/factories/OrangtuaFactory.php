@@ -11,7 +11,6 @@ class OrangtuaFactory extends Factory
         return [
             'namaortu' => $this->faker->name(),
             'notelportu' => $this->faker->phoneNumber(),
-            'emailortu' => $this->faker->unique()->safeEmail(),
         ];
     }
 }

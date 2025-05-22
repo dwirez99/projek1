@@ -11,7 +11,7 @@ class Statusgizi extends Model
 
     protected $primaryKey = 'idstatus';
     protected $fillable = [
-        'nisn', 
+        'nis', 
         'z_score', 
         'status', 
         'tanggalpembuatan',
@@ -19,6 +19,6 @@ class Statusgizi extends Model
 
     public function pesertadidik()
     {
-        return $this->belongsTo(Pesertadidik::class, 'nisn', 'nisn');
+        return $this->belongsTo(Pesertadidik::class, 'nis', 'nis');
     }
 }

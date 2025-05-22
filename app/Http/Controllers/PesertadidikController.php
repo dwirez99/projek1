@@ -76,9 +76,9 @@ class PesertadidikController extends Controller
     }
 
 
-    public function update(Request $request, $nisn)
+    public function update(Request $request, $nis)
     {
-        $pesertadidik = Pesertadidik::findOrFail($nisn);
+        $pesertadidik = Pesertadidik::findOrFail($nis);
 
         $data = $request->all();
 
@@ -92,19 +92,19 @@ class PesertadidikController extends Controller
         return redirect()->back()->with('success', 'Data diperbarui!');
     }
 
-    public function destroy($nisn)
+    public function destroy($nis)
     {
-        $pesertadidik = Pesertadidik::findOrFail($nisn);
+        $pesertadidik = Pesertadidik::findOrFail($nis);
         $pesertadidik->delete();
         return redirect()->back()->with('success', 'Data dihapus!');
     }
-public function uploadPenilaian(Request $request, $nisn)
+public function uploadPenilaian(Request $request, $nis)
 {
     $request->validate([
         'file_penilaian' => 'required|mimes:pdf,doc,docx|max:2048', // max 2MB
     ]);
 
-    $pd = Pesertadidik::where('nisn', $nisn)->firstOrFail();
+    $pd = Pesertadidik::where('nis', $nis)->firstOrFail();
 
     // Hapus file lama jika ada
     if ($pd->file_penilaian && Storage::exists('public/' . $pd->file_penilaian)) {

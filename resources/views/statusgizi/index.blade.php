@@ -29,7 +29,7 @@
     <form id="bulkDeleteForm" action="{{ route('statusgizi.bulkDelete') }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data terpilih?')">
         @csrf
         @method('DELETE')
-        <input type="hidden" name="selected_nisn" id="selectedNisnInput">
+        <input type="hidden" name="selected_nis" id="selectednisInput">
     </form>
 
     <div class="mb-3">
@@ -41,7 +41,7 @@
             <tr>
                 <th style="display:none">ID</th> <!-- Kolom tersembunyi -->
                 <th><input type="checkbox" id="selectAll"></th>
-                <th>NISN</th>
+                <th>NIS</th>
                 <th>Nama <i class="bi bi-arrow-down-up" onclick="sortTable(3)"></i></th>
                 <th>Tinggi Badan</th>
                 <th>Berat Badan</th>
@@ -56,7 +56,7 @@
             <tr>
                 <td style="display:none">{{ $item->idstatus }}</td>
                 <td style="background-color:white;"><input type="checkbox" class="row-checkbox"></td>
-                <td style="background-color:white;">{{ $item->nisn }}</td>
+                <td style="background-color:white;">{{ $item->nis }}</td>
                 <td style="background-color:white;">{{ $item->pesertaDidik->namapd ?? '-' }}</td>
                 <td style="background-color:white;">{{ $item->pesertaDidik->tinggibadan ?? '-' }} cm</td>
                 <td style="background-color:white;">{{ $item->pesertaDidik->beratbadan ?? '-' }} kg</td>
@@ -64,7 +64,7 @@
                 <td style="background-color:white;">{{ $item->status }}</td>
                 <td style="background-color:white;">{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('d M Y') }}</td>
                 <td style="background-color:white;">
-                    <form onsubmit="return handleDelete(event, '{{ route('statusgizi.destroy', $item->nisn) }}')">
+                    <form onsubmit="return handleDelete(event, '{{ route('statusgizi.destroy', $item->nis) }}')">
                         <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
                     </form>
                 </td>
@@ -133,12 +133,12 @@
 
         const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
         if (checkedBoxes.length > 0) {
-            const selectedNisn = [];
+            const selectedNis = [];
             checkedBoxes.forEach(box => {
-                const nisn = box.closest('tr').cells[2].textContent.trim();
-                selectedNisn.push(nisn);
+                const nis = box.closest('tr').cells[2].textContent.trim();
+                selectedNis.push(nis);
             });
-            document.getElementById('selectedNisnInput').value = selectedNisn.join(',');
+            document.getElementById('selectednisInput').value = selectedNis.join(',');
             document.getElementById('bulkDeleteForm').submit();
         } else {
             if (confirm('Yakin ingin menghapus data ini?')) {

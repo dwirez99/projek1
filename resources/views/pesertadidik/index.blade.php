@@ -98,7 +98,7 @@
     <div class="list-group">
         @forelse ($pesertadidiks as $pd)
             <div class="list-group-item list-item mb-3 p-3" x-data="{ edit: false, showDetails: false }">
-                <form method="POST" action="{{ route('pesertadidik.update', $pd->nisn) }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('pesertadidik.update', $pd->nis) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
@@ -116,7 +116,7 @@
                         <div class="student-info">
                             <template x-if="!edit">
                                 <div>
-                                    <div class="student-name">{{ $pd->namapd }} <small class="text-muted">(NISN: {{ $pd->nisn }})</small></div>
+                                    <div class="student-name">{{ $pd->namapd }} <small class="text-muted">(NIS: {{ $pd->nis }})</small></div>
                                     <div class="student-detail mb-2">
                                         <div>Orang Tua: {{ $pd->orangtua->namaortu }} ({{ $pd->orangtua->nickname }})</div>
                                         <div>Lahir: {{ $pd->tanggallahir }} | {{ $pd->jeniskelamin }}</div>
@@ -189,10 +189,10 @@
                             <template x-if="!edit">
                                 <div class="d-flex flex-column gap-2">
                                     <button type="button" class="btn btn-sm btn-warning" @click="edit = true">Edit</button>
-                                    <a href="{{ route('pesertadidik.destroy', $pd->nisn) }}"
-                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $pd->nisn }}').submit();"
+<a href="{{ route('pesertadidik.destroy', $pd->nis) }}"
+                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $pd->nis }}').submit();"
                                        class="btn btn-sm btn-danger">Hapus</a>
-                                    <a href="{{ route('statusgizi.create', $pd->nisn) }}" class="btn btn-sm btn-secondary">Hitung Z-Score</a>
+                                    <a href="{{ route('statusgizi.create', $pd->nis) }}" class="btn btn-sm btn-secondary">Hitung Z-Score</a>
                                 </div>
                             </template>
 
@@ -206,11 +206,11 @@
                     </div>
                 </form>
 
-                <form id="delete-form-{{ $pd->nisn }}" action="{{ route('pesertadidik.destroy', $pd->nisn) }}" method="POST" style="display: none;">
+<form id="delete-form-{{ $pd->nis }}" action="{{ route('pesertadidik.destroy', $pd->nis) }}" method="POST" style="display: none;">
                     @csrf
                     @method('DELETE')
                 </form>
-                <form action="{{ route('pesertadidik.upload_penilaian', $pd->nisn) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('pesertadidik.upload_penilaian', $pd->nis) }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mt-2">
