@@ -55,6 +55,25 @@ class PesertadidikController extends Controller
 
     public function store(Request $request)
     {
+        // Determine current academic year and semester
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
+        if ($currentMonth >= 7) {
+            // Semester ganjil dimulai bulan Juli, tahun ajaran baru juga mulai Juli
+            $tahunajar = $currentYear . '/' . ($currentYear + 1);
+            $semester = 'Ganjil';
+        } else {
+            $tahunajar = ($currentYear - 1) . '/' . $currentYear;
+            $semester = 'Genap';
+        }
+
+        // Merge default values into request data
+        $request->merge([
+            'tahunajar' => $tahunajar,
+            'semester' => $semester,
+        ]);
+
         $validated = $request->validate([
             'idortu' => 'required',
             'namapd' => 'required',
@@ -68,11 +87,8 @@ class PesertadidikController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto', 'public');
-            $validated['foto'] = $foto;
-        }
-        Pesertadidik::create($validated);
+        // Add tahunajar and semester explicitly to validated data
+        $validated['tahunajar'] = $request->input('tahunajar');
         return redirect()->route('pesertadidik.index')->with('success', 'Data ditambahkan!');
 
     }
