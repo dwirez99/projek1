@@ -7,6 +7,7 @@
     <title>Status Gizi Peserta Didik</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
     <style>
         th, td { vertical-align: middle !important; }
     </style>
@@ -42,7 +43,7 @@
                 <th style="display:none">ID</th> <!-- Kolom tersembunyi -->
                 <th><input type="checkbox" id="selectAll"></th>
                 <th>NIS</th>
-                <th>Nama <i class="bi bi-arrow-down-up" onclick="sortTable(3)"></i></th>
+                <th>Nama Anak<i class="bi bi-arrow-down-up" onclick="sortTable(3)"></i></th>
                 <th>Tinggi Badan</th>
                 <th>Berat Badan</th>
                 <th>Z-Score</th>

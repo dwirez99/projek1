@@ -34,7 +34,7 @@
         <thead class="table-dark">
             <tr>
                 <th style="display:none">ID</th> <!-- Kolom tersembunyi -->
-                <th>NISN</th>
+                <th>NIS</th>
                 <th>Nama <i class="bi bi-arrow-down-up" onclick="sortTable(3)"></i></th>
                 <th>Tinggi Badan</th>
                 <th>Berat Badan</th>
@@ -47,7 +47,7 @@
             @foreach ($statusGiziAnak as $item)
             <tr>
                 <td style="display:none">{{ $item->idstatus }}</td>
-                <td style="background-color:white;">{{ $item->nisn }}</td>
+                <td style="background-color:white;">{{ $item->nis }}</td>
                 <td style="background-color:white;">{{ $item->pesertaDidik->namapd ?? '-' }}</td>
                 <td style="background-color:white;">{{ $item->pesertaDidik->tinggibadan ?? '-' }} cm</td>
                 <td style="background-color:white;">{{ $item->pesertaDidik->beratbadan ?? '-' }} kg</td>

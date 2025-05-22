@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Daftar Guru')
 
 @section('content')
 <div class="container mx-auto px-5 py-8">

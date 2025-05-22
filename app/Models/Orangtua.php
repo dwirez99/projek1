@@ -14,12 +14,15 @@ class Orangtua extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id'); // sesuaikan jika nama kolomnya berbeda
     }
+
 
     public function pesertadidiks()
     {
         return $this->hasMany(Pesertadidik::class, 'idortu');
     }
+
+    
 
 }

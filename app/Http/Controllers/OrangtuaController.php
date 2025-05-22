@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
 
@@ -138,23 +139,51 @@ class OrangtuaController extends Controller
     public function nilaiSiswa()
     {
         $user = Auth::user();
-        $orangTua = $user->orangtua;
 
+        Log::info("user: {$user}");
+
+        // Logging untuk memastikan user terautentikasi
+        if (!$user) {
+            Log::warning('Akses nilaiSiswa tanpa login.');
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        Log::info("User yang login: {$user->id} - {$user->name}");
+
+        $orangTua = $user->orangTua; // relasi hasOne
+
+        // Logging untuk mengecek apakah relasi berhasil
         if (!$orangTua) {
+            Log::warning("Data orangtua tidak ditemukan untuk user_id: {$user->id}");
             return redirect()->route('orangtua.index')->with('error', 'Orangtua tidak ditemukan untuk pengguna ini.');
         }
 
-        $anakanaks = Pesertadidik::with('orangtua')->where('idortu', $orangTua->id)->get();
+        Log::info("Orangtua ditemukan dengan ID: {$orangTua->id}");
 
-        // Ambil semua status gizi terbaru per anak
+        $anakanaks = Pesertadidik::with('orangtua')
+            ->where('idortu', $orangTua->id)
+            ->get();
+
+        Log::info("Jumlah anak ditemukan: " . $anakanaks->count());
+
+        // Ambil status gizi terbaru setiap anak
         $statusgizis = [];
+
         foreach ($anakanaks as $anak) {
+            Log::info("Mengambil status gizi untuk NIS: {$anak->nis}");
+
             $status = Statusgizi::with('pesertadidik')
-                ->where('nisn', $anak->nisn)
+                ->where('nis', $anak->nis)
                 ->latest('created_at')
                 ->first();
 
-            $statusgizis[$anak->nisn] = $status;
+            if ($status) {
+                Log::info("Status gizi ditemukan untuk NIS {$anak->nis} - ID Status: {$status->id}");
+            } else {
+                Log::warning("Status gizi TIDAK ditemukan untuk NIS {$anak->nis}");
+            }
+
+            $statusgizis[$anak->nis] = $status;
         }
 
         return view('orangtuas.anakanak', compact('anakanaks', 'statusgizis'));

@@ -14,18 +14,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Livewire\Dashboard;
 use App\Models\Artikel;
 
-Route::get('/', [HomeController::class, 'getArtikel']);
+Route::redirect('/', '/landingpages');
+Route::get('/landingpages', [HomeController::class, 'getArtikel'])->name('home');
 // Route::get('/', function () {
 //     return view('landingpages');
 // })->name('home');
 
-Route::get('/',[HomeController::class, 'getArtikel'])->name('home');
 
 
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
-
+    
 });
 
 Route::middleware(['auth', 'role:orangtua'])->group(function () {
@@ -85,7 +85,16 @@ Route::get('/log-check', function () {
     return 'Cek file log sekarang';
 });
 
-require __DIR__ . '/auth.php';
+Route::get('/check-role', function () {
+    $user = Auth::user();
+    return [
+        'user' => $user->name,
+        'roles_from_spatie' => $user->getRoleNames(),
+        'user_table_role_column' => $user->role,
+    ];
+});
+
 
 Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
+require __DIR__ . '/auth.php';
 

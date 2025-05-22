@@ -70,23 +70,23 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label>Tahun Ajar</label>
                             <select name="tahunajar" class="form-select">
                                 <option value="">Pilih Tahun Ajar</option>
                                 <option value="2024/2025" {{ old('tahunajar') == '2024/2025' ? 'selected' : '' }}>2024/2025</option>
                                 <option value="2025/2026" {{ old('tahunajar') == '2025/2026' ? 'selected' : '' }}>2025/2026</option>
                             </select>
-                        </div>
+                        </div> --}}
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label>Semester</label>
                             <select name="semester" class="form-select">
                                 <option value="">Pilih Semester</option>
                                 <option value="Ganjil" {{ old('semester') == 'Ganjil' ? 'selected' : '' }}>Ganjil</option>
                                 <option value="Genap" {{ old('semester') == 'Genap' ? 'selected' : '' }}>Genap</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label>Tinggi Badan</label>

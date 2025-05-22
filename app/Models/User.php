@@ -42,9 +42,9 @@ class User extends Authenticatable
             ->map(fn(string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
     }
-
+    
     public function orangTua()
     {
-        return $this->hasOne(Orangtua::class);
+        return $this->hasOne(Orangtua::class, 'user_id'); // ganti jika nama kolom foreign key bukan 'user_id'
     }
 }

@@ -16,7 +16,7 @@ class Pesertadidik extends Model
 
     protected $fillable = [
         'idortu', 'namapd', 'tanggallahir', 'jeniskelamin',
-        'kelas', 'tahunajar', 'semester', 'fase', 'tinggibadan', 'beratbadan', 'foto'
+        'kelas', 'semester', 'fase', 'tinggibadan', 'beratbadan', 'foto','file_penilaian'
     ];
 
     public function orangtua()
@@ -27,7 +27,7 @@ class Pesertadidik extends Model
 
     public function statusgizi()
     {
-        return $this->hasOne(Statusgizi::class, 'nisn', 'nisn');
+        return $this->hasOne(Statusgizi::class, 'nis', 'nis');
     }
 }
 

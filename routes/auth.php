@@ -35,14 +35,14 @@ Route::post('logout', App\Livewire\Actions\Logout::class)
     ->name('logout');
 
     Route::middleware(['auth', 'role:guru'])->group(function () {
-        Route::get('/landingpages', function () {
-            return view('dashboard');
+        Route::get('/', function () {
+            return view('landingpages');
         })->name('dashboard');
     });
 
     Route::middleware(['auth', 'role:orangtua'])->group(function () {
-        Route::get('/landingpages', function () {
-            return view('orangtua.landingpages');
+        Route::get('/', function () {
+            return view('landingpages');
         })->name('landingpages');
     });
 
