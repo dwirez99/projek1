@@ -80,21 +80,6 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 Route::get('/artikels/{artikel}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtikel');
 
-Route::get('/log-check', function () {
-    Log::info('Log test berhasil!');
-    return 'Cek file log sekarang';
-});
-
-Route::get('/check-role', function () {
-    $user = Auth::user();
-    return [
-        'user' => $user->name,
-        'roles_from_spatie' => $user->getRoleNames(),
-        'user_table_role_column' => $user->role,
-    ];
-});
-
-
 Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
 require __DIR__ . '/auth.php';
 
