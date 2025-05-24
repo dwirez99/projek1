@@ -106,7 +106,7 @@
                     <div class="d-flex align-items-start gap-3">
                         {{-- Kolom Kiri: Foto --}}
                         <div>
-                            <img src="{{ $pd->foto ? asset('storage/' . $pd->foto) : asset('default.jpg') }}"
+                            <img src="{{ $pd->foto ? asset('storage/media/' . $pd->foto) : asset('default.jpg') }}"
                                  class="student-photo" alt="Foto Siswa">
                             <template x-if="edit">
                                 <input type="file" name="foto" class="form-control form-control-sm mt-2" style="width: 80px;">
@@ -123,22 +123,11 @@
                                         <div>Lahir: {{ $pd->tanggallahir }} | {{ $pd->jeniskelamin }}</div>
                                         <div>Kelas: {{ $pd->kelas }}</div>
                                         <div>TB/BB: {{ $pd->tinggibadan }} cm / {{ $pd->beratbadan }} kg</div>
-                                    </div>
+                                        <div>No. Telp Ortu: {{ $pd->orangtua->notelportu }}</div>
+                                        <div >Status Gizi (Terbaru): <strong>{{ $pd->statusgiziTerbaru->status ?? '-' }}</strong></div>
+                                        <div>Z - Score: {{ $pd->statusgiziTerbaru->z_score ?? '-' }}</div>
+                                        <div><a href="{{ route('statusgizi.index') }}">Riwayat Status Gizi</a></div>
 
-                                    <button type="button" class="btn btn-sm btn-outline-secondary mb-2"
-                                            @click="showDetails = !showDetails">
-                                        <span x-text="showDetails ? 'Sembunyikan' : 'Lihat'">Lihat</span> Detail
-                                    </button>
-
-                                    <div class="detail-row" x-show="showDetails" x-transition>
-                                        <div class="detail-col">
-                                            <div><strong>Kelas:</strong> {{ $pd->kelas }}</div>
-                                            {{-- <div><strong>Tahun Ajar:</strong> {{ $pd->tahunajar }}</div> --}}
-                                        </div>
-                                        <div class="detail-col">
-                                            {{-- <div><strong>Semester:</strong> {{ $pd->semester }}</div> --}}
-                                            <div><strong>TB/BB:</strong> {{ $pd->tinggibadan }} cm / {{ $pd->beratbadan }} kg</div>
-                                        </div>
                                     </div>
                                 </div>
                             </template>

@@ -18,8 +18,6 @@ return new class extends Migration
             $table->date('tanggallahir');
             $table->string('jeniskelamin');
             $table->string('kelas');
-            $table->string('tahunajar');
-            $table->string('semester');
             $table->string('fase')->default('Pondasi');
             $table->integer('tinggibadan');
             $table->integer('beratbadan');
