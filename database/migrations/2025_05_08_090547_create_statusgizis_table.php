@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('statusgizis', function (Blueprint $table) {
             $table->id('idstatus');
-            $table->unsignedBigInteger('nis');
+            $table->uuid('nis');
             $table->float('z_score');
             $table->string('status');
             $table->date('tanggalpembuatan');
             $table->timestamps();
 
-            $table->foreign('nisn')->references('nis')->on('pesertadidiks')->onDelete('cascade');
+            $table->foreign('nis')->references('nis')->on('pesertadidiks')->onDelete('cascade');
         });
     }
 
