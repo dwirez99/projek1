@@ -72,7 +72,7 @@
                       <div class="card-body">
                         <h5 class="card-title">{{$artikel->judul}}</h5>
                         <div class="card-text">
-                          {!! Str::limit($artikel->konten, 25) !!}
+                          {{-- {!! Str::limit($artikel->konten, 25) !!} --}}
                         </div>
                         <a href="{{ route('artikel.show', $artikel->id)}}" class="text-dark text-decoration-underline fw-standar">Selengkapnya</a>
                       </div>
@@ -98,7 +98,7 @@
           <button class="btn-lihat mt-4"><a href="/kegiatan" wire:navigate>Lihat Semua Kegiatan</a></button>
         </div>
       </div>
-      
+
 {{-- Mulai Guru --}}
 <h4 id="tag">Profil Guru</h4>
       <div class="section-guru">

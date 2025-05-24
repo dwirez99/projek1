@@ -153,16 +153,13 @@
                                                 <option value="Laki-laki" {{ $pd->jeniskelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                                                 <option value="Perempuan" {{ $pd->jeniskelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                             </select>
-                                            <input type="text" name="kelas" value="{{ $pd->kelas }}" class="form-control form-control-sm" placeholder="Kelas">
+                                            <select name="Kelas" class="form-select form-select-sm mb-2">
+                                                <option value="Laki-laki" {{ $pd->kelas == 'A' ? 'selected' : '' }}>KELAS A</option>
+                                                <option value="Perempuan" {{ $pd->kelas == 'B' ? 'selected' : '' }}>KELAS B</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="detail-row">
-                                        <div class="detail-col">
-                                            <input type="text" name="tahunajar" value="{{ $pd->tahunajar }}" class="form-control form-control-sm mb-2" placeholder="Tahun Ajar">
-                                        </div>
-                                        <div class="detail-col">
-                                            <input type="text" name="semester" value="{{ $pd->semester }}" class="form-control form-control-sm mb-2" placeholder="Semester">
-                                        </div>
                                     </div>
                                     <div class="detail-row">
                                         <div class="detail-col">

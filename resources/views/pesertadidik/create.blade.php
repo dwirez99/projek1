@@ -8,7 +8,10 @@
 <div class="container mt-5">
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>Periksa kembali input Anda!</strong>
+            <strong>Terjadi kesalahan pada input Anda:</strong>
+            @if ($errors->has('foto'))
+                <p>Ukuran file foto tidak boleh lebih dari 2MB (2048 kilobytes).</p>
+            @endif
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -70,23 +73,6 @@
                             </select>
                         </div>
 
-                        {{-- <div class="mb-3">
-                            <label>Tahun Ajar</label>
-                            <select name="tahunajar" class="form-select">
-                                <option value="">Pilih Tahun Ajar</option>
-                                <option value="2024/2025" {{ old('tahunajar') == '2024/2025' ? 'selected' : '' }}>2024/2025</option>
-                                <option value="2025/2026" {{ old('tahunajar') == '2025/2026' ? 'selected' : '' }}>2025/2026</option>
-                            </select>
-                        </div> --}}
-
-                        {{-- <div class="mb-3">
-                            <label>Semester</label>
-                            <select name="semester" class="form-select">
-                                <option value="">Pilih Semester</option>
-                                <option value="Ganjil" {{ old('semester') == 'Ganjil' ? 'selected' : '' }}>Ganjil</option>
-                                <option value="Genap" {{ old('semester') == 'Genap' ? 'selected' : '' }}>Genap</option>
-                            </select>
-                        </div> --}}
 
                         <div class="mb-3">
                             <label>Tinggi Badan</label>
