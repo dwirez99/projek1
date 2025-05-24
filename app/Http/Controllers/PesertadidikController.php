@@ -8,43 +8,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class PesertadidikController extends Controller
 {
 
     public function index(Request $request)
-{
-    $query = Pesertadidik::with('orangtua');
+    {
+        $query = Pesertadidik::with('orangtua','statusgiziTerbaru');
 
-    // Pencarian Nama
-    if ($request->filled('cari')) {
-        $query->where('namapd', 'like', '%' . $request->cari . '%');
+        // Pencarian Nama
+        if ($request->filled('cari')) {
+            $query->where('namapd', 'like', '%' . $request->cari . '%');
+        }
+
+        // Filter Kelas
+        if ($request->filled('kelas')) {
+            $query->where('kelas', $request->kelas);
+        }
+
+        // Filter Tahun Ajar
+        if ($request->filled('tahunajar')) {
+            $query->where('tahunajar', $request->tahunajar);
+        }
+
+        // Sorting Nama
+        if ($request->sort == 'nama_asc') {
+            $query->orderBy('namapd', 'asc');
+        } elseif ($request->sort == 'nama_desc') {
+            $query->orderBy('namapd', 'desc');
+        } else {
+            $query->orderBy('namapd', 'asc'); // Default
+        }
+
+        $pesertadidiks = $query->paginate(20);
+        $orangtuas = Orangtua::all();
+
+        return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
     }
-
-    // Filter Kelas
-    if ($request->filled('kelas')) {
-        $query->where('kelas', $request->kelas);
-    }
-
-    // Filter Tahun Ajar
-    if ($request->filled('tahunajar')) {
-        $query->where('tahunajar', $request->tahunajar);
-    }
-
-    // Sorting Nama
-    if ($request->sort == 'nama_asc') {
-        $query->orderBy('namapd', 'asc');
-    } elseif ($request->sort == 'nama_desc') {
-        $query->orderBy('namapd', 'desc');
-    } else {
-        $query->orderBy('namapd', 'asc'); // Default
-    }
-
-    $pesertadidiks = $query->paginate(20);
-    $orangtuas = Orangtua::all();
-
-    return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
-}
 
 
     public function create()
@@ -53,45 +55,57 @@ class PesertadidikController extends Controller
         return view('pesertadidik.create', compact('orangtuas'));
     }
 
+
     public function store(Request $request)
     {
-        // Determine current academic year and semester
-        $currentMonth = date('n');
-        $currentYear = date('Y');
+        try {
+            Log::info('Memulai proses penyimpanan peserta didik.', ['request_data' => $request->all()]);
 
-        if ($currentMonth >= 7) {
-            // Semester ganjil dimulai bulan Juli, tahun ajaran baru juga mulai Juli
-            $tahunajar = $currentYear . '/' . ($currentYear + 1);
-            $semester = 'Ganjil';
-        } else {
-            $tahunajar = ($currentYear - 1) . '/' . $currentYear;
-            $semester = 'Genap';
+            $validated = $request->validate([
+                'idortu' => 'required',
+                'namapd' => 'required',
+                'tanggallahir' => 'required|date',
+                'jeniskelamin' => 'required',
+                'kelas' => 'required',
+                'tinggibadan' => 'required|integer',
+                'beratbadan' => 'required|integer',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                // tambahkan validasi tahunajar dan semester kalau diperlukan
+            ]);
+            // Generate NIS sebagai angka acak unik
+            do {
+                $nis = random_int(1000000000, 9999999999); // 10 digit
+            } while (DB::table('pesertadidiks')->where('nis', $nis)->exists());
+
+            Log::info("Generated NIS: " . $nis);
+            $validated['nis'] = $nis;
+
+            if ($request->hasFile('foto')) {
+                $file = $request->file('foto');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('media', $filename, 'public');
+                $validated['foto'] = $filename;
+
+                Log::info('Foto berhasil diupload.', ['path' => $path]);
+            }
+
+
+            $pd = PesertaDidik::create($validated);
+
+            Log::info('Data peserta didik berhasil disimpan.', ['id' => $pd->nis]);
+
+            return redirect()->route('pesertadidik.index')->with('success', 'Data ditambahkan!');
+        } catch (Exception $e) {
+            Log::error('Gagal menyimpan data peserta didik.', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return redirect()->back()->withErrors('Terjadi kesalahan saat menyimpan data.')->withInput();
         }
-
-        // Merge default values into request data
-        $request->merge([
-            'tahunajar' => $tahunajar,
-            'semester' => $semester,
-        ]);
-
-        $validated = $request->validate([
-            'idortu' => 'required',
-            'namapd' => 'required',
-            'tanggallahir' => 'required|date',
-            'jeniskelamin' => 'required',
-            'kelas' => 'required',
-            'tahunajar' => 'required',
-            'semester' => 'required',
-            'tinggibadan' => 'required|integer',
-            'beratbadan' => 'required|integer',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        // Add tahunajar and semester explicitly to validated data
-        $validated['tahunajar'] = $request->input('tahunajar');
-        return redirect()->route('pesertadidik.index')->with('success', 'Data ditambahkan!');
-
     }
+
+
 
 
     public function update(Request $request, $nis)
@@ -172,4 +186,3 @@ class PesertadidikController extends Controller
         }
     }
 }
-

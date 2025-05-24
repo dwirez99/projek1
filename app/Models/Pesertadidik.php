@@ -15,8 +15,17 @@ class Pesertadidik extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'idortu', 'namapd', 'tanggallahir', 'jeniskelamin',
-        'kelas', 'semester', 'fase', 'tinggibadan', 'beratbadan', 'foto','file_penilaian', 'tahunajar'
+        'nis',
+        'idortu',
+        'namapd',
+        'tanggallahir',
+        'jeniskelamin',
+        'kelas',
+        'fase',
+        'tinggibadan',
+        'beratbadan',
+        'foto',
+        'file_penilaian'
     ];
 
     public function orangtua()
@@ -28,5 +37,10 @@ class Pesertadidik extends Model
     public function statusgizi()
     {
         return $this->hasOne(Statusgizi::class, 'nis', 'nis');
+    }
+
+    public function statusgiziTerbaru()
+    {
+        return $this->hasOne(Statusgizi::class, 'nis', 'nis')->latestOfMany('idstatus');
     }
 }
