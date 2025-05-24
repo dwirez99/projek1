@@ -99,7 +99,7 @@
     <div class="list-group">
         @forelse ($pesertadidiks as $pd)
             <div class="list-group-item list-item mb-3 p-3" x-data="{ edit: false, showDetails: false }">
-<form method="POST" action="{{ route('pesertadidik.update', $pd->nis) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('pesertadidik.update', $pd->nis) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
@@ -125,7 +125,7 @@
                                         <div>TB/BB: {{ $pd->tinggibadan }} cm / {{ $pd->beratbadan }} kg</div>
                                     </div>
 
-                                    {{-- <button type="button" class="btn btn-sm btn-outline-secondary mb-2"
+                                    <button type="button" class="btn btn-sm btn-outline-secondary mb-2"
                                             @click="showDetails = !showDetails">
                                         <span x-text="showDetails ? 'Sembunyikan' : 'Lihat'">Lihat</span> Detail
                                     </button>
@@ -139,7 +139,7 @@
                                             {{-- <div><strong>Semester:</strong> {{ $pd->semester }}</div> --}}
                                             <div><strong>TB/BB:</strong> {{ $pd->tinggibadan }} cm / {{ $pd->beratbadan }} kg</div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </template>
 

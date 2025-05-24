@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Livewire\Dashboard;
 use App\Models\Artikel;
 
-Route::redirect('/', '/landingpages');
-Route::get('/landingpages', [HomeController::class, 'getArtikel'])->name('home');
+
+Route::get('/', [HomeController::class, 'getArtikel'])->name('home');
 // Route::get('/', function () {
 //     return view('landingpages');
 // })->name('home');
@@ -25,7 +25,7 @@ Route::get('/landingpages', [HomeController::class, 'getArtikel'])->name('home')
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
-    
+
 });
 
 Route::middleware(['auth', 'role:orangtua'])->group(function () {

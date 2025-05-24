@@ -34,17 +34,21 @@ Route::middleware('auth')->group(function () {
 Route::post('logout', App\Livewire\Actions\Logout::class)
     ->name('logout');
 
-    Route::middleware(['auth', 'role:guru'])->group(function () {
-        Route::get('/', function () {
-            return view('landingpages');
-        })->name('dashboard');
-    });
+    // Route::middleware(['auth', 'role:guru'])->group(function () {
+    //     Route::get('/', function () {
+    //         return view('landingpages');
+    //     })->name('dashboard');
+    // });
 
-    Route::middleware(['auth', 'role:orangtua'])->group(function () {
-        Route::get('/', function () {
-            return view('landingpages');
-        })->name('landingpages');
-    });
+    // Route::middleware(['auth', 'role:orangtua'])->group(function () {
+    //     Route::get('/', function () {
+    //         return view('landingpages');
+    //     })->name('landingpages');
+    // });
+
+    use App\Http\Controllers\HomeController;
+
+    Route::get('/landingpages', [HomeController::class, 'getArtikel'])->name('landingpages');
 
     // Route::middleware(['auth', 'role:guest'])->group(function () {
     //     Route::get('/landingpages', function () {
