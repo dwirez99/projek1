@@ -120,14 +120,14 @@ body {
 .card-custom {
     border-radius: 20px;
     box-shadow: 5px 5px 0px black;
-    background-color: #24c1ff;
+    background-color: #00B7FF;
   }
 
 .card-title{
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .card-text{

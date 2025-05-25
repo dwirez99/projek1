@@ -62,10 +62,9 @@
         <div class="container">
           <div id="artikelCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              @foreach($artikels->chunk(2) as $chunk)
-              <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+              <div class="carousel-item active">
                 <div class="row justify-content-center g-4">
-                  @foreach($chunk as $artikel)
+                  @foreach($artikels as $artikel)
                   <div class="col-md-5">
                     <div class="card card-custom h-100">
                       <img src="{{asset('storage/' . $artikel->thumbnail)}}" class="card-img-top img-fixed" alt="Kegiatan 1" style="border-radius: 20px 20px 0 0;">
@@ -81,18 +80,7 @@
                   @endforeach
                 </div>
               </div>
-              @endforeach
             </div>
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#artikelCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#artikelCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
 
           <button class="btn-lihat mt-4"><a href="/kegiatan" wire:navigate>Lihat Semua Kegiatan</a></button>

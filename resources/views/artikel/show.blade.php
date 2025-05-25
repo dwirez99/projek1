@@ -1,127 +1,122 @@
 @extends('layouts.app')
+
 @section('title', $artikel->judul)
-{{-- <link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/96x96.png" sizes="96x96">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/120x120.png" sizes="120x120">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/152x152.png" sizes="152x152">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/167x167.png" sizes="167x167">
-<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/180x180.png" sizes="180x180"> --}}
-<link rel="stylesheet" href="{{asset('ckeditor/style.css')}}">
-<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/45.0.0/ckeditor5.css" crossorigin>
-<link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+
 @push('style')
 <style>
-    img{
-        border-radius: 12px;
-        object-fit: cover;
+    .artikel-wrapper {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 10px 10px 0px #000000;
+        font-family: 'Poppins', sans-serif;
     }
-    .container-artikel{
-        max-width: 100vw;
+
+    .artikel-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+
+    .artikel-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+    }
+
+    .artikel-meta img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    .artikel-meta-info {
         display: flex;
         flex-direction: column;
-        padding-left: 28px;
-        color: white;
-        padding-right: 28px
+        font-size: 14px;
+        color: #333;
     }
 
-    .judul-artikel{
-        max-width: 100%;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    .thumbnail{
-        max-width: 100%;
+    .artikel-thumbnail img {
+        width: 100%;
+        max-height: 500px;
         object-fit: cover;
+        border-radius: 16px;
+        margin-bottom: 24px;
     }
 
-    .thumbnail img{
-        max-width: 100%;
-        margin-bottom: 28px
+    .artikel-content {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #222;
     }
 
-    .btn-kembali{
-        text-decoration: none;
-        color:black;
+    .btn-back {
+        margin-top: 30px;
+        display: inline-block;
         background-color: greenyellow;
-        width: fit-content;
-        height: auto;
-        padding: 18px;       
-        border: 2px solid black;
-        border-radius: 18px;
-        box-shadow: 7px 7px black;
-        font-family: "Poppins", sans-serif;
-        font-size: 18px;
-        margin-bottom: 28px
-    }
-
-    .btn-kembali:hover{
-        background-color: white;
-        transform: translateY(-5px);
+        border: 2px solid #000;
+        padding: 10px 18px;
+        border-radius: 14px;
+        font-weight: 600;
+        color: #000;
+        text-decoration: none;
+        box-shadow: 6px 6px #000;
         transition: all 0.3s ease;
     }
 
-    .ck-content img {
-    max-width: 100%;
-    height: auto;
+    .btn-back:hover {
+        background-color: white;
+        transform: translateY(-3px);
     }
 
-    .ck-content {
-    display: block;
-    line-height: 1.6;
+    @media (max-width: 768px) {
+        .artikel-wrapper {
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .artikel-title {
+            font-size: 1.8rem;
+        }
+
+        .artikel-meta {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
-
-    .ck-content figure {
-    margin: 1em 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 1em;
-    }
-
-    .ck-content figure img {
-    max-width: 300px;
-    height: auto;
-    }
-
-    .ck-content p {
-    margin: 0 0 1em 0;
-    }
-
-
 </style>
 @endpush
 
-
 @section('content')
+<div class="artikel-wrapper">
+    <h1 class="artikel-title">{{ $artikel->judul }}</h1>
 
-<div class="container-artikel">
-    <div class="judul-artikel">
-        <h2>{{ $artikel->judul }}</h2>
-        <p>oleh TKDW LAMONG | {{$artikel->created_at}}</p>
+    <div class="artikel-meta">
+        <img src="{{ asset('build\assets\logo\GKL33_Dharma Wanita - Koleksilogo.com 3.png') }}" alt="Avatar Penulis">
+        <div class="artikel-meta-info">
+            <strong>TK DHARMA WANITA LAMONG</strong>
+            <span>Guru</span>
+            <span>Di Publikasikan: {{ $artikel->created_at->format('d-m-Y') }}</span>
+        </div>
     </div>
-    <div class="thumbnail">
-        @if($artikel->thumbnail)
-            <img src="{{asset('storage/' . $artikel->thumbnail)}}" alt="" class="img-artikel">
-        @endif
-    </div>
-    <div class="ck-content" style="margin-bottom: 28px">
+
+    @if($artikel->thumbnail)
+        <div class="artikel-thumbnail">
+            <img src="{{ asset('storage/' . $artikel->thumbnail) }}" alt="Thumbnail Artikel">
+        </div>
+    @endif
+
+    <div class="artikel-content">
         {!! $artikel->konten !!}
     </div>
 
-    @guest
-    <a href="{{route('listArtikel')}}" class="btn-kembali"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
-      </svg> Kembali</a>
-    @endguest
-
-    @role('orangtua')
-    <a href="{{route('listArtikel')}}" class="btn-kembali"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
-      </svg> Kembali</a>
-    @endrole
-
-    @role('guru')
-    <a href="{{route('artikel.index')}}" class="btn-kembali"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
-      </svg> Kembali</a>
-    @endrole
+    <a href="{{ route('listArtikel') }}" class="btn-back">← Kembali</a>
 </div>
+@endsection
