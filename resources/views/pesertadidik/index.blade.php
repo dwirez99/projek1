@@ -153,9 +153,9 @@
                                                 <option value="Laki-laki" {{ $pd->jeniskelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                                                 <option value="Perempuan" {{ $pd->jeniskelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                             </select>
-                                            <select name="Kelas" class="form-select form-select-sm mb-2">
-                                                <option value="Laki-laki" {{ $pd->kelas == 'A' ? 'selected' : '' }}>KELAS A</option>
-                                                <option value="Perempuan" {{ $pd->kelas == 'B' ? 'selected' : '' }}>KELAS B</option>
+                                            <select name="kelas" class="form-select form-select-sm mb-2"> {{-- Ubah name menjadi "kelas" (lowercase) --}}
+                                                <option value="A" {{ $pd->kelas == 'A' ? 'selected' : '' }}>KELAS A</option> {{-- Perbaiki value --}}
+                                                <option value="B" {{ $pd->kelas == 'B' ? 'selected' : '' }}>KELAS B</option> {{-- Perbaiki value --}}
                                             </select>
                                         </div>
                                     </div>

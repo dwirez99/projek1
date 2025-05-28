@@ -122,11 +122,18 @@
 </head>
 <body>
     <div class="container-main">
-        
+        {{-- Alert untuk error dari controller (misalnya, data tidak cocok dengan dataset Z-score) --}}
+        @if ($errors->has('nis'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                {{ $errors->first('nis') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
         <!-- Kartu Data -->
         <div class="card card-custom">
-            
+
             <!-- Tombol Kembali -->
             <a href="{{ route('pesertadidik.index') }}" class="btn-back" data-bs-toggle="tooltip" data-bs-placement="right" title="Kembali ke daftar">
                 <i class="bi bi-arrow-left-circle-fill"></i>
