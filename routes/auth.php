@@ -8,27 +8,25 @@ Route::middleware('guest')->group(function () {
     Volt::route('login', 'auth.login')
         ->name('login');
 
-    Volt::route('register', 'auth.register')
-        ->name('register');
-
-    Volt::route('forgot-password', 'auth.forgot-password')
-        ->name('password.request');
-
-    Volt::route('reset-password/{token}', 'auth.reset-password')
-        ->name('password.reset');
-
 });
 
-Route::middleware('auth')->group(function () {
-    Volt::route('verify-email', 'auth.verify-email')
-        ->name('verification.notice');
+use App\Http\Controllers\OrangtuaController;
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
+Route::middleware('role:orangtua')->group(function () {
+    Route::get('editprofiles', [OrangtuaController::class, 'editProfile'])
+        ->name('editprofiles');
 
-    Volt::route('confirm-password', 'auth.confirm-password')
-        ->name('password.confirm');
+    Route::post('editprofiles/update', [OrangtuaController::class, 'updateProfile']) // Handle profile updates
+        ->name('editprofiles.update');
+
+    // Fallback POST route to handle incorrect POST to userprofiles
+    Route::post('editrofiles', function () {
+        return redirect()->route('userprofiles')->with('error', 'POST method not supported on this route. Please use the update route.');
+    });
+
+    // New route for read-only profile view
+    Route::get('orangtuas/profiles', [OrangtuaController::class, 'showReadOnlyProfile'])
+        ->name('orangtuas.profiles');
 });
 
 Route::post('logout', App\Livewire\Actions\Logout::class)

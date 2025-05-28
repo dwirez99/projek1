@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/orangtuas', [OrangtuaController::class, 'index'])->name('orangtua.index');
     Route::get('/orangtuas/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
     Route::post('/orangtuas', [OrangtuaController::class, 'store'])->name('orangtua.store');
-    Route::patch('/orangtuas/{id}', [OrangtuaController::class, 'update'])->name('orangtua.update');
+    // Route::patch('/orangtuas/{id}', [OrangtuaController::class, 'update'])->name('orangtua.update');
     Route::delete('orangtuas/{orangtua}', [OrangtuaController::class, 'destroy'])->name('orangtua.destroy');
 
 });
