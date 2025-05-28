@@ -6,30 +6,32 @@ use App\Models\Orangtua;
 use App\Models\Pesertadidik;
 use App\Models\StatusGizi;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 
 class OrangtuaController extends Controller
 {
     public function index()
-    {
-        $orangtuas = Orangtua::all();
-        return view('orangtuas.index', compact('orangtuas'));
+{
+    $search = request('cari');
 
-        $search = request('cari');
+    $orangtuas = Orangtua::with('user')
+        ->when($search, function($query) use ($search) {
+            return $query->where('namaortu', 'like', '%'.$search.'%')
+                         ->orWhere('nickname', 'like', '%'.$search.'%');
+        })
+        ->paginate(10); // Sesuaikan jumlah item per halaman
 
-        $orangtuas = Orangtua::with('user')
-            ->when($search, function($query) use ($search) {
-                return $query->where('namaortu', 'like', '%'.$search.'%')
-                            ->orWhere('nickname', 'like', '%'.$search.'%');
-            })
-            ->paginate(1); // This is the key change - use paginate() instead of get()
-    }
+    return view('orangtuas.index', compact('orangtuas'));
+}
+
+
 
     public function create()
     {
@@ -118,7 +120,7 @@ class OrangtuaController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        $user->save();
+        $user->update();
 
         return redirect()->route('orangtua.index')->with('success', 'Data orang tua berhasil diperbarui.');
     }
@@ -187,5 +189,103 @@ class OrangtuaController extends Controller
         }
 
         return view('orangtuas.anakanak', compact('anakanaks', 'statusgizis'));
+    }
+
+    public function editProfile()
+    {
+        $user = Auth::user();
+        $orangtua = $user->orangTua;
+
+        if (!$orangtua) {
+            return redirect()->route('home')->with('error', 'Orangtua profile not found.');
+        }
+
+        return view('orangtuas.editprofile', compact('orangtua', 'user'));
+    }
+
+    public function showReadOnlyProfile()
+    {
+        $user = Auth::user();
+        $orangtua = $user->orangTua;
+
+        if (!$orangtua) {
+            return redirect()->route('home')->with('error', 'Orangtua profile not found.');
+        }
+
+        return view('orangtuas.viewprofiles', compact('orangtua', 'user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        $orangtua = $user->orangTua;
+
+        Log::info('updateProfile called');
+        Log::info('User: ' . json_encode($user));
+        Log::info('Orangtua: ' . json_encode($orangtua));
+        Log::info('Request data: ' . json_encode($request->all()));
+
+        if (!$user || !$orangtua) {
+            Log::warning('User or Orangtua not found in updateProfile');
+            return redirect()->route('login')->with('error', 'You must be logged in to update your profile.');
+        }
+
+        // Determine the username based on nickname or namaortu
+        $derivedUsername = '';
+        if ($request->filled('nickname')) {
+            $derivedUsername = Str::slug($request->nickname);
+        }
+
+        // If nickname was empty or not provided, or slug resulted in empty, fallback to namaortu
+        if (empty($derivedUsername)) {
+            $derivedUsername = Str::slug($request->namaortu);
+        }
+
+        $request->merge(['username_to_validate' => $derivedUsername]);
+
+        $validatedData = $request->validate([
+            'namaortu'   => 'required|string|max:255',
+            'nickname'   => 'nullable|string|max:255',
+            'emailortu'  => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('orangtuas', 'emailortu')->ignore($orangtua->id),
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'notelportu' => 'required|string|max:20',
+            'password'   => 'nullable|string|min:6|confirmed',
+            'alamat'     => 'nullable|string|max:255',
+            'username_to_validate' => [
+                'required', // Ensures the slug is not empty
+                'string',
+                'max:255',
+                Rule::unique('users', 'username')->ignore($user->id),
+            ],
+        ]);
+
+        // Update orangtua data
+        $orangtua->update([
+            'namaortu'   => $validatedData['namaortu'],
+            'nickname'   => $validatedData['nickname'],
+            'emailortu'  => $validatedData['emailortu'],
+            'notelportu' => $validatedData['notelportu'],
+            'alamat'     => $validatedData['alamat'],
+        ]);
+
+        // Update user data
+        $user->name = $validatedData['namaortu']; // Sync user's name
+        $user->username = $validatedData['username_to_validate']; // Use validated derived username
+        $user->email = $validatedData['emailortu'];
+        $user->notelp = $validatedData['notelportu'];
+        $user->alamat = $validatedData['alamat'];
+
+        if (!empty($validatedData['password'])) {
+            $user->password = Hash::make($validatedData['password']);
+        }
+
+        $user->save();
+        Log::info('Profile updated successfully');
+        return redirect()->route('orangtuas.profiles')->with('success', 'Profile updated successfully!');
     }
 }
