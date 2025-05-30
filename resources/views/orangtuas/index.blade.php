@@ -1,14 +1,27 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .judul-halaman {
+        font-family: "Baloo Thambi 2", system-ui;
+        font-size: 60px;
+        color: #fff;
+        background: linear-gradient(to right, #1c92d2, #f2fcfe);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        padding: 40px 50px;
+        margin-bottom: 20px;
+    }
+</style>
 
 @section('title','Daftar Orang Tua')
-
+<div class="judul-halaman">Kelola Orang Tua</div>
 @section('content')
 <div class="container mt-5">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
-        <h1 class="fw-bold">Daftar Orang Tua</h1>
         <form action="{{ route('orangtua.index') }}" method="GET" class="d-flex gap-2 w-100 w-md-auto">
             <input type="text" name="cari" class="form-control rounded-pill shadow-sm" placeholder="Cari nama orang tua..." value="{{ request('cari') }}" style="max-width: 260px;">
-            <button type="submit" class="btn btn-outline-primary rounded-pill shadow-sm">
+            <button type="submit" class="btn btn-primary rounded-pill shadow-sm">
                 <i class="bi bi-search"></i> Cari
             </button>
         </form>

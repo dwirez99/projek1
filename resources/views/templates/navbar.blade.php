@@ -126,11 +126,13 @@
                         Logout
                     </a>
                 </form>
+                @role('orangtua')
                 <form method="GET" action="{{ route('orangtuas.profiles') }}" style="margin: 0;">
                 <a href="#" onclick="this.closest('form').submit()" style="display: block; padding: 10px 15px; color: black; text-decoration: none;">
                     User Profile
                 </a>
                 </form>
+                @endrole
             </div>
         </li>
         @endauth

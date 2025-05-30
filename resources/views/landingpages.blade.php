@@ -146,7 +146,7 @@
             @endforeach
           </div>
 
-    <button class="btn-lihat">Lihat Semua Guru</button>
+    <button class="btn-lihat"><a href="/guru" wire:navigate>Lihat Semua Guru</a></button>
   </div>
 </div>
 {{-- Akhir Guru --}}

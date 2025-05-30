@@ -378,8 +378,9 @@ z-index: 999999999999;
 }
 
 .navbar img.logo {
-    max-width: 48px;
-    max-height: 48px;
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: 10px;
 }
 
 .nav-menu {

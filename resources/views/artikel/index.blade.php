@@ -150,7 +150,7 @@
 </style>
 
 @section('content')
-<div class="judul-halaman">Kelola Artikel</div>
+
 
 <div class="btn-container">
     <a href="{{ route('artikel.create') }}" class="btn-tambah">+ Tambah Artikel</a>
