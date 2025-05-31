@@ -61,6 +61,7 @@ Route::prefix('statusgizi')->name('statusgizi.')->group(function () {
     Route::post('/store', [StatusgiziController::class, 'store'])->name('store');
     Route::delete('/bulk-delete', [StatusgiziController::class, 'bulkDelete'])->name('bulkDelete');
     Route::delete('/{nis}', [StatusgiziController::class, 'destroy'])->name('destroy');
+    Route::get('/chart', [StatusgiziController::class, 'chart'])->name('chart');
     Route::get('/export-pdf', [StatusgiziController::class, 'exportPdf'])->name('exportPdf');
 });
 

@@ -9,6 +9,7 @@ use App\Models\Orangtua;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class StatusgiziController extends Controller
@@ -197,6 +198,50 @@ class StatusgiziController extends Controller
         })->with('pesertaDidik')->get();
 
         return view('orangtuas.statusgizi', compact('statusGiziAnak'));
+    }
+
+    public function chart()
+    {
+        // Ambil bulan unik dari data
+        $bulanList = \App\Models\StatusGizi::selectRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") as bulan')
+            ->distinct()
+            ->orderBy('bulan', 'desc')
+            ->pluck('bulan');
+
+        return view('statusgizi.chart', compact('bulanList'));
+    }
+
+    public function chartData(Request $request)
+    {
+        $bulan = $request->get('bulan');
+        if (!$bulan) {
+            $bulan = now()->format('Y-m');
+        }
+
+        $data = \App\Models\StatusGizi::with('pesertaDidik')
+            ->whereRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") = ?', [$bulan])
+            ->get();
+
+        $kelasA = ['Gizi Kurang' => 0, 'Gizi Baik' => 0, 'Gizi Lebih' => 0, 'Obesitas' => 0];
+        $kelasB = ['Gizi Kurang' => 0, 'Gizi Baik' => 0, 'Gizi Lebih' => 0, 'Obesitas' => 0];
+
+        foreach ($data as $item) {
+            $status = $item->status;
+            $kelas = $item->pesertaDidik->kelas ?? 'A';
+
+            if (!in_array($status, ['Gizi Kurang', 'Gizi Baik', 'Gizi Lebih', 'Obesitas'])) continue;
+
+            if ($kelas === 'A') {
+                $kelasA[$status]++;
+            } elseif ($kelas === 'B') {
+                $kelasB[$status]++;
+            }
+        }
+
+        return response()->json([
+            'kelasA' => $kelasA,
+            'kelasB' => $kelasB
+        ]);
     }
 
     public function exportPdf(Request $request)

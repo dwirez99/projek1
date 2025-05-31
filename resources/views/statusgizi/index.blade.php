@@ -2,21 +2,26 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Status Gizi Peserta Didik</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" />
     <style>
-        th, td { vertical-align: middle !important; }
+        th, td {
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Status Gizi Peserta Didik</h2>
-        <div>
+        <div class="d-flex gap-2">
+            {{-- <a href="{{ route('statusgizi.chart') }}" class="btn btn-success">
+                <i class="bi bi-bar-chart-line-fill"></i> Lihat Chart
+            </a> --}}
             <a href="javascript:void(0)" onclick="printFiltered()" class="btn btn-danger">
                 <i class="bi bi-file-earmark-pdf-fill"></i> Cetak PDF
             </a>
@@ -30,25 +35,26 @@
     <form id="bulkDeleteForm" action="{{ route('statusgizi.bulkDelete') }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data terpilih?')">
         @csrf
         @method('DELETE')
-        <input type="hidden" name="selected_nis" id="selectednisInput">
+        <input type="hidden" name="selected_nis" id="selectednisInput" />
     </form>
 
     <div class="mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Cari data...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Cari data..." />
     </div>
 
     <table class="table table-bordered table-hover align-middle" id="statusTable" data-sort-dir="asc">
         <thead class="table-dark">
             <tr>
-                <th style="display:none">ID</th> <!-- Kolom tersembunyi -->
-                <th><input type="checkbox" id="selectAll"></th>
+                <th style="display:none">ID</th>
+                <th style="display:none">Kelas</th>
+                <th><input type="checkbox" id="selectAll" /></th>
                 <th>NIS</th>
-                <th>Nama Anak<i class="bi bi-arrow-down-up" onclick="sortTable(3)"></i></th>
+                <th>Nama Anak <i class="bi bi-arrow-down-up" onclick="sortTable(4)"></i></th>
                 <th>Tinggi Badan</th>
                 <th>Berat Badan</th>
                 <th>Z-Score</th>
                 <th>Status</th>
-                <th>Tanggal <i class="bi bi-arrow-down-up" onclick="sortTable(8)"></i></th>
+                <th>Tanggal <i class="bi bi-arrow-down-up" onclick="sortTable(9)"></i></th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -56,15 +62,16 @@
             @foreach ($status as $item)
             <tr>
                 <td style="display:none">{{ $item->idstatus }}</td>
-                <td style="background-color:white;"><input type="checkbox" class="row-checkbox"></td>
-                <td style="background-color:white;">{{ $item->nis }}</td>
-                <td style="background-color:white;">{{ $item->pesertaDidik->namapd ?? '-' }}</td>
-                <td style="background-color:white;">{{ $item->pesertaDidik->tinggibadan ?? '-' }} cm</td>
-                <td style="background-color:white;">{{ $item->pesertaDidik->beratbadan ?? '-' }} kg</td>
-                <td style="background-color:white;">{{ $item->z_score }}</td>
-                <td style="background-color:white;">{{ $item->status }}</td>
-                <td style="background-color:white;">{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('d M Y') }}</td>
-                <td style="background-color:white;">
+                <td style="display:none">{{ $item->pesertaDidik->kelas ?? 'A' }}</td>
+                <td><input type="checkbox" class="row-checkbox" /></td>
+                <td>{{ $item->nis }}</td>
+                <td>{{ $item->pesertaDidik->namapd ?? '-' }}</td>
+                <td>{{ $item->pesertaDidik->tinggibadan ?? '-' }} cm</td>
+                <td>{{ $item->pesertaDidik->beratbadan ?? '-' }} kg</td>
+                <td>{{ $item->z_score }}</td>
+                <td>{{ $item->status }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('d M Y') }}</td>
+                <td>
                     <form onsubmit="return handleDelete(event, '{{ route('statusgizi.destroy', $item->nis) }}')">
                         <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
                     </form>
@@ -73,86 +80,168 @@
             @endforeach
         </tbody>
     </table>
+
+    <!-- Chart Section -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Filter Rentang Tanggal Status Gizi</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="startDate" class="form-label">Tanggal Mulai</label>
+                    <input type="date" id="startDate" class="form-control" onchange="updateCharts()" />
+                </div>
+                <div class="col-md-6">
+                    <label for="endDate" class="form-label">Tanggal Akhir</label>
+                    <input type="date" id="endDate" class="form-control" onchange="updateCharts()" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Chart Status Gizi Kelas A</h5>
+        </div>
+        <div class="card-body">
+            <canvas id="chartKelasA" style="height: 300px;"></canvas>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Chart Status Gizi Kelas B</h5>
+        </div>
+        <div class="card-body">
+            <canvas id="chartKelasB" style="height: 300px;"></canvas>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Pencarian
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-        const filter = this.value.toLowerCase();
-        const rows = document.querySelectorAll("#statusTable tbody tr");
+    let chartA = null, chartB = null;
+
+    function getChartDataByClass() {
+        const rows = document.querySelectorAll('#statusTable tbody tr');
+        const data = { A: {}, B: {} };
+
+        const start = document.getElementById('startDate')?.value;
+        const end = document.getElementById('endDate')?.value;
+        const startDate = start ? new Date(start) : null;
+        const endDate = end ? new Date(end) : null;
+
         rows.forEach(row => {
-            const match = Array.from(row.cells).some(td => td.textContent.toLowerCase().includes(filter));
-            row.style.display = match ? "" : "none";
-        });
-    });
+            if (row.style.display === 'none') return;
 
-    function sortTable(n) {
-        const table = document.getElementById("statusTable");
-        const tbody = table.tBodies[0];
-        const rows = Array.from(tbody.rows);
-        let dir = table.getAttribute('data-sort-dir') === 'asc' ? 'desc' : 'asc';
-        table.setAttribute('data-sort-dir', dir);
+            const kelas = row.cells[1].textContent.trim();
+            const status = row.cells[8].textContent.trim();
+            const tanggal = row.cells[9].textContent.trim();
 
-        rows.sort((a, b) => {
-            const x = a.cells[n].textContent.trim().toLowerCase();
-            const y = b.cells[n].textContent.trim().toLowerCase();
+            const dateObj = new Date(tanggal);
+            if (isNaN(dateObj)) return;
 
-            if (!isNaN(x) && !isNaN(y)) {
-                return dir === 'asc' ? x - y : y - x;
-            }
+            if (startDate && dateObj < startDate) return;
+            if (endDate && dateObj > endDate) return;
 
-            return dir === 'asc' ? x.localeCompare(y) : y.localeCompare(x);
+            const bulan = dateObj.toISOString().slice(0, 7);
+
+            if (!data[kelas]) data[kelas] = {};
+            if (!data[kelas][bulan]) data[kelas][bulan] = {};
+            if (!data[kelas][bulan][status]) data[kelas][bulan][status] = 0;
+            data[kelas][bulan][status]++;
         });
 
-        rows.forEach(row => tbody.appendChild(row));
+        return data;
     }
 
-    function printFiltered() {
-        const rows = [...document.querySelectorAll("#statusTable tbody tr")]
-            .filter(row => row.style.display !== "none")
-            .map(row => ({
-                idstatus: row.cells[0].textContent.trim()
-            }));
+    function prepareChartData(data, kelas) {
+        if (!data[kelas]) return { labels: [], datasets: [] };
+        const bulanLabels = Object.keys(data[kelas]).sort();
+        const statusLabels = ['Gizi Kurang', 'Gizi Baik', 'Gizi Lebih', 'Obesitas'];
+        const colors = {
+            'Gizi Kurang': '#dc3545',
+            'Gizi Baik': '#198754',
+            'Gizi Lebih': '#ffc107',
+            'Obesitas': '#0d6efd'
+        };
 
-        if (rows.length === 0) {
-            alert('Tidak ada data yang bisa dicetak.');
-            return;
-        }
+        const datasets = statusLabels.map(status => ({
+            label: status,
+            backgroundColor: colors[status],
+            data: bulanLabels.map(b => data[kelas][b][status] || 0)
+        }));
 
-        const idList = rows.map(r => r.idstatus).join(',');
-        const url = `{{ route('statusgizi.exportPdf') }}?ids=${encodeURIComponent(idList)}`;
-        window.open(url, '_blank');
+        return { labels: bulanLabels, datasets };
     }
 
-    document.getElementById('selectAll').addEventListener('click', function() {
-        const checked = this.checked;
-        document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = checked);
-    });
-
-    function handleDelete(event, individualDeleteUrl) {
-        event.preventDefault();
-
-        const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
-        if (checkedBoxes.length > 0) {
-            const selectedNis = [];
-            checkedBoxes.forEach(box => {
-                const nis = box.closest('tr').cells[2].textContent.trim();
-                selectedNis.push(nis);
-            });
-            document.getElementById('selectednisInput').value = selectedNis.join(',');
-            document.getElementById('bulkDeleteForm').submit();
+    function renderChart(canvasId, chartRef, chartData) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        if (chartRef) {
+            chartRef.data = chartData;
+            chartRef.update();
         } else {
-            if (confirm('Yakin ingin menghapus data ini?')) {
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = individualDeleteUrl;
-                form.innerHTML = `@csrf @method('DELETE')`;
-                document.body.appendChild(form);
-                form.submit();
-            }
+            return new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Bulan',
+                                font: { size: 14 }
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jumlah Anak',
+                                font: { size: 14 }
+                            },
+                            ticks: { stepSize: 1, precision: 0 }
+                        }
+                    }
+                }
+            });
         }
-        return false;
+    }
+
+    function updateCharts() {
+        const data = getChartDataByClass();
+        const chartDataA = prepareChartData(data, 'A');
+        const chartDataB = prepareChartData(data, 'B');
+
+        chartA = renderChart('chartKelasA', chartA, chartDataA) || chartA;
+        chartB = renderChart('chartKelasB', chartB, chartDataB) || chartB;
+    }
+
+    window.onload = function () {
+        updateCharts();
     }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
