@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @extends('layouts.app')
 
   </head>
@@ -180,8 +182,195 @@
     </div>
 
       {{-- Akhir Tentang kami --}}
+
+      {{-- Tabel --}}
+    <table class="table table-bordered table-hover align-middle" id="statusTable" data-sort-dir="asc" style="display: none;">
+        <thead class="table-dark">
+            <tr>
+                <th style="display:none">Kelas</th>
+                <th>Status</th>
+                <th>Tanggal <i class="bi bi-arrow-down-up" onclick="sortTable(9)"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($status as $item)
+            <tr>
+                <td style="display:none">{{ $item->pesertaDidik->kelas ?? 'A' }}</td>
+                <td>{{ $item->status }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('d M Y') }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+      {{-- Tabel --}}
+    {{-- Awal Chart --}}
+<h4 id="stats">Statistik Pertumbuhan Anak</h4>
+<div class="container mt-4">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Filter Rentang Tanggal Status Gizi</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="startDate" class="form-label">Tanggal Mulai</label>
+                    <input type="date" id="startDate" class="form-control" onchange="updateCharts()" />
+                </div>
+                <div class="col-md-6">
+                    <label for="endDate" class="form-label">Tanggal Akhir</label>
+                    <input type="date" id="endDate" class="form-control" onchange="updateCharts()" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Chart Status Gizi Kelas A</h5>
+        </div>
+        <div class="card-body">
+            <canvas id="chartKelasA" style="height: 300px;"></canvas>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Chart Status Gizi Kelas B</h5>
+        </div>
+        <div class="card-body">
+            <canvas id="chartKelasB" style="height: 300px;"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    let chartA = null, chartB = null;
+
+    function getChartDataByClass() {
+        const rows = document.querySelectorAll('#statusTable tbody tr');
+        const data = { A: {}, B: {} };
+
+        const start = document.getElementById('startDate')?.value;
+        const end = document.getElementById('endDate')?.value;
+        const startDate = start ? new Date(start) : null;
+        const endDate = end ? new Date(end) : null;
+
+        rows.forEach(row => {
+            if (row.style.display === 'none') return;
+
+            const kelas = row.cells[0].textContent.trim();
+            const status = row.cells[1].textContent.trim();
+            const tanggal = row.cells[2].textContent.trim();
+
+            const dateObj = new Date(tanggal);
+            if (isNaN(dateObj)) return;
+
+            if (startDate && dateObj < startDate) return;
+            if (endDate && dateObj > endDate) return;
+
+            const bulan = dateObj.toISOString().slice(0, 7);
+
+            if (!data[kelas]) data[kelas] = {};
+            if (!data[kelas][bulan]) data[kelas][bulan] = {};
+            if (!data[kelas][bulan][status]) data[kelas][bulan][status] = 0;
+            data[kelas][bulan][status]++;
+        });
+
+        return data;
+    }
+
+    function prepareChartData(data, kelas) {
+        if (!data[kelas]) return { labels: [], datasets: [] };
+        const bulanLabels = Object.keys(data[kelas]).sort();
+        const statusLabels = ['Gizi Kurang', 'Gizi Baik', 'Gizi Lebih', 'Obesitas'];
+        const colors = {
+            'Gizi Kurang': '#dc3545',
+            'Gizi Baik': '#198754',
+            'Gizi Lebih': '#ffc107',
+            'Obesitas': '#0d6efd'
+        };
+
+        const datasets = statusLabels.map(status => ({
+            label: status,
+            backgroundColor: colors[status],
+            data: bulanLabels.map(b => data[kelas][b][status] || 0)
+        }));
+
+        return { labels: bulanLabels, datasets };
+    }
+
+    function renderChart(canvasId, chartRef, chartData) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        if (chartRef) {
+            chartRef.data = chartData;
+            chartRef.update();
+        } else {
+            return new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Bulan',
+                                font: { size: 14 }
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jumlah Anak',
+                                font: { size: 14 }
+                            },
+                            ticks: { stepSize: 1, precision: 0 }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    function updateCharts() {
+        const data = getChartDataByClass();
+        const chartDataA = prepareChartData(data, 'A');
+        const chartDataB = prepareChartData(data, 'B');
+
+        chartA = renderChart('chartKelasA', chartA, chartDataA) || chartA;
+        chartB = renderChart('chartKelasB', chartB, chartDataB) || chartB;
+    }
+
+    window.onload = function () {
+        updateCharts();
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    {{-- Akhir Chart --}}
+
+
       {{-- Awal Footer --}}
       {{-- Akhir Footer --}}
+
 
 
 
