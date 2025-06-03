@@ -14,14 +14,13 @@
             margin-bottom: 10px;
             position: relative;
         }
-        .logo-kiri, .logo-kanan {
+        .logo-kiri{
             position: absolute;
             width: 80px;
             height: auto;
             top: 0;
         }
         .logo-kiri { left: 20px; }
-        .logo-kanan { right: 20px; }
 
         h1, h2, h3, h4, h5, p {
             margin: 0;
@@ -56,8 +55,7 @@
 </head>
 <body>
 
-<img src="{{ public_path('images/logo-tk.png') }}" class="logo-kiri">
-<!-- <img src="{{ public_path('images/logo-kanan.png') }}" class="logo-kanan"> -->
+<img src="{{ public_path('img/logo-dwp.png') }}" class="logo-kiri" alt="Logo">
 
 <div class="kop">
     <h1 style="font-weight: bold;">DHARMA WANITA PERSATUAN</h1>
