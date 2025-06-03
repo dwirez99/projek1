@@ -2,30 +2,25 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
     <title>Status Gizi Peserta Didik</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
-        th, td {
-            vertical-align: middle !important;
-        }
+        th, td { vertical-align: middle !important; }
     </style>
 </head>
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Status Gizi Peserta Didik</h2>
-        <div class="d-flex gap-2">
-            {{-- <a href="{{ route('statusgizi.chart') }}" class="btn btn-success">
-                <i class="bi bi-bar-chart-line-fill"></i> Lihat Chart
-            </a> --}}
-            <a href="javascript:void(0)" onclick="printFiltered()" class="btn btn-danger">
-                <i class="bi bi-file-earmark-pdf-fill"></i> Cetak PDF
-            </a>
-        </div>
+        <a href="{{ route('statusgizi.exportPdf') }}" onclick="printFiltered()" class="btn btn-danger">
+            <i class="bi bi-file-earmark-pdf-fill"></i> Cetak PDF
+        </a>
     </div>
 
     @if (session('success'))
@@ -70,7 +65,7 @@
                 <td>{{ $item->pesertaDidik->beratbadan ?? '-' }} kg</td>
                 <td>{{ $item->z_score }}</td>
                 <td>{{ $item->status }}</td>
-                <td>{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('d M Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('Y-m-d') }}</td>
                 <td>
                     <form onsubmit="return handleDelete(event, '{{ route('statusgizi.destroy', $item->nis) }}')">
                         <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
@@ -81,25 +76,18 @@
         </tbody>
     </table>
 
-    <!-- Chart Section -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<div class="container mt-4">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 mt-5">
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">Filter Rentang Tanggal Status Gizi</h5>
         </div>
-        <div class="card-body">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="startDate" class="form-label">Tanggal Mulai</label>
-                    <input type="date" id="startDate" class="form-control" onchange="updateCharts()" />
-                </div>
-                <div class="col-md-6">
-                    <label for="endDate" class="form-label">Tanggal Akhir</label>
-                    <input type="date" id="endDate" class="form-control" onchange="updateCharts()" />
-                </div>
+        <div class="card-body row g-3">
+            <div class="col-md-6">
+                <label for="startDate" class="form-label">Tanggal Mulai</label>
+                <input type="date" id="startDate" class="form-control" onchange="updateCharts()" />
+            </div>
+            <div class="col-md-6">
+                <label for="endDate" class="form-label">Tanggal Akhir</label>
+                <input type="date" id="endDate" class="form-control" onchange="updateCharts()" />
             </div>
         </div>
     </div>
@@ -109,7 +97,7 @@
             <h5 class="mb-0">Chart Status Gizi Kelas A</h5>
         </div>
         <div class="card-body">
-            <canvas id="chartKelasA" style="height: 300px;"></canvas>
+            <canvas id="chartKelasA" style="height: 50px;"></canvas>
         </div>
     </div>
 
@@ -118,11 +106,12 @@
             <h5 class="mb-0">Chart Status Gizi Kelas B</h5>
         </div>
         <div class="card-body">
-            <canvas id="chartKelasB" style="height: 300px;"></canvas>
+            <canvas id="chartKelasB" style="height: 50px;"></canvas>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     let chartA = null, chartB = null;
 
@@ -141,15 +130,13 @@
             const kelas = row.cells[1].textContent.trim();
             const status = row.cells[8].textContent.trim();
             const tanggal = row.cells[9].textContent.trim();
-
             const dateObj = new Date(tanggal);
-            if (isNaN(dateObj)) return;
 
+            if (isNaN(dateObj)) return;
             if (startDate && dateObj < startDate) return;
             if (endDate && dateObj > endDate) return;
 
             const bulan = dateObj.toISOString().slice(0, 7);
-
             if (!data[kelas]) data[kelas] = {};
             if (!data[kelas][bulan]) data[kelas][bulan] = {};
             if (!data[kelas][bulan][status]) data[kelas][bulan][status] = 0;
@@ -172,7 +159,10 @@
 
         const datasets = statusLabels.map(status => ({
             label: status,
-            backgroundColor: colors[status],
+            borderColor: colors[status],
+            backgroundColor: colors[status] + '55',
+            tension: 0.3,
+            fill: false,
             data: bulanLabels.map(b => data[kelas][b][status] || 0)
         }));
 
@@ -186,16 +176,14 @@
             chartRef.update();
         } else {
             return new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: chartData,
                 options: {
                     responsive: true,
                     plugins: {
                         legend: {
                             position: 'top',
-                            labels: {
-                                font: { size: 14 }
-                            }
+                            labels: { font: { size: 14 } }
                         },
                         tooltip: {
                             callbacks: {
@@ -241,7 +229,6 @@
         updateCharts();
     }
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
