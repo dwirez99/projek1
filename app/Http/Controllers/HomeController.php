@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function getArtikel(){
-        $artikels = Artikel::latest()->take(5)->get();
+        $artikels = Artikel::latest()->take(4)->get();
         $gurus = Guru::orderBy('name')->limit(5)->get();
         return view('landingpages', compact('artikels', 'gurus'));
     }

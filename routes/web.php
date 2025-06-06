@@ -15,18 +15,11 @@ use App\Livewire\Dashboard;
 use App\Models\Artikel;
 
 
-Route::get('/', [HomeController::class, 'getArtikel'])->name('home');
+Route::get('/', [HomeController::class, 'getArtikel'])->name('home')->middleware('auth');
 // Route::get('/', function () {
 //     return view('landingpages');
 // })->name('home');
 
-
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::redirect('settings', 'settings/profile');
-
-});
 
 Route::middleware(['auth', 'role:orangtua'])->group(function () {
     Route::get('/statusgiziOrtu', [StatusgiziController::class, 'indexOrtu'])->name('statusOrtu.index');
@@ -38,7 +31,6 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/orangtuas', [OrangtuaController::class, 'index'])->name('orangtua.index');
     Route::get('/orangtuas/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
     Route::post('/orangtuas', [OrangtuaController::class, 'store'])->name('orangtua.store');
-    // Route::patch('/orangtuas/{id}', [OrangtuaController::class, 'update'])->name('orangtua.update');
     Route::delete('orangtuas/{orangtua}', [OrangtuaController::class, 'destroy'])->name('orangtua.destroy');
 
 });
@@ -83,4 +75,3 @@ Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtik
 
 Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
 require __DIR__ . '/auth.php';
-

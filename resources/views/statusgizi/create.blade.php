@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
     <style>
-        body {
-            background-color: #f4f6f8;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
         .container-main {
             max-width: 960px;
@@ -18,15 +15,17 @@
             position: relative;
         }
 
-        .card-custom {
-            background-color: #ffffff;
-            border-radius: 16px;
+        .card-statusgiziz {
+            background-color: #fcfcfc;
+            border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
         }
 
         .img-container img {
@@ -132,7 +131,7 @@
         @endif
 
         <!-- Kartu Data -->
-        <div class="card card-custom">
+        <div class="card card-statusgiziz">
 
             <!-- Tombol Kembali -->
             <a href="{{ route('pesertadidik.index') }}" class="btn-back" data-bs-toggle="tooltip" data-bs-placement="right" title="Kembali ke daftar">
