@@ -40,8 +40,7 @@
     <table class="table table-bordered table-hover align-middle" id="statusTable" data-sort-dir="asc">
         <thead class="table-dark">
             <tr>
-                <th style="display:none">ID</th>
-                <th style="display:none">Kelas</th>
+                <th style>Kelas</th>
                 <th><input type="checkbox" id="selectAll" /></th>
                 <th>NIS</th>
                 <th>Nama Anak <i class="bi bi-arrow-down-up" onclick="sortTable(4)"></i></th>
@@ -53,11 +52,10 @@
                 <th>Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: white">
             @foreach ($status as $item)
             <tr>
-                <td style="display:none">{{ $item->idstatus }}</td>
-                <td style="display:none">{{ $item->pesertaDidik->kelas ?? 'A' }}</td>
+                <td>{{ $item->pesertaDidik->kelas ?? 'A' }}</td>
                 <td><input type="checkbox" class="row-checkbox" /></td>
                 <td>{{ $item->nis }}</td>
                 <td>{{ $item->pesertaDidik->namapd ?? '-' }}</td>
@@ -76,7 +74,12 @@
         </tbody>
     </table>
 
-    <div class="card shadow mb-4 mt-5">
+    <!-- Chart Section -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+    <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">Filter Rentang Tanggal Status Gizi</h5>
         </div>
@@ -127,9 +130,10 @@
         rows.forEach(row => {
             if (row.style.display === 'none') return;
 
-            const kelas = row.cells[1].textContent.trim();
-            const status = row.cells[8].textContent.trim();
-            const tanggal = row.cells[9].textContent.trim();
+            const kelas = row.cells[0].textContent.trim();
+            const status = row.cells[7].textContent.trim();
+            const tanggal = row.cells[8].textContent.trim();
+
             const dateObj = new Date(tanggal);
 
             if (isNaN(dateObj)) return;
