@@ -15,7 +15,7 @@ use App\Livewire\Dashboard;
 use App\Models\Artikel;
 
 
-Route::get('/', [HomeController::class, 'getArtikel'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'getArtikel'])->name('home');
 // Route::get('/', function () {
 //     return view('landingpages');
 // })->name('home');
