@@ -92,7 +92,7 @@ body {
     max-width: 100vw;
 }
 
-#about{
+#about, #stats{
     font-family: "Baloo Thambi 2", system-ui;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -104,6 +104,17 @@ body {
     padding-top: 30px;
     margin-top: 50px;
     max-width: 100vw;
+}
+
+.section-stats{
+    padding: 50px 20px;
+    background: white;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: start;
+    box-shadow: 5px 5px 0px black;
+    max-width: 100%;
 }
 
 .section-kegiatan {

@@ -39,6 +39,7 @@
         <input type="text" id="searchInput" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Cari berdasarkan Nama, NIS, Status, atau Tanggal (YYYY-MM-DD)..." />
     </div>
 
+<<<<<<< HEAD
     <div class="bg-white shadow-md rounded-lg overflow-x-auto mb-8">
         <table class="min-w-full divide-y divide-gray-200" id="statusTable" data-sort-dir="asc">
             <thead class="bg-gray-800 text-white">
@@ -104,6 +105,58 @@
             <div>
                 <label for="startDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Mulai</label>
                 <input type="date" id="startDate" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" onchange="updateChartsAndTable()" />
+=======
+    <table class="table table-bordered table-hover align-middle" id="statusTable" data-sort-dir="asc">
+        <thead class="table-dark">
+            <tr>
+                <th style>Kelas</th>
+                <th><input type="checkbox" id="selectAll" /></th>
+                <th>NIS</th>
+                <th>Nama Anak <i class="bi bi-arrow-down-up" onclick="sortTable(4)"></i></th>
+                <th>Tinggi Badan</th>
+                <th>Berat Badan</th>
+                <th>Z-Score</th>
+                <th>Status</th>
+                <th>Tanggal <i class="bi bi-arrow-down-up" onclick="sortTable(9)"></i></th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody style="background-color: white">
+            @foreach ($status as $item)
+            <tr>
+                <td>{{ $item->pesertaDidik->kelas ?? 'A' }}</td>
+                <td><input type="checkbox" class="row-checkbox" /></td>
+                <td>{{ $item->nis }}</td>
+                <td>{{ $item->pesertaDidik->namapd ?? '-' }}</td>
+                <td>{{ $item->pesertaDidik->tinggibadan ?? '-' }} cm</td>
+                <td>{{ $item->pesertaDidik->beratbadan ?? '-' }} kg</td>
+                <td>{{ $item->z_score }}</td>
+                <td>{{ $item->status }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggalpembuatan)->format('Y-m-d') }}</td>
+                <td>
+                    <form onsubmit="return handleDelete(event, '{{ route('statusgizi.destroy', $item->nis) }}')">
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <!-- Chart Section -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Filter Rentang Tanggal Status Gizi</h5>
+        </div>
+        <div class="card-body row g-3">
+            <div class="col-md-6">
+                <label for="startDate" class="form-label">Tanggal Mulai</label>
+                <input type="date" id="startDate" class="form-control" onchange="updateCharts()" />
+>>>>>>> 6cdcef404328cb3d0adf7cf8b57131137d9f22ce
             </div>
             <div>
                 <label for="endDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Akhir</label>
@@ -167,9 +220,10 @@
             // Check if row is visible (not filtered out by search or date)
             if (row.classList.contains('hidden-by-search') || row.classList.contains('hidden-by-date')) return;
 
-            const kelas = row.cells[1].textContent.trim();
-            const status = row.cells[8].textContent.trim();
-            const tanggal = row.cells[9].textContent.trim();
+            const kelas = row.cells[0].textContent.trim();
+            const status = row.cells[7].textContent.trim();
+            const tanggal = row.cells[8].textContent.trim();
+
             const dateObj = new Date(tanggal);
 
             if (isNaN(dateObj)) return;
