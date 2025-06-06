@@ -3,17 +3,19 @@
 <head>
     <title>Tambah Peserta Didik</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    {{-- Tambahkan Alpine.js --}}
     <script src="//unpkg.com/alpinejs" defer></script>
     <style>
         .dropdown-list-item:hover {
-            background-color: #f0f0f0; /* Warna abu-abu muda untuk hover */
+            background-color: #f0f0f0;
         }
-        [x-cloak] { display: none !important; } /* Sembunyikan elemen Alpine.js hingga siap */
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
 <div class="container mt-5">
+    {{-- Notifikasi Error --}}
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Terjadi kesalahan pada input Anda:</strong>
@@ -28,6 +30,7 @@
         </div>
     @endif
 
+    {{-- Notifikasi Sukses --}}
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -48,16 +51,14 @@
                             $oldIdOrtu = old('idortu');
                             $oldNamaOrtu = '';
                             if ($oldIdOrtu) {
-                                // Pastikan $orangtuas adalah koleksi dan tidak null
                                 $resolvedOrangtua = ($orangtuas && method_exists($orangtuas, 'firstWhere')) ? $orangtuas->firstWhere('id', $oldIdOrtu) : null;
                                 if ($resolvedOrangtua) {
                                     $oldNamaOrtu = $resolvedOrangtua->namaortu;
                                 }
                             }
-                            // Pastikan $orangtuas adalah koleksi yang bisa di-map, atau array kosong jika tidak
                             $orangtuasArray = ($orangtuas && method_exists($orangtuas, 'map'))
-                                                ? $orangtuas->map(fn($o) => ['id' => $o->id, 'namaortu' => $o->namaortu])->values()->all()
-                                                : [];
+                                ? $orangtuas->map(fn($o) => ['id' => $o->id, 'namaortu' => $o->namaortu])->values()->all()
+                                : [];
                             $orangtuasJson = json_encode($orangtuasArray);
                         @endphp
 
@@ -73,13 +74,11 @@
                                         this.filterOrangtuas();
                                     },
                                     filterOrangtuas() {
-                                        if (this.searchTerm.trim() === '') {
-                                            this.filteredOrangtuas = this.allOrangtuas;
-                                        } else {
-                                            this.filteredOrangtuas = this.allOrangtuas.filter(ortu =>
+                                        this.filteredOrangtuas = this.searchTerm.trim() === ''
+                                            ? this.allOrangtuas
+                                            : this.allOrangtuas.filter(ortu =>
                                                 ortu.namaortu.toLowerCase().includes(this.searchTerm.toLowerCase())
                                             );
-                                        }
                                     },
                                     handleInput() {
                                         this.dropdownOpen = true;
@@ -102,12 +101,8 @@
                                                 this.selectedOrangtuaId = exactMatch.id;
                                             } else {
                                                 const previouslySelected = this.allOrangtuas.find(o => o.id == this.selectedOrangtuaId);
-                                                if (previouslySelected) {
-                                                    this.searchTerm = previouslySelected.namaortu;
-                                                } else {
-                                                    this.searchTerm = '';
-                                                    this.selectedOrangtuaId = '';
-                                                }
+                                                this.searchTerm = previouslySelected ? previouslySelected.namaortu : '';
+                                                this.selectedOrangtuaId = previouslySelected ? previouslySelected.id : '';
                                             }
                                             this.dropdownOpen = false;
                                         }, 200);
@@ -127,7 +122,6 @@
                                    x-on:blur="handleBlur"
                                    placeholder="Ketik nama orang tua..."
                                    autocomplete="off">
-
                             <input type="hidden" name="idortu" x-bind:value="selectedOrangtuaId">
 
                             <div x-show="dropdownOpen && filteredOrangtuas.length > 0"
@@ -145,6 +139,7 @@
                                     </template>
                                 </ul>
                             </div>
+
                             <div x-show="dropdownOpen && searchTerm !== '' && filteredOrangtuas.length === 0"
                                  class="position-absolute w-100 bg-white border rounded shadow-lg mt-1 p-2 text-muted"
                                  style="z-index: 1050;">
@@ -157,6 +152,7 @@
                         </div>
                         {{-- Akhir Komponen Pencarian Orang Tua --}}
 
+                        {{-- Form Data Peserta Didik --}}
                         <div class="mb-3">
                             <label>Nama</label>
                             <input type="text" name="namapd" class="form-control" placeholder="Nama" value="{{ old('namapd') }}">
@@ -184,7 +180,6 @@
                                 <option value="B" {{ old('kelas') == 'B' ? 'selected' : '' }}>B</option>
                             </select>
                         </div>
-
 
                         <div class="mb-3">
                             <label>Tinggi Badan</label>

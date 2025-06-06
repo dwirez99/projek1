@@ -62,7 +62,7 @@
     </style>
 </head>
 <body>
-<div class="judul-halaman">Kelola Orang Tua</div>
+<div class="judul-halaman">Kelola Peserta Didik</div>
 
 <div class="container mt-4">
     {{-- Header dan Pencarian --}}
