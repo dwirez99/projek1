@@ -152,7 +152,7 @@
     {{-- Awal Chart --}}
 <h4 class="text-2xl font-bold text-center mt-12 mb-6" id="tag">Statistik Pertumbuhan Anak</h4>
 <div class="section-stats mb-12">
-    <div class="container mb-12">
+    <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
                 <h5 class="mb-0">Filter Rentang Tanggal Status Gizi</h5>
