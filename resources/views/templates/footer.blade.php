@@ -12,21 +12,18 @@
             <div class="col-md-3 mb-4 hidden md:block">
                 <h5 class="fw-bold">Menu Utama</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark text-decoration-none">Home</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">About</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">Blog</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">Gallery</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">Contact</a></li>
+                    <li><a href="/" class="text-dark text-decoration-none">Home</a></li>
+                    <li><a href="/#about" class="text-dark text-decoration-none">About</a></li>
+                    <li><a href="/kegiatan" class="text-dark text-decoration-none">Blog</a></li>
                 </ul>
             </div>
 
             <div class="col-md-3 mb-4 hidden md:block">
                 <h5 class="fw-bold">Akademik</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark text-decoration-none">Guru</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">Siswa</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">Pengumuman</a></li>
-                    <li><a href="#" class="text-dark text-decoration-none">Kegiatan</a></li>
+                    <li><a href="/guru" class="text-dark text-decoration-none">Guru</a></li>
+                    <li><a href="/" class="text-dark text-decoration-none">Chart</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none"></a></li>
                     <li><a href="#" class="text-dark text-decoration-none">Download</a></li>
                 </ul>
             </div>

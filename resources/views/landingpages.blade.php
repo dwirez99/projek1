@@ -150,7 +150,7 @@
 
       {{-- Tabel --}}
     {{-- Awal Chart --}}
-<h4 class="text-2xl font-bold text-center mt-12 mb-6" id="tag">Statistik Pertumbuhan Anak</h4>
+<h4 class="text-2xl font-bold text-center mt-12 mb-6 " id="stats">Statistik Pertumbuhan Anak</h4>
 <div class="section-stats mb-12">
     <div class="container">
         <div class="card shadow mb-4">

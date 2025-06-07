@@ -483,7 +483,7 @@ a{
         text-align: justify;
     }
 
-    #tag, #about {
+    #tag, #about  #stats{
         font-size: 40px;
         padding-left: 20px;
         padding-right: 20px;
