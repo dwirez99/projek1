@@ -106,16 +106,27 @@ body {
     max-width: 100vw;
 }
 
+.section-stats{
+    padding: 50px 20px;
+    background: white;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: start;
+    box-shadow: 5px 5px 0px black;
+    max-width: 100%;
+}
+
 .section-kegiatan {
     padding: 50px 20px;
     background: white;
     margin: 30px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    text-align:start;
+    text-align: start;
     box-shadow: 5px 5px 0px black;
     max-width: 100%;
-  }
+}
 
 .card-custom {
     border-radius: 20px;
@@ -446,4 +457,111 @@ a{
     object-fit: cover;
     height: 100%;
     width: 100%;
+}
+
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    #welcome {
+        font-size: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+    #name {
+        font-size: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+    #intro {
+        font-size: 16px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: justify;
+    }
+
+    #tag, #about  #stats{
+        font-size: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+    .section-kegiatan,
+    .section-guru,
+    .section-about {
+        margin: 15px;
+        padding: 20px 10px;
+    }
+
+    .section-guru .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-about .flex {
+        flex-direction: column;
+    }
+
+    .section-about .md\:w-1\/3,
+    .section-about .md\:w-2\/3 {
+        width: 100%;
+    }
+
+    .section-about .md\:pl-4 {
+        padding-left: 0;
+        margin-top: 20px;
+    }
+
+    .map-container {
+        height: 300px;
+    }
+
+    /* Carousel adjustments */
+    #default-carousel .relative {
+        height: 200px;
+    }
+
+    /* Navbar adjustments */
+    .navbar {
+        width: 90%;
+        height: auto;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #welcome {
+        font-size: 32px;
+    }
+
+    #name {
+        font-size: 24px;
+    }
+
+    #tag, #about {
+        font-size: 32px;
+    }
+
+    .section-guru .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-lihat {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 }

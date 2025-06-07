@@ -3,7 +3,6 @@
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -11,7 +10,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 
-new #[Layout('components.layouts.auth')] class extends Component {
+new #[Layout('components.layouts.auth.simple')] class extends Component
+{
     #[Validate('required|string')]
     public string $username = '';
 
@@ -20,16 +20,12 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
     public bool $remember = false;
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function login(): void
     {
         $this->validate();
-
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
+        if (!Auth::attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -40,26 +36,12 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        // $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
-        $user = Auth::user();
-
-        if ($user->role === 'guru') {
-            $this->redirectIntended(default: '/landingpages', navigate: true);
-        } elseif ($user->role === 'orangtua') {
-            $this->redirectIntended(default: '/landingpages', navigate: true);
-        } else {
-            // fallback kalau role tidak dikenali
-            $this->redirectIntended(default: '/landingpages', navigate: true);
-        }
-
+        $this->redirectIntended(default: '/landingpages', navigate: true);
     }
 
-    /**
-     * Ensure the authentication request is not rate limited.
-     */
     protected function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -75,63 +57,88 @@ new #[Layout('components.layouts.auth')] class extends Component {
         ]);
     }
 
-    /**
-     * Get the authentication rate limiting throttle key.
-     */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->username).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->username) . '|' . request()->ip());
     }
-}; ?>
+};
+?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Log in to your account')" :description="__('Enter your Username and password below to log in')" />
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-light">
+                    <h4 class="card-title mb-1">{{ __('Masuk Ke dalam Akun') }}</h4>
+                    <p class="card-text text-muted small">
+                        {{ __('Masukan Username dan password untuk masuk ke dalam akun Anda.') }}
+                    </p>
+                </div>
+                <div class="card-body p-4">
+                    @if (session('status'))
+                        <div class="alert alert-success text-center mb-3" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+                    <form wire:submit.prevent="login" method="POST">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">{{ __('Username') }}</label>
+                            <input
+                                wire:model="username"
+                                type="text"
+                                id="username"
+                                name="username"
+                                class="form-control @error('username') is-invalid @enderror"
+                                placeholder="Masukan Username"
+                                required
+                                autofocus
+                                autocomplete="username"
+                            >
+                            @error('username')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-    <form wire:submit="login" class="flex flex-col gap-6">
-        <!-- Usernmae Address -->
-        <flux:input
-            wire:model="username"
-            :label="__('Username')"
-            type="Username"
-            required
-            autofocus
-            autocomplete=""
-            placeholder="Masukan Username"
-        />
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="password" class="form-label">{{ __('Password') }}</label>
+                                @if (Route::has('password.request'))
+                                    <a
+                                        href="{{ route('password.request') }}"
+                                        wire:navigate
+                                        class="form-text text-muted text-decoration-none small"
+                                    >
+                                        {{ __('Forgot your password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                            <input
+                                wire:model="password"
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="{{ __('Password') }}"
+                                required
+                                autocomplete="current-password"
+                            >
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        <!-- Password -->
-        <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Password')"
-            />
+                        <div class="mb-3 form-check">
+                            <input wire:model="remember" type="checkbox" id="remember" class="form-check-input">
+                            <label for="remember" class="form-check-label">{{ __('Remember me') }}</label>
+                        </div>
 
-            @if (Route::has('password.request'))
-                <flux:link class="absolute end-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </flux:link>
-            @endif
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
-
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
-        </div>
-    </form>
-
-    {{-- @if (Route::has('register'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-            {{ __('Don\'t have an account?') }}
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-        </div>
-    @endif --}}
+    </div>
 </div>

@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background-color: #00B7FF;">
     <header>
         @include('templates.navbar')
     </header>
@@ -66,4 +66,3 @@
 
 </body>
 </html>
-

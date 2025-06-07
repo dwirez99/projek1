@@ -84,7 +84,8 @@
     </style>
 
 <nav class="navbar">
-    <img src="{{ asset('img/logo-dwp.png') }}" alt="Logo" class="logo" onclick="toggleMenu()"/>
+    {{-- Add align-items: center to the .navbar CSS rule to vertically center items --}}
+    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo" onclick="toggleMenu()"/>
     <ul class="nav-menu" id="nav">
         <li><a href="{{ route('home') }}" class="nav-item">Halaman Utama</a></li>
         <li><a href="/kegiatan" wire:navigate class="nav-item">Kegiatan</a></li>
@@ -148,5 +149,3 @@
         @endguest
     </ul>
 </nav>
-
-

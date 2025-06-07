@@ -21,13 +21,6 @@ Route::get('/', [HomeController::class, 'getArtikel'])->name('home');
 // })->name('home');
 
 
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::redirect('settings', 'settings/profile');
-
-});
-
 Route::middleware(['auth', 'role:orangtua'])->group(function () {
     Route::get('/statusgiziOrtu', [StatusgiziController::class, 'indexOrtu'])->name('statusOrtu.index');
     Route::get('/anakanaks', [OrangtuaController::class, 'nilaiSiswa'])->name('orangtua.anak');
@@ -38,7 +31,6 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/orangtuas', [OrangtuaController::class, 'index'])->name('orangtua.index');
     Route::get('/orangtuas/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
     Route::post('/orangtuas', [OrangtuaController::class, 'store'])->name('orangtua.store');
-    // Route::patch('/orangtuas/{id}', [OrangtuaController::class, 'update'])->name('orangtua.update');
     Route::delete('orangtuas/{orangtua}', [OrangtuaController::class, 'destroy'])->name('orangtua.destroy');
 
 });
@@ -83,4 +75,3 @@ Route::get('/kegiatan', [HomeController::class, 'listArtikel'])->name('listArtik
 
 Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
 require __DIR__ . '/auth.php';
-
