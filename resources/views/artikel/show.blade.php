@@ -99,7 +99,7 @@
     <h1 class="artikel-title">{{ $artikel->judul }}</h1>
 
     <div class="artikel-meta">
-        <img src="{{ asset('build\assets\logo\GKL33_Dharma Wanita - Koleksilogo.com 3.png') }}" alt="Avatar Penulis">
+        <img src="{{ asset('build/assets/logo/logo_dw.png') }}" alt="Avatar Penulis">
         <div class="artikel-meta-info">
             <strong>TK DHARMA WANITA LAMONG</strong>
             <span>Guru</span>
