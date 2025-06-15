@@ -37,7 +37,7 @@
         <input type="text" id="searchInput" class="form-control" placeholder="Cari data..." />
     </div>
 
-    <table class="table table-bordered table-hover align-middle" id="statusTable" data-sort-dir="asc">
+    <table class="table table-bordered table-hover align-middle" id="statusTable" data-sort-dir="asc" style="background-color: white">
         <thead class="table-dark">
             <tr>
                 <th style="display:none">ID</th>
