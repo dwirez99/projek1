@@ -25,8 +25,12 @@
 </head>
 <body >
 <div class="judul-halaman">Kelola Peserta Didik</div>
-
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8" x-data="{ zScoreActive: false }">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8"
+     x-data="{
+        zScoreActive: localStorage.getItem('zScoreActive') === 'true'
+     }"
+     x-init="$watch('zScoreActive', value => localStorage.setItem('zScoreActive', value))"
+>
 
     {{-- Tombol Tambah Data --}}
     <div class="mb-6 text-left">
@@ -119,8 +123,8 @@
                                         <p><span class="font-medium text-gray-700">Kelas:</span> {{ $pd->kelas }}</p>
                                         <p><span class="font-medium text-gray-700">TB/BB:</span> {{ $pd->tinggibadan ?? '-' }} cm / {{ $pd->beratbadan ?? '-' }} kg</p>
                                         <p><span class="font-medium text-gray-700">No. Telp Ortu:</span> {{ $pd->orangtua->notelportu }}</p>
-                                        <p><span class="font-medium text-gray-700">Status Gizi (Terbaru):</span> <strong class="text-indigo-600">{{ $pd->statusgiziTerbaru->status ?? '-' }} | {{ $pd->statusgiziTerbaru?->tanggalpembuatan 
-                                            ? \Carbon\Carbon::parse($pd->statusgiziTerbaru->tanggalpembuatan)->isoFormat('D MMMM YYYY') 
+                                        <p><span class="font-medium text-gray-700">Status Gizi (Terbaru):</span> <strong class="text-indigo-600">{{ $pd->statusgiziTerbaru->status ?? '-' }} | {{ $pd->statusgiziTerbaru?->tanggalpembuatan
+                                            ? \Carbon\Carbon::parse($pd->statusgiziTerbaru->tanggalpembuatan)->isoFormat('D MMMM YYYY')
                                             : '-' }}
                                         </strong></p>
                                         <p><span class="font-medium text-gray-700">Z-Score:</span> {{ $pd->statusgiziTerbaru->z_score ?? '-' }}</p>

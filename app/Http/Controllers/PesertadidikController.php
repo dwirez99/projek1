@@ -58,7 +58,7 @@ class PesertadidikController extends Controller
             $query->get();
         }
 
-        $pesertadidiks = $query->paginate(20);
+        $pesertadidiks = $query->paginate(5);
         $orangtuas = Orangtua::all();
 
         return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));

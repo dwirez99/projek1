@@ -23,7 +23,7 @@ class StatusgiziController extends Controller
     public function hitung(Request $request)
     {
         Log::info('Masuk ke fungsi hitung');
-       
+
         $request->validate([
             'nis' => 'required|exists:pesertadidiks,nis',
         ]);
@@ -35,7 +35,7 @@ class StatusgiziController extends Controller
         $tinggi = $pd->tinggibadan;
         $berat = $pd->beratbadan;
         $jeniskelamin = $pd->jeniskelamin;
-        
+
         Log::info("Data PD: Tinggi=$tinggi, Berat=$berat, JK=$jeniskelamin");
 
         // Hitung IMT
@@ -165,7 +165,7 @@ class StatusgiziController extends Controller
             'tanggalpembuatan' => now(),
         ]);
 
-        return redirect()->route('statusgizi.index')->with('success', 'Status gizi berhasil disimpan.');
+        return redirect()->route('pesertadidik.index')->with('success', 'Status gizi berhasil disimpan.');
 
     }
 
