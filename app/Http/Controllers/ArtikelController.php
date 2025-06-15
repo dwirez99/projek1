@@ -12,7 +12,7 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $artikels = Artikel::latest()->get();
+        $artikels = Artikel::latest()->paginate(5); // Mengubah get() menjadi paginate(), misalnya 5 item per halaman
         return view('artikel.index', compact('artikels'));
     }
 

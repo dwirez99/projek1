@@ -184,4 +184,9 @@
     </div>
     @endforeach
 </div>
+
+<div class="d-flex justify-content-center mt-4">
+    {{ $artikels->links() }}
+</div>
+
 @endsection
