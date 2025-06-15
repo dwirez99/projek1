@@ -60,7 +60,7 @@
         z-index: 1;
     }
 
-    
+
 
 </style>
 @endpush
@@ -142,10 +142,10 @@
 	} = window.CKEDITOR;
 
 	const LICENSE_KEY =
-		'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzgxOTgzOTksImp0aSI6IjA5MDNiMjJhLWI3YWUtNDVlYi05MWM5LWM1NjhhNmQ5NjI1YSIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIl0sInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCJdLCJ2YyI6ImJkZDc4N2VjIn0.d-BqNP26xkRECdqqLNLBdQG5vIBO7MJQdeqtB_RW0YD2bHclpSsD4G0ZQDyVNtZc1op6VRBzsaOLMZqkAxqu1g';
+		'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3ODA1MzExOTksImp0aSI6IjIyZWU1OGI5LWNlZmUtNDFhMS1iOTI5LTg5MTBjMzU0Y2Y1YSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCIsIkUyUCIsIkUyVyJdLCJ2YyI6IjhmNjg1ZmQ1In0.sAqyEHOcwjdoiM4FKuWzWzCOEoOU0jDa30GF7-4nRL6rF-E89q2wWeSYdRIm-SaZkOy8P0AnoOlKDMu6OQA-XA';
 
 	const editorConfig = {
-		
+
 		toolbar: {
 			items: [
 				'sourceEditing',
@@ -396,7 +396,7 @@
     @csrf
     <label for="judul"><h2>Judul Artikel</h2></label>
     <input type="text" name="judul" placeholder="Judul Artikel" class="judulArtikel">
-    
+
     <label for="thumbnail"><h2>Thumbnail Artikel:</h2></label>
     <input type="file" name="thumbnail" class="thumbnailArtikel" id="thumbnail" accept="image/*">
 

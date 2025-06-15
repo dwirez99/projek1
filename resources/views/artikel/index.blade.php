@@ -19,11 +19,12 @@
 
     .judul-halaman {
         font-family: "Baloo Thambi 2", system-ui;
-        font-weight: 700;
-        font-size: 48px;
-        color: #333;
-        text-align: left;
-        padding: 40px 60px 0 60px;
+        font-size: 60px;
+        color: #fff;
+        background: linear-gradient(to right, #1c92d2, #f2fcfe);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        padding: 40px 50px;
+        margin-bottom: 20px;
     }
 
     .btn-container {
@@ -151,6 +152,9 @@
 
 @section('content')
 
+<div class="judul-halaman">
+        Daftar Kegiatan
+    </div>
 
 <div class="btn-container">
     <a href="{{ route('artikel.create') }}" class="btn-tambah">+ Tambah Artikel</a>
