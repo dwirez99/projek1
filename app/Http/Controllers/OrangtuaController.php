@@ -26,7 +26,7 @@ class OrangtuaController extends Controller
             return $query->where('namaortu', 'like', '%'.$search.'%')
                          ->orWhere('nickname', 'like', '%'.$search.'%');
         })
-        ->paginate(10); // Sesuaikan jumlah item per halaman
+        ->paginate(4); // Sesuaikan jumlah item per halaman
 
     return view('orangtuas.index', compact('orangtuas'));
 }
