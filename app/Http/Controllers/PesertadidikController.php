@@ -42,7 +42,7 @@ class PesertadidikController extends Controller
             $query->orderBy('namapd', 'asc'); // Default
         }
 
-        $pesertadidiks = $query->paginate(20);
+        $pesertadidiks = $query->paginate(5);
         $orangtuas = Orangtua::all();
 
         return view('pesertadidik.index', compact('pesertadidiks', 'orangtuas'));
