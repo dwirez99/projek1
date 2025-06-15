@@ -93,11 +93,20 @@ class PesertadidikApiController extends Controller
     public function update(Request $request, $nis)
     {
         $pesertadidik = Pesertadidik::findOrFail($nis);
+        // Validasi bisa ditambahkan di sini jika diperlukan, mirip dengan metode store
+        // $validated = $request->validate([...]);
         $data = $request->all();
+        $oldFotoPath = $pesertadidik->foto;
 
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto', 'public');
-            $data['foto'] = $foto;
+            // Hapus foto lama jika ada dan BUKAN default.jpg, dan jika pathnya valid
+            // Perhatikan bahwa path yang disimpan di DB mungkin berbeda antara 'store' dan 'update' sebelumnya
+            // Jika $oldFotoPath dari 'store' hanya nama file, maka pathnya 'media/'.$oldFotoPath
+            // Jika $oldFotoPath dari 'update' adalah 'foto/namafile.jpg', maka pathnya 'media/'.$oldFotoPath (jika view konsisten)
+            // Untuk konsistensi dengan view 'storage/media/' . $pd->foto:
+            // Jika $oldFotoPath adalah 'foto/namafile.jpg', maka file fisik ada di 'storage/app/public/media/foto/namafile.jpg'
+            $path = $request->file('foto')->store('media/foto', 'public'); // Hasil: 'media/foto/namafileunik.jpg'
+            $data['foto'] = str_replace('media/', '', $path); // Simpan: 'foto/namafileunik.jpg'
         }
 
         $pesertadidik->update($data);

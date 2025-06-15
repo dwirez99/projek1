@@ -1,0 +1,674 @@
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="csrf-token" content="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL">
+<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/96x96.png" sizes="96x96">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/120x120.png" sizes="120x120">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/152x152.png" sizes="152x152">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/167x167.png" sizes="167x167">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/180x180.png" sizes="180x180">
+<link rel="stylesheet" href="Buat%20Artikel_files/style.css">
+<link rel="stylesheet" href="Buat%20Artikel_files/ckeditor5.css" crossorigin="">
+
+
+
+
+    <meta charset="UTF-8">
+    <title>Buat Artikel</title>
+    <link rel="icon" href="http://127.0.0.1:8000/favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL">
+    <link href="Buat%20Artikel_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="Buat%20Artikel_files/style_002.css">
+    <link rel="icon" href="http://127.0.0.1:8000/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
+    <link rel="stylesheet" href="Buat%20Artikel_files/swiper-bundle.min.css">
+    <script src="Buat%20Artikel_files/swiper-bundle.min.js"></script>   
+
+
+    
+    
+    <link rel="stylesheet" href="Buat%20Artikel_files/all.min.css">
+    <style>
+    .headingArtikel{
+        font-family: "Baloo Thambi 2", system-ui;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-size:80px;
+        color: aliceblue;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        padding: 28px;
+        min-width: 100vw;
+    }
+
+    .containerForm{
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        max-width: 100vw;
+        position: relative;
+        z-index: 1;
+
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding: 28px;
+    }
+
+    input{
+        width: auto;
+        margin-bottom: 18px;
+        padding: 18px;
+        border: 2px solid black;
+        border-radius: 7px;
+
+    }
+
+    .ck.ck-editor__main {
+    z-index: 1;
+    color: black;
+    }
+
+    .ck.ck-editor__editable_inline {
+        min-height: 300px;
+        background-color: white;
+        z-index: 1;
+    }
+
+
+
+</style>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <script src="Buat%20Artikel_files/ckeditor5.umd.js" crossorigin=""></script>
+
+<script>
+	const {
+		ClassicEditor,
+		Autoformat,
+		AutoImage,
+		AutoLink,
+		Autosave,
+		BalloonToolbar,
+		BlockQuote,
+		Bold,
+		Bookmark,
+		Code,
+		CodeBlock,
+		Essentials,
+		FindAndReplace,
+		FontBackgroundColor,
+		FontColor,
+		FontFamily,
+		FontSize,
+		FullPage,
+		Fullscreen,
+		GeneralHtmlSupport,
+		Heading,
+		Highlight,
+		HorizontalLine,
+		HtmlComment,
+		HtmlEmbed,
+		ImageBlock,
+		ImageCaption,
+		ImageInline,
+		ImageInsert,
+		ImageInsertViaUrl,
+		ImageResize,
+		ImageStyle,
+		ImageTextAlternative,
+		ImageToolbar,
+		ImageUpload,
+		Indent,
+		IndentBlock,
+		Italic,
+		Link,
+		LinkImage,
+		List,
+		ListProperties,
+		MediaEmbed,
+		PageBreak,
+		Paragraph,
+		PasteFromOffice,
+		RemoveFormat,
+		ShowBlocks,
+		SimpleUploadAdapter,
+		SourceEditing,
+		SpecialCharacters,
+		SpecialCharactersArrows,
+		SpecialCharactersCurrency,
+		SpecialCharactersEssentials,
+		SpecialCharactersLatin,
+		SpecialCharactersMathematical,
+		SpecialCharactersText,
+		Strikethrough,
+		Subscript,
+		Superscript,
+		Table,
+		TableCaption,
+		TableCellProperties,
+		TableColumnResize,
+		TableLayout,
+		TableProperties,
+		TableToolbar,
+		TextTransformation,
+		TodoList,
+		Underline
+	} = window.CKEDITOR;
+
+	const LICENSE_KEY =
+		'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzgxOTgzOTksImp0aSI6IjA5MDNiMjJhLWI3YWUtNDVlYi05MWM5LWM1NjhhNmQ5NjI1YSIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIl0sInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCJdLCJ2YyI6ImJkZDc4N2VjIn0.d-BqNP26xkRECdqqLNLBdQG5vIBO7MJQdeqtB_RW0YD2bHclpSsD4G0ZQDyVNtZc1op6VRBzsaOLMZqkAxqu1g';
+
+	const editorConfig = {
+
+		toolbar: {
+			items: [
+				'sourceEditing',
+				'showBlocks',
+				'fullscreen',
+				'|',
+				'heading',
+				'|',
+				'fontSize',
+				'fontFamily',
+				'fontColor',
+				'fontBackgroundColor',
+				'|',
+				'bold',
+				'italic',
+				'underline',
+				'|',
+				'link',
+				'insertImage',
+				'insertTable',
+				'insertTableLayout',
+				'highlight',
+				'blockQuote',
+				'codeBlock',
+				'|',
+				'bulletedList',
+				'numberedList',
+				'todoList',
+				'outdent',
+				'indent'
+			],
+			shouldNotGroupWhenFull: false
+		},
+		plugins: [
+			Autoformat,
+			AutoImage,
+			AutoLink,
+			Autosave,
+			BalloonToolbar,
+			BlockQuote,
+			Bold,
+			Bookmark,
+			Code,
+			CodeBlock,
+			Essentials,
+			FindAndReplace,
+			FontBackgroundColor,
+			FontColor,
+			FontFamily,
+			FontSize,
+			FullPage,
+			Fullscreen,
+			GeneralHtmlSupport,
+			Heading,
+			Highlight,
+			HorizontalLine,
+			HtmlComment,
+			HtmlEmbed,
+			ImageBlock,
+			ImageCaption,
+			ImageInline,
+			ImageInsert,
+			ImageInsertViaUrl,
+			ImageResize,
+			ImageStyle,
+			ImageTextAlternative,
+			ImageToolbar,
+			ImageUpload,
+			Indent,
+			IndentBlock,
+			Italic,
+			Link,
+			LinkImage,
+			List,
+			ListProperties,
+			MediaEmbed,
+			PageBreak,
+			Paragraph,
+			PasteFromOffice,
+			RemoveFormat,
+			ShowBlocks,
+			SimpleUploadAdapter,
+			SourceEditing,
+			SpecialCharacters,
+			SpecialCharactersArrows,
+			SpecialCharactersCurrency,
+			SpecialCharactersEssentials,
+			SpecialCharactersLatin,
+			SpecialCharactersMathematical,
+			SpecialCharactersText,
+			Strikethrough,
+			Subscript,
+			Superscript,
+			Table,
+			TableCaption,
+			TableCellProperties,
+			TableColumnResize,
+			TableLayout,
+			TableProperties,
+			TableToolbar,
+			TextTransformation,
+			TodoList,
+			Underline
+		],
+		balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage', '|', 'bulletedList', 'numberedList'],
+		fontFamily: {
+			supportAllValues: true
+		},
+		fontSize: {
+			options: [10, 12, 14, 'default', 18, 20, 22],
+			supportAllValues: true
+		},
+		fullscreen: {
+			onEnterCallback: container =>
+				container.classList.add(
+					'editor-container',
+					'editor-container_classic-editor',
+					'editor-container_include-fullscreen',
+					'main-container'
+				)
+		},
+		heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph'
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1'
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2'
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3'
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4'
+				},
+				{
+					model: 'heading5',
+					view: 'h5',
+					title: 'Heading 5',
+					class: 'ck-heading_heading5'
+				},
+				{
+					model: 'heading6',
+					view: 'h6',
+					title: 'Heading 6',
+					class: 'ck-heading_heading6'
+				}
+			]
+		},
+		htmlSupport: {
+			allow: [
+				{
+					name: /^.*$/,
+					styles: true,
+					attributes: true,
+					classes: true
+				}
+			]
+		},
+		image: {
+			toolbar: [
+				'toggleImageCaption',
+				'imageTextAlternative',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'|',
+				'resizeImage'
+			]
+		},
+		licenseKey: LICENSE_KEY,
+		link: {
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
+			decorators: {
+				toggleDownloadable: {
+					mode: 'manual',
+					label: 'Downloadable',
+					attributes: {
+						download: 'file'
+					}
+				}
+			}
+		},
+		list: {
+			properties: {
+				styles: true,
+				startIndex: true,
+				reversed: true
+			}
+		},
+		menuBar: {
+			isVisible: true
+		},
+		simpleUpload: {
+			uploadUrl: "http://127.0.0.1:8000/upload?_token=ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL",
+		},
+		table: {
+			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+		}
+	};
+
+	document.addEventListener('DOMContentLoaded', function () {
+		ClassicEditor.create(document.querySelector('#konten'), editorConfig);
+	});
+
+    // Preview gambar thumbnail
+    document.getElementById('thumbnail').addEventListener('change', function (event) {
+        const [file] = this.files;
+        if (file) {
+            const preview = document.getElementById('preview-thumbnail');
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+        }
+    });
+
+	console.log("CKEditor Upload URL: http://127.0.0.1:8000/upload");
+    console.log("CSRF Token: ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL");
+
+</script>
+<script src="Buat%20Artikel_files/navbar.js"></script>
+<script>
+    window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        const footer = document.querySelector("footer");
+        const navbarBottom = navbar.getBoundingClientRect().bottom;
+        const footerTop = footer.getBoundingClientRect().top;
+
+        // Jika bawah navbar melewati atas footer
+        if (navbarBottom >= footerTop) {
+            navbar.classList.add("force-responsive");
+        } else {
+            navbar.classList.remove("force-responsive");
+        }
+    });
+
+
+    </script>
+    
+    <style>
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #F58B05;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border: 2px solid black;
+            transition: background-color 0.3s;
+        }
+
+        .user-menu:hover .user-icon,
+        .user-menu.show .user-icon {
+            background-color: #e07a00;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            bottom: 110%;
+            right: 0;
+            background: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            box-shadow: 7px 7px black;
+            min-width: 180px;
+            z-index: 1100;
+            display: none;
+            flex-direction: column;
+        }
+
+        .user-dropdown.show {
+            display: flex;
+        }
+
+        .user-dropdown a {
+            padding: 10px 15px;
+            color: black;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .user-dropdown a:hover {
+            background-color: #F58B05;
+            color: black;
+        }
+    </style>
+
+<nav class="navbar">
+    <img src="Buat%20Artikel_files/logo-dwp.png" alt="Logo" class="logo" onclick="toggleMenu()">
+    <ul class="nav-menu" id="nav">
+        <li><a href="http://127.0.0.1:8000/" class="nav-item">Halaman Utama</a></li>
+        <li><a href="http://127.0.0.1:8000/kegiatan" wire:navigate="" class="nav-item">Kegiatan</a></li>
+        <li><a href="http://127.0.0.1:8000/#about" class="nav-item">Tentang Kami</a></li>
+        <li><a href="http://127.0.0.1:8000/guru" class="nav-item">Daftar Guru</a></li>
+                        <li>
+            <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
+            <div class="dropdown-menu" id="dropdownGuru">
+                <a href="http://127.0.0.1:8000/pesertadidik" wire:navigate="">Kelola Peserta Didik</a>
+                <a href="http://127.0.0.1:8000/orangtuas">Biodata Orang Tua</a>
+                <a href="http://127.0.0.1:8000/statusgizi">Deteksi Stunting</a>
+                <a href="http://127.0.0.1:8000/artikels">Kelola Kegiatan Instansi</a>
+            </div>
+        </li>
+                
+                <li>
+            <div class="user-menu" id="userMenu" tabindex="0" aria-label="User menu" onclick="toggleUserDropdown(event)">
+                <div class="user-icon" id="userIcon" title="User menu">
+                    GU
+                </div>
+            </div>
+            <div class="user-dropdown" id="userDropdown" role="menu" aria-hidden="true">
+                <a href="#" class="user-name" tabindex="0">Guru User</a>
+                <form method="POST" action="http://127.0.0.1:8000/logout" style="margin: 0;">
+                    <input type="hidden" name="_token" value="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL" autocomplete="off">                    <a href="#" onclick="this.closest('form').submit()" style="display: block; padding: 10px 15px; color: black; text-decoration: none;">
+                        Logout
+                    </a>
+                </form>
+            </div>
+        </li>
+        
+
+
+
+            </ul>
+</nav>
+
+
+    </header>
+
+    <main>
+        
+<div class="headingArtikel" id="tag2">
+    Buat Artikel baru
+</div>
+
+<div class="containerForm">
+    <form action="http://127.0.0.1:8000/artikels" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL" autocomplete="off">    <label for="judul"><h2>Judul Artikel</h2></label>
+    <input type="text" name="judul" placeholder="Judul Artikel" class="judulArtikel" value="s,xna,naxaaxkajxnkjsbHSKHB">
+
+    <label for="thumbnail"><h2>Thumbnail Artikel:</h2></label>
+    <input type="file" name="thumbnail" class="thumbnailArtikel" id="thumbnail" accept="image/*">
+
+    <label for="konten"><h2>Konten Artikel:</h2></label>
+    <img id="preview-thumbnail" src="Buat%20Artikel_files/create.html" alt="Preview Thumbnail" style="max-width: 300px; display: none;">
+
+    <textarea name="konten" id="konten" class="kontenArtikel" cols="30" rows="10" style="display: none;"></textarea><div class="ck ck-reset ck-editor ck-rounded-corners" role="application" dir="ltr" lang="en" aria-labelledby="ck-editor__label_ecf6af74713e28d65a5cbae7386f21b8f"><label class="ck ck-label ck-voice-label" id="ck-editor__label_ecf6af74713e28d65a5cbae7386f21b8f">Rich Text Editor</label><div class="ck ck-editor__top ck-reset_all" role="presentation"><div class="ck ck-sticky-panel"><div class="ck ck-sticky-panel__placeholder" style="display: none;"></div><div class="ck ck-sticky-panel__content"><div class="ck ck-menu-bar" aria-label="Editor menu bar" role="menubar"><div class="ck ck-menu-bar__menu ck-menu-bar__menu_top-level"><button class="ck ck-button ck-off ck-button_with-text ck-list-item-button ck-menu-bar__menu__button" role="menuitem" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0f6b544b400f10f5127838aa5813285f" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><span class="ck ck-button__label" id="ck-editor__aria-label_e0f6b544b400f10f5127838aa5813285f">Edit</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-menu-bar__menu__button__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-menu-bar__menu__panel ck-menu-bar__menu__panel_position_se ck-hidden" tabindex="-1"></div></div><div class="ck ck-menu-bar__menu ck-menu-bar__menu_top-level"><button class="ck ck-button ck-off ck-button_with-text ck-list-item-button ck-menu-bar__menu__button" role="menuitem" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_ed0eb950d00a0e1eda1ae02429c1b0823" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><span class="ck ck-button__label" id="ck-editor__aria-label_ed0eb950d00a0e1eda1ae02429c1b0823">View</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-menu-bar__menu__button__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-menu-bar__menu__panel ck-menu-bar__menu__panel_position_se ck-hidden" tabindex="-1"></div></div><div class="ck ck-menu-bar__menu ck-menu-bar__menu_top-level"><button class="ck ck-button ck-off ck-button_with-text ck-list-item-button ck-menu-bar__menu__button" role="menuitem" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e55acdb511e05e1de0642630b258274c2" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><span class="ck ck-button__label" id="ck-editor__aria-label_e55acdb511e05e1de0642630b258274c2">Insert</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-menu-bar__menu__button__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-menu-bar__menu__panel ck-menu-bar__menu__panel_position_se ck-hidden" tabindex="-1"></div></div><div class="ck ck-menu-bar__menu ck-menu-bar__menu_top-level"><button class="ck ck-button ck-off ck-button_with-text ck-list-item-button ck-menu-bar__menu__button" role="menuitem" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e2ace15cd620046afaff5ac3645e7733d" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><span class="ck ck-button__label" id="ck-editor__aria-label_e2ace15cd620046afaff5ac3645e7733d">Format</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-menu-bar__menu__button__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-menu-bar__menu__panel ck-menu-bar__menu__panel_position_se ck-hidden" tabindex="-1"></div></div><div class="ck ck-menu-bar__menu ck-menu-bar__menu_top-level"><button class="ck ck-button ck-off ck-button_with-text ck-list-item-button ck-menu-bar__menu__button" role="menuitem" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_ebc2eb3c4a19c1ae163757d7fbbfc1d4f" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><span class="ck ck-button__label" id="ck-editor__aria-label_ebc2eb3c4a19c1ae163757d7fbbfc1d4f">Help</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-menu-bar__menu__button__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-menu-bar__menu__panel ck-menu-bar__menu__panel_position_se ck-hidden" tabindex="-1"></div></div></div><div class="ck ck-toolbar ck-toolbar_grouping" role="toolbar" aria-label="Editor toolbar" tabindex="-1"><div class="ck ck-toolbar__items"><button class="ck ck-button ck-source-editing-button ck-off ck-button_with-text" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e644b426b65e54f792bec9f8e57b13460" data-cke-tooltip-text="Source" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 0 5 4.5v15.003h-16V0h11zM3 1.5v3.25l-1.497 1-.003 8 1.5 1v3.254L7.685 18l-.001 1.504H17.5V8.002L16 9.428l-.004-4.22-4.222-3.692L3 1.5z"></path><path d="M4.06 6.64a.75.75 0 0 1 .958 1.15l-.085.07L2.29 9.75l2.646 1.89c.302.216.4.62.232.951l-.058.095a.75.75 0 0 1-.951.232l-.095-.058-3.5-2.5V9.14l3.496-2.5zm4.194 6.22a.75.75 0 0 1-.958-1.149l.085-.07 2.643-1.89-2.646-1.89a.75.75 0 0 1-.232-.952l.058-.095a.75.75 0 0 1 .95-.232l.096.058 3.5 2.5v1.22l-3.496 2.5zm7.644-.836 2.122 2.122-5.825 5.809-2.125-.005.003-2.116zm2.539-1.847 1.414 1.414a.5.5 0 0 1 0 .707l-1.06 1.06-2.122-2.12 1.061-1.061a.5.5 0 0 1 .707 0z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e644b426b65e54f792bec9f8e57b13460">Source</span></button><button class="ck ck-button ck-off" role="menuitemcheckbox" type="button" tabindex="-1" aria-checked="false" aria-labelledby="ck-editor__aria-label_e6784a0d0301c4369fdd38afb9da882e1" data-cke-tooltip-text="Show blocks" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6.395 9.196 2.545-.007V6.498a.598.598 0 0 1 .598-.598h.299a.598.598 0 0 1 .598.598v6.877a.598.598 0 0 1-.598.598h-.299a.598.598 0 0 1-.598-.598v-2.691l-2.545.007v2.691a.598.598 0 0 1-.598.598h-.299a.598.598 0 0 1-.598-.598V6.505a.598.598 0 0 1 .598-.598h.299a.598.598 0 0 1 .598.598v2.691Z"></path><path d="M15.094 13.417V6.462a.562.562 0 0 0-.562-.562h-.782a1 1 0 0 0-.39.08l-1.017.43a.562.562 0 0 0-.343.517v.197c0 .4.406.67.775.519l.819-.337v6.111c0 .31.251.562.561.562h.377c.31 0 .562-.251.562-.562Z"></path><path d="M0 15.417v1.5h1.5v-1.5H0Z"></path><path d="M18.5 15.417v1.5H20v-1.5h-1.5Z"></path><path d="M18.5 12.333v1.5H20v-1.5h-1.5Z"></path><path d="M18.5 9.25v1.5H20v-1.5h-1.5Z"></path><path d="M18.5 6.167v1.5H20v-1.5h-1.5Z"></path><path d="M0 18.5v.5a1 1 0 0 0 1 1h.5v-1.5H0Z"></path><path d="M3.083 18.5V20h1.5v-1.5h-1.5Z"></path><path d="M6.167 18.5V20h1.5v-1.5h-1.5Z"></path><path d="M9.25 18.5V20h1.5v-1.5h-1.5Z"></path><path d="M12.333 18.5V20h1.5v-1.5h-1.5Z"></path><path d="M15.417 18.5V20h1.5v-1.5h-1.5Z"></path><path d="M18.5 18.5V20h.5a1 1 0 0 0 1-1v-.5h-1.5Z"></path><path clip-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v3.583h-1.5V1.5h-17v12.333H0V1Z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e6784a0d0301c4369fdd38afb9da882e1">Show blocks</span></button><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e316ffe2ffd53cf69a4e3a2ab87ac8b4a" data-cke-tooltip-text="Enter fullscreen mode" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M11.5 5.75a.75.75 0 0 1 0-1.5H15a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0V6.81l-2.72 2.72a.75.75 0 0 1-1.06-1.06l2.72-2.72H11.5Z"></path><path d="M9.53 10.47a.75.75 0 0 1 0 1.06l-2.72 2.72H8.5a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v1.69l2.72-2.72a.75.75 0 0 1 1.06 0Z"></path><path d="M2 0h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2Zm16 1.5H2a.5.5 0 0 0-.5.5v16a.5.5 0 0 0 .5.5h16a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5Z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e316ffe2ffd53cf69a4e3a2ab87ac8b4a">Enter fullscreen mode</span></button><span class="ck ck-toolbar__separator"></span><div class="ck ck-dropdown ck-heading-dropdown"><button class="ck ck-button ck-off ck-button_with-text ck-dropdown__button" type="button" tabindex="-1" aria-label="Heading 3, Heading" data-cke-tooltip-text="Heading" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><span class="ck ck-button__label">Heading 3</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><span class="ck ck-toolbar__separator"></span><div class="ck ck-dropdown ck-font-size-dropdown"><button class="ck ck-button ck-off ck-dropdown__button" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_ee81dcb5b83cb1456b30eda5506858935" data-cke-tooltip-text="Font Size" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.816 11.5 7.038 4.785 4.261 11.5h5.555zm.62 1.5H3.641l-1.666 4.028H.312l5.789-14h1.875l5.789 14h-1.663L10.436 13zm7.55 2.279.779-.779.707.707-2.265 2.265-2.193-2.265.707-.707.765.765V4.825c0-.042 0-.083.002-.123l-.77.77-.707-.707L17.207 2.5l2.265 2.265-.707.707-.782-.782c.002.043.003.089.003.135v10.454z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_ee81dcb5b83cb1456b30eda5506858935">Font Size</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><div class="ck ck-dropdown ck-font-family-dropdown"><button class="ck ck-button ck-off ck-dropdown__button" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e72148da6f5664de203157f853f40ce6b" data-cke-tooltip-text="Font Family" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M11.03 3h6.149a.75.75 0 1 1 0 1.5h-5.514L11.03 3zm1.27 3h4.879a.75.75 0 1 1 0 1.5h-4.244L12.3 6zm1.27 3h3.609a.75.75 0 1 1 0 1.5h-2.973L13.57 9zm-2.754 2.5L8.038 4.785 5.261 11.5h5.555zm.62 1.5H4.641l-1.666 4.028H1.312l5.789-14h1.875l5.789 14h-1.663L11.436 13z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e72148da6f5664de203157f853f40ce6b">Font Family</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><div class="ck ck-dropdown ck-color-ui-dropdown"><button class="ck ck-button ck-off ck-dropdown__button" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e836d1324832674b68284cb368b5dc936" data-cke-tooltip-text="Font Color" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.4 10.3 10 4.5l-2.4 5.8h4.8zm.5 1.2H7.1L5.7 15H4.2l5-12h1.6l5 12h-1.5L13 11.5zm3.1 7H4a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e836d1324832674b68284cb368b5dc936">Font Color</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"><div class="ck ck-color-selector"></div></div></div><div class="ck ck-dropdown ck-color-ui-dropdown"><button class="ck ck-button ck-off ck-dropdown__button" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e5ed236e2bee44c369ad7fcef57c7a874" data-cke-tooltip-text="Font Background Color" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8.38 9.262H7.62L10 5.506l2.38 5.756zm.532 1.285L14.34 16h1.426L10.804 4H9.196L4.234 16H5.66l1.428-3.453h5.824z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e5ed236e2bee44c369ad7fcef57c7a874">Font Background Color</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"><div class="ck ck-color-selector"></div></div></div><span class="ck ck-toolbar__separator"></span><button class="ck ck-button ck-on" type="button" tabindex="-1" aria-pressed="true" aria-labelledby="ck-editor__aria-label_e42c99811093ab54f36b731f40dda4199" data-cke-tooltip-text="Bold (Ctrl+B)" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10.187 17H5.773c-.637 0-1.092-.138-1.364-.415-.273-.277-.409-.718-.409-1.323V4.738c0-.617.14-1.062.419-1.332.279-.27.73-.406 1.354-.406h4.68c.69 0 1.288.041 1.793.124.506.083.96.242 1.36.478.341.197.644.447.906.75a3.262 3.262 0 0 1 .808 2.162c0 1.401-.722 2.426-2.167 3.075C15.05 10.175 16 11.315 16 13.01a3.756 3.756 0 0 1-2.296 3.504 6.1 6.1 0 0 1-1.517.377c-.571.073-1.238.11-2 .11zm-.217-6.217H7v4.087h3.069c1.977 0 2.965-.69 2.965-2.072 0-.707-.256-1.22-.768-1.537-.512-.319-1.277-.478-2.296-.478zM7 5.13v3.619h2.606c.729 0 1.292-.067 1.69-.2a1.6 1.6 0 0 0 .91-.765c.165-.267.247-.566.247-.897 0-.707-.26-1.176-.778-1.409-.519-.232-1.31-.348-2.375-.348H7z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e42c99811093ab54f36b731f40dda4199">Bold</span></button><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_efd5f10b0559b9602750f44d586939b5d" data-cke-tooltip-text="Italic (Ctrl+I)" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m9.586 14.633.021.004c-.036.335.095.655.393.962.082.083.173.15.274.201h1.474a.6.6 0 1 1 0 1.2H5.304a.6.6 0 0 1 0-1.2h1.15c.474-.07.809-.182 1.005-.334.157-.122.291-.32.404-.597l2.416-9.55a1.053 1.053 0 0 0-.281-.823 1.12 1.12 0 0 0-.442-.296H8.15a.6.6 0 0 1 0-1.2h6.443a.6.6 0 1 1 0 1.2h-1.195c-.376.056-.65.155-.823.296-.215.175-.423.439-.623.79l-2.366 9.347z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_efd5f10b0559b9602750f44d586939b5d">Italic</span></button><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e4ec7c4098c2ac59c080c2c06299af8d0" data-cke-tooltip-text="Underline (Ctrl+U)" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 18v-1.5h14V18zm2.2-8V3.6c0-.4.4-.6.8-.6.3 0 .7.2.7.6v6.2c0 2 1.3 2.8 3.2 2.8 1.9 0 3.4-.9 3.4-2.9V3.6c0-.3.4-.5.8-.5.3 0 .7.2.7.5V10c0 2.7-2.2 4-4.9 4-2.6 0-4.7-1.2-4.7-4z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e4ec7c4098c2ac59c080c2c06299af8d0">Underline</span></button><span class="ck ck-toolbar__separator"></span><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_ee2700424de33f93f0a2f22137429ecf7" data-cke-tooltip-text="Link (Ctrl+K)" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_ee2700424de33f93f0a2f22137429ecf7">Link</span></button><div class="ck ck-dropdown"><div class="ck ck-splitbutton ck-dropdown__button"><button class="ck ck-button ck-off ck-file-dialog-button ck-splitbutton__action" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e4cc021ca4153649c994d0673183177ab" data-cke-tooltip-text="Upload image from computer" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M1.201 1C.538 1 0 1.47 0 2.1v14.363c0 .64.534 1.037 1.186 1.037h9.494a2.97 2.97 0 0 1-.414-.287 2.998 2.998 0 0 1-1.055-2.03 3.003 3.003 0 0 1 .693-2.185l.383-.455-.02.018-3.65-3.41a.695.695 0 0 0-.957-.034L1.5 13.6V2.5h15v5.535a2.97 2.97 0 0 1 1.412.932l.088.105V2.1c0-.63-.547-1.1-1.2-1.1H1.202Zm11.713 2.803a2.146 2.146 0 0 0-2.049 1.992 2.14 2.14 0 0 0 1.28 2.096 2.13 2.13 0 0 0 2.644-3.11 2.134 2.134 0 0 0-1.875-.978Z"></path><path d="M15.522 19.1a.79.79 0 0 0 .79-.79v-5.373l2.059 2.455a.79.79 0 1 0 1.211-1.015l-3.352-3.995a.79.79 0 0 0-.995-.179.784.784 0 0 0-.299.221l-3.35 3.99a.79.79 0 1 0 1.21 1.017l1.936-2.306v5.185c0 .436.353.79.79.79Z"></path><path d="M15.522 19.1a.79.79 0 0 0 .79-.79v-5.373l2.059 2.455a.79.79 0 1 0 1.211-1.015l-3.352-3.995a.79.79 0 0 0-.995-.179.784.784 0 0 0-.299.221l-3.35 3.99a.79.79 0 1 0 1.21 1.017l1.936-2.306v5.185c0 .436.353.79.79.79Z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e4cc021ca4153649c994d0673183177ab">Upload image from computer</span><input class="ck-hidden" type="file" tabindex="-1" accept="image/jpeg,image/png,image/gif,image/bmp,image/webp,image/tiff" multiple="true"></button><button class="ck ck-button ck-off ck-splitbutton__arrow" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0ff760160d1a874444ca7748314b7308" data-cke-tooltip-text="Insert image" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e0ff760160d1a874444ca7748314b7308">Insert image</span></button></div><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><div class="ck ck-dropdown"><button class="ck ck-button ck-off ck-dropdown__button" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e81c5ec5754272370125aa4e3f8dfaec7" data-cke-tooltip-text="Insert table" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5.5v3h4v-3H3Zm0 4v3h4v-3H3Zm0 4v3h4v-3H3Zm5 3h4v-3H8v3Zm5 0h4v-3h-4v3Zm4-4v-3h-4v3h4Zm0-4v-3h-4v3h4Zm1.5 8A1.5 1.5 0 0 1 17 18H3a1.5 1.5 0 0 1-1.5-1.5V3c.222-.863 1.068-1.5 2-1.5h13c.932 0 1.778.637 2 1.5v13.5Zm-6.5-4v-3H8v3h4Zm0-4v-3H8v3h4Z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e81c5ec5754272370125aa4e3f8dfaec7">Insert table</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><div class="ck ck-dropdown"><button class="ck ck-button ck-off ck-dropdown__button" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e8a5859e38d19aef33ecd947dbd742a11" data-cke-tooltip-text="Insert table layout" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M1.5 4.121C1.5 2.95 2.426 2 3.568 2h12.864c1.142 0 2.068.95 2.068 2.121V16.38c0 1.171-.926 2.121-2.068 2.121H3.568c-1.142 0-2.068-.95-2.068-2.121V4.12Zm2.068-.707a.699.699 0 0 0-.69.707V6.38h14.244V4.12a.698.698 0 0 0-.69-.707H3.568Zm13.554 4.38h-4.968v3.939h4.968V7.794Zm0 5.353h-4.968v3.939h4.278c.381 0 .69-.317.69-.707v-3.232Zm-6.347 3.939V7.794H2.878v8.585c0 .39.309.707.69.707h7.207Z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e8a5859e38d19aef33ecd947dbd742a11">Insert table layout</span><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-dropdown__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg></button><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><div class="ck ck-dropdown ck-toolbar-dropdown"><div class="ck ck-splitbutton ck-dropdown__button"><button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e76cbb0a5a9697068fe1534cb5ebefa59" data-cke-tooltip-text="Highlight" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path class="ck-icon__fill" d="M10.798 1.59 3.002 12.875l1.895 1.852 2.521 1.402 6.997-12.194z" style="fill: var(--ck-highlight-marker-yellow);"></path><path d="m2.556 16.727.234-.348c-.297-.151-.462-.293-.498-.426-.036-.137.002-.416.115-.837.094-.25.15-.449.169-.595a4.495 4.495 0 0 0 0-.725c-.209-.621-.303-1.041-.284-1.26.02-.218.178-.506.475-.862l6.77-9.414c.539-.91 1.605-.85 3.199.18 1.594 1.032 2.188 1.928 1.784 2.686l-5.877 10.36c-.158.412-.333.673-.526.782-.193.108-.604.179-1.232.21-.362.131-.608.237-.738.318-.13.081-.305.238-.526.47-.293.265-.504.397-.632.397-.096 0-.27-.075-.524-.226l-.31.41-1.6-1.12zm-.279.415 1.575 1.103-.392.515H1.19l1.087-1.618zm8.1-13.656-4.953 6.9L8.75 12.57l4.247-7.574c.175-.25-.188-.647-1.092-1.192-.903-.546-1.412-.652-1.528-.32zM8.244 18.5 9.59 17h9.406v1.5H8.245z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e76cbb0a5a9697068fe1534cb5ebefa59">Highlight</span></button><button class="ck ck-button ck-off ck-splitbutton__arrow" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e3ff57cc4921435cd49c26e5004a77c27" data-cke-tooltip-text="Highlight" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e3ff57cc4921435cd49c26e5004a77c27">Highlight</span></button></div><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e39f5202263e30b7fcd309cc99410bbad" data-cke-tooltip-text="Block quote" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e39f5202263e30b7fcd309cc99410bbad">Block quote</span></button><div class="ck ck-dropdown ck-code-block-dropdown"><div class="ck ck-splitbutton ck-dropdown__button"><button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e3eb3c4d75051eb2b3ad78a9baa4b8e2c" data-cke-tooltip-text="Insert code block" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.87 12.61a.75.75 0 0 1-.089.976l-.085.07-3.154 2.254 3.412 2.414a.75.75 0 0 1 .237.95l-.057.095a.75.75 0 0 1-.95.237l-.096-.058-4.272-3.022-.003-1.223 4.01-2.867a.75.75 0 0 1 1.047.174zm2.795-.231.095.057 4.011 2.867-.003 1.223-4.272 3.022-.095.058a.75.75 0 0 1-.88-.151l-.07-.086-.058-.095a.75.75 0 0 1 .15-.88l.087-.07 3.412-2.414-3.154-2.253-.085-.071a.75.75 0 0 1 .862-1.207zM16 0a2 2 0 0 1 2 2v9.354l-.663-.492-.837-.001V2a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h3.118L7.156 19H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14zM5.009 15l.003 1H3v-1h2.009zm2.188-2-1.471 1H5v-1h2.197zM10 11v.095L8.668 12H7v-1h3zm4-2v1H7V9h7zm0-2v1H7V7h7zm-4-2v1H5V5h5zM6 3v1H3V3h3z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e3eb3c4d75051eb2b3ad78a9baa4b8e2c">Insert code block</span></button><button class="ck ck-button ck-off ck-splitbutton__arrow" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e843b0b7f33404e6cc29a9035264647cd" data-cke-tooltip-text="Insert code block" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e843b0b7f33404e6cc29a9035264647cd">Insert code block</span></button></div><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><span class="ck ck-toolbar__separator"></span><div class="ck ck-dropdown ck-list-styles-dropdown"><div class="ck ck-splitbutton ck-dropdown__button"><button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_ef5611bce02f7370bb5b1ee7194a86ca4" data-cke-tooltip-text="Bulleted List" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.75c0 .414.336.75.75.75h9.5a.75.75 0 1 0 0-1.5h-9.5a.75.75 0 0 0-.75.75zm-6 0C1 4.784 1.777 4 2.75 4c.966 0 1.75.777 1.75 1.75 0 .966-.777 1.75-1.75 1.75C1.784 7.5 1 6.723 1 5.75zm6 9c0 .414.336.75.75.75h9.5a.75.75 0 1 0 0-1.5h-9.5a.75.75 0 0 0-.75.75zm-6 0c0-.966.777-1.75 1.75-1.75.966 0 1.75.777 1.75 1.75 0 .966-.777 1.75-1.75 1.75-.966 0-1.75-.777-1.75-1.75z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_ef5611bce02f7370bb5b1ee7194a86ca4">Bulleted List</span></button><button class="ck ck-button ck-off ck-splitbutton__arrow" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_eff3efa96a5b13b41582f5af8967349ae" data-cke-tooltip-text="Bulleted List" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_eff3efa96a5b13b41582f5af8967349ae">Bulleted List</span></button></div><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><div class="ck ck-dropdown ck-list-styles-dropdown"><div class="ck ck-splitbutton ck-dropdown__button"><button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_e3402d2a4a827ec2d261025e8a262377d" data-cke-tooltip-text="Numbered List" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.75c0 .414.336.75.75.75h9.5a.75.75 0 1 0 0-1.5h-9.5a.75.75 0 0 0-.75.75zM3.5 3v5H2V3.7H1v-1h2.5V3zM.343 17.857l2.59-3.257H2.92a.6.6 0 1 0-1.04 0H.302a2 2 0 1 1 3.995 0h-.001c-.048.405-.16.734-.333.988-.175.254-.59.692-1.244 1.312H4.3v1h-4l.043-.043zM7 14.75a.75.75 0 0 1 .75-.75h9.5a.75.75 0 1 1 0 1.5h-9.5a.75.75 0 0 1-.75-.75z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e3402d2a4a827ec2d261025e8a262377d">Numbered List</span></button><button class="ck ck-button ck-off ck-splitbutton__arrow" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_eb0bedc4bed9819e6824f15a8a2c9db06" data-cke-tooltip-text="Numbered List" data-cke-tooltip-position="s" aria-haspopup="true" aria-expanded="false"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 10 10" aria-hidden="true"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136L.941 4.523z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_eb0bedc4bed9819e6824f15a8a2c9db06">Numbered List</span></button></div><div class="ck ck-reset ck-dropdown__panel ck-dropdown__panel_se" tabindex="-1"></div></div><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-pressed="false" aria-labelledby="ck-editor__aria-label_eb3196981fc90946825925b4c8889237f" data-cke-tooltip-text="To-do List" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m2.315 14.705 2.224-2.24a.689.689 0 0 1 .963 0 .664.664 0 0 1 0 .949L2.865 16.07a.682.682 0 0 1-.112.089.647.647 0 0 1-.852-.051L.688 14.886a.635.635 0 0 1 0-.903.647.647 0 0 1 .91 0l.717.722zm5.185.045a.75.75 0 0 1 .75-.75h9.5a.75.75 0 1 1 0 1.5h-9.5a.75.75 0 0 1-.75-.75zM2.329 5.745l2.21-2.226a.689.689 0 0 1 .963 0 .664.664 0 0 1 0 .95L2.865 7.125a.685.685 0 0 1-.496.196.644.644 0 0 1-.468-.187L.688 5.912a.635.635 0 0 1 0-.903.647.647 0 0 1 .91 0l.73.736zM7.5 5.75A.75.75 0 0 1 8.25 5h9.5a.75.75 0 1 1 0 1.5h-9.5a.75.75 0 0 1-.75-.75z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_eb3196981fc90946825925b4c8889237f">To-do List</span></button><button class="ck ck-button ck-disabled ck-off" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_eb097db8d6eb81cae5ac87b6e1e61538d" aria-disabled="true" data-cke-tooltip-text="Decrease indent" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.75c0 .414.336.75.75.75h14.5a.75.75 0 1 0 0-1.5H2.75a.75.75 0 0 0-.75.75zm5 6c0 .414.336.75.75.75h9.5a.75.75 0 1 0 0-1.5h-9.5a.75.75 0 0 0-.75.75zM2.75 16.5h14.5a.75.75 0 1 0 0-1.5H2.75a.75.75 0 1 0 0 1.5zm1.618-9.55L.98 9.358a.4.4 0 0 0 .013.661l3.39 2.207A.4.4 0 0 0 5 11.892V7.275a.4.4 0 0 0-.632-.326z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_eb097db8d6eb81cae5ac87b6e1e61538d">Decrease indent</span></button><button class="ck ck-button ck-off" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e491cfa59f7cf6480d3d372792b8e693c" data-cke-tooltip-text="Increase indent" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.75c0 .414.336.75.75.75h14.5a.75.75 0 1 0 0-1.5H2.75a.75.75 0 0 0-.75.75zm5 6c0 .414.336.75.75.75h9.5a.75.75 0 1 0 0-1.5h-9.5a.75.75 0 0 0-.75.75zM2.75 16.5h14.5a.75.75 0 1 0 0-1.5H2.75a.75.75 0 1 0 0 1.5zM1.632 6.95 5.02 9.358a.4.4 0 0 1-.013.661l-3.39 2.207A.4.4 0 0 1 1 11.892V7.275a.4.4 0 0 1 .632-.326z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e491cfa59f7cf6480d3d372792b8e693c">Increase indent</span></button></div></div></div></div></div><div class="ck ck-editor__main" role="presentation"><div class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-focused" lang="en" dir="ltr" role="textbox" aria-label="Rich Text Editor. Editing area: main. Press Alt+0 for help." contenteditable="true"><div class="markdown markdown-main-panel stronger enable-updated-hr-color" style="--animation-duration:400ms;--fade-animation-function:linear;font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" _ngcontent-ng-c2565727476="" id="model-response-message-contentr_8e082f5d0ff1ed4f" dir="ltr"><h3 style="font-family:Google Sans, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="5:1-5:81"><strong style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;">4. Lomba Mewarnai "Dunia Bawah Laut Ceria": Menggali Imajinasi Anak-Anak!</strong></h3><div class="ck-horizontal-line ck-widget" contenteditable="false"><hr style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="7:1-7:3"><div class="ck ck-reset_all ck-widget__type-around"><div class="ck ck-widget__type-around__button ck-widget__type-around__button_before" title="Insert paragraph before block" aria-hidden="true"><svg viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M9.055.263v3.972h-6.77M1 4.216l2-2.038m-2 2 2 2.038"></path></svg></div><div class="ck ck-widget__type-around__button ck-widget__type-around__button_after" title="Insert paragraph after block" aria-hidden="true"><svg viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M9.055.263v3.972h-6.77M1 4.216l2-2.038m-2 2 2 2.038"></path></svg></div><div class="ck ck-widget__type-around__fake-caret"></div></div></div><p style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="9:1-9:346">Suasana TK Dharma Wanita Lamongan minggu ini dipenuhi dengan keceriaan dan konsentrasi! Kami mengadakan <strong style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;">Lomba Mewarnai "Dunia Bawah Laut Ceria"</strong>
+ yang diikuti oleh seluruh anak-anak dari berbagai kelompok. Lomba ini 
+bukan hanya tentang siapa yang paling rapi, tetapi juga tentang 
+bagaimana anak-anak bisa bebas mengekspresikan imajinasi mereka.</p><p style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="11:1-11:580">Setiap
+ meja dipenuhi dengan krayon warna-warni, pensil warna, dan lembar 
+gambar yang menampilkan berbagai makhluk laut yang lucu: ada ikan yang 
+tersenyum, gurita yang ramah, kepiting yang ceria, dan rumput laut yang 
+melambai-lambai. Sebelum lomba dimulai, Bu Guru mengajak anak-anak untuk
+ membayangkan seperti apa indahnya dunia bawah laut. "Bayangkan, di sana
+ ada ikan warna-warni, bintang laut yang berkilau, dan karang yang 
+beraneka rupa! Kalian bebas memilih warna kesukaan kalian untuk membuat 
+dunia bawah laut ini semakin hidup!" seru Bu Guru, membangkitkan 
+semangat mereka.</p><p style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="13:1-13:462">Selama
+ lomba berlangsung, ruangan hening diselingi suara gesekan krayon dan 
+gumaman kecil anak-anak yang asyik dengan karyanya. Ada yang memilih 
+warna biru tua untuk laut dalam, ada pula yang menciptakan lautan dengan
+ gradasi warna pelangi. Ikan-ikan mereka diwarnai dengan kombinasi warna
+ yang tak terduga, menunjukkan kreativitas mereka yang luar biasa. Para 
+guru berkeliling, memberikan semangat dan sesekali membantu anak-anak 
+yang kesulitan memegang krayon.</p><p style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="15:1-15:456">Penjurian dilakukan berdasarkan beberapa kriteria, seperti <strong style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;">kreativitas pemilihan warna, kerapian, dan ekspresi</strong>
+ anak dalam karyanya. Namun, yang paling penting adalah semangat dan 
+usaha mereka. Setiap anak yang berpartisipasi mendapatkan stiker bintang
+ sebagai tanda penghargaan atas kerja keras mereka. Tiga pemenang 
+terbaik mendapatkan hadiah berupa buku cerita bergambar dan alat 
+mewarnai baru, yang disambut dengan sorak gembira teman-teman lainnya.</p><p style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;" data-sourcepos="17:1-17:393">Kegiatan lomba mewarnai ini sangat bermanfaat untuk <strong style="font-family:Google Sans Text, sans-serif !important;line-height:1.15 !important;margin-top:0px !important;">mengembangkan motorik halus, konsentrasi, dan ekspresi diri</strong>
+ anak. Lebih dari itu, mereka belajar tentang sportivitas, menghargai 
+karya teman, dan merasa bangga atas hasil karya mereka sendiri. Kami 
+sangat senang melihat senyum cerah dan binar mata penuh kebanggaan dari 
+setiap anak-anak kami. Sampai jumpa di lomba-lomba seru berikutnya!</p></div></div></div></div>
+	
+    <button type="submit" class="btn-artikel">Simpan</button>
+    </form>
+</div>
+
+    </main>
+
+    <footer>
+        <footer class="bg-warning text-dark pt-5 pb-3">
+    <div class="container">
+        <div class="row text-start">
+            <div class="col-md-3 mb-4">
+                <img src="Buat%20Artikel_files/GKL33_Dharma%20Wanita%20-%20Koleksilogo.com%203.png" alt="Logo" class="mb-2" style="width: 60px;">
+                <h5 class="fw-bold mt-2">TK DW Lamong</h5>
+                <p class="small mb-0">© 2025–2030 | All Rights Reserved</p>
+                <p class="small">Powered by projek1</p>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold">Menu Utama</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-dark text-decoration-none">Home</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">About</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Blog</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Gallery</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold">Akademik</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-dark text-decoration-none">Guru</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Siswa</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Pengumuman</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Kegiatan</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Download</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold">Hubungi Kami</h5>
+                <p class="mb-0">Alamat: Jln Glatik RT 03 RW 03</p>
+                <p class="mb-0">Desa Lamong, Pare Kediri</p>
+                <p class="mb-0">Email: <a href="mailto:tkdwlamongkediri@gmail.com" class="text-dark text-decoration-none">tkdwlamongkediri@gmail.com</a></p>
+                <p class="mb-0">Phone: 021-5725610</p>
+                <p class="mb-2">Fax: 021-5725610</p>
+                <div class="d-flex gap-3">
+                    <a href="#"><img src="Buat%20Artikel_files/youtube.png" alt="YouTube" width="24"></a>
+                    <a href="#"><img src="Buat%20Artikel_files/facebook.png" alt="Facebook" width="24"></a>
+                    <a href="#"><img src="Buat%20Artikel_files/instagram.png" alt="Instagram" width="24"></a>
+                    <a href="#"><img src="Buat%20Artikel_files/whatsapp.png" alt="WhatsApp" width="24"></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+</footer>    </footer>
+
+    
+    <script>
+        function toggleUserDropdown(event) {
+            event.stopPropagation(); // Prevent closing immediately
+
+            const dropdown = document.getElementById('userDropdown');
+            const userMenu = document.getElementById('userMenu');
+
+            // Toggle the .show class
+            dropdown.classList.toggle('show');
+            userMenu.classList.toggle('show');
+        }
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('userDropdown');
+            const userMenu = document.getElementById('userMenu');
+
+            if (!userMenu.contains(event.target)) {
+                dropdown.classList.remove('show');
+                userMenu.classList.remove('show');
+            }
+        });
+
+
+
+    </script>
+
+
+
+
+<div class="ck-body-wrapper"><div class="ck ck-reset_all ck-body ck-rounded-corners" dir="ltr" role="application"><div class="ck ck-clipboard-drop-target-line ck-hidden"></div><div class="ck ck-aria-live-announcer"><div aria-live="polite" aria-relevant="additions"><ul class="ck ck-aria-live-region-list"></ul></div><div aria-live="assertive" aria-relevant="additions"><ul class="ck ck-aria-live-region-list"></ul></div></div><div class="ck ck-balloon-panel ck-balloon-panel_position_border-side_right ck-balloon-panel_visible ck-powered-by-balloon" style="top: 913px; left: 1739px;"><div class="ck ck-powered-by" aria-hidden="true"><a href="https://ckeditor.com/powered-by-ckeditor/?utm_source=ckeditor&amp;utm_medium=referral&amp;utm_campaign=701Dn000000hVgmIAE_powered_by_ckeditor_logo" target="_blank" tabindex="-1"><span class="ck ck-powered-by__label">Powered by</span><svg class="ck ck-icon ck-reset_all-excluded" viewBox="0 0 53 10" aria-hidden="true"><path fill="#1C2331" d="M31.724 1.492a15.139 15.139 0 0 0 .045 1.16 2.434 2.434 0 0 0-.687-.34 3.68 3.68 0 0 0-1.103-.166 2.332 2.332 0 0 0-1.14.255 1.549 1.549 0 0 0-.686.87c-.15.41-.225.98-.225 1.712 0 .939.148 1.659.444 2.161.297.503.792.754 1.487.754.452.015.9-.094 1.294-.316.296-.174.557-.4.771-.669l.14.852h1.282V.007h-1.623v1.485ZM31 6.496a1.77 1.77 0 0 1-.494.061.964.964 0 0 1-.521-.127.758.758 0 0 1-.296-.466 3.984 3.984 0 0 1-.093-.992 4.208 4.208 0 0 1 .098-1.052.753.753 0 0 1 .307-.477 1.08 1.08 0 0 1 .55-.122c.233-.004.466.026.69.089l.483.144v2.553c-.11.076-.213.143-.307.2a1.73 1.73 0 0 1-.417.189ZM35.68 0l-.702.004c-.322.002-.482.168-.48.497l.004.581c.002.33.164.493.486.49l.702-.004c.322-.002.481-.167.48-.496L36.165.49c-.002-.33-.164-.493-.486-.491ZM36.145 2.313l-1.612.01.034 5.482 1.613-.01-.035-5.482ZM39.623.79 37.989.8 38 2.306l-.946.056.006 1.009.949-.006.024 2.983c.003.476.143.844.419 1.106.275.26.658.39 1.148.387.132 0 .293-.01.483-.03.19-.02.38-.046.57-.08.163-.028.324-.068.482-.119l-.183-1.095-.702.004a.664.664 0 0 1-.456-.123.553.553 0 0 1-.14-.422l-.016-2.621 1.513-.01-.006-1.064-1.514.01-.01-1.503ZM46.226 2.388c-.41-.184-.956-.274-1.636-.27-.673.004-1.215.101-1.627.29-.402.179-.72.505-.888.91-.18.419-.268.979-.264 1.68.004.688.1 1.24.285 1.655.172.404.495.724.9.894.414.18.957.268 1.63.264.68-.004 1.224-.099 1.632-.284.4-.176.714-.501.878-.905.176-.418.263-.971.258-1.658-.004-.702-.097-1.261-.28-1.677a1.696 1.696 0 0 0-.888-.9Zm-.613 3.607a.77.77 0 0 1-.337.501 1.649 1.649 0 0 1-1.317.009.776.776 0 0 1-.343-.497 4.066 4.066 0 0 1-.105-1.02 4.136 4.136 0 0 1 .092-1.03.786.786 0 0 1 .337-.507 1.59 1.59 0 0 1 1.316-.008.79.79 0 0 1 .344.502c.078.337.113.683.105 1.03.012.343-.019.685-.092 1.02ZM52.114 2.07a2.67 2.67 0 0 0-1.128.278c-.39.191-.752.437-1.072.73l-.157-.846-1.273.008.036 5.572 1.623-.01-.024-3.78c.35-.124.646-.22.887-.286.26-.075.53-.114.8-.118l.45-.003.144-1.546-.286.001ZM22.083 7.426l-1.576-2.532a2.137 2.137 0 0 0-.172-.253 1.95 1.95 0 0 0-.304-.29.138.138 0 0 1 .042-.04 1.7 1.7 0 0 0 .328-.374l1.75-2.71c.01-.015.025-.028.024-.048-.01-.01-.021-.007-.031-.007L20.49 1.17a.078.078 0 0 0-.075.045l-.868 1.384c-.23.366-.46.732-.688 1.099a.108.108 0 0 1-.112.06c-.098-.005-.196-.001-.294-.002-.018 0-.038.006-.055-.007.002-.02.002-.039.005-.058a4.6 4.6 0 0 0 .046-.701V1.203c0-.02-.009-.032-.03-.03h-.033L16.93 1.17c-.084 0-.073-.01-.073.076v6.491c-.001.018.006.028.025.027h1.494c.083 0 .072.007.072-.071v-2.19c0-.055-.003-.11-.004-.166a3.366 3.366 0 0 0-.05-.417h.06c.104 0 .209.002.313-.002a.082.082 0 0 1 .084.05c.535.913 1.07 1.824 1.607 2.736a.104.104 0 0 0 .103.062c.554-.003 1.107-.002 1.66-.002l.069-.003-.019-.032-.188-.304ZM27.112 6.555c-.005-.08-.004-.08-.082-.08h-2.414c-.053 0-.106-.003-.159-.011a.279.279 0 0 1-.246-.209.558.558 0 0 1-.022-.15c0-.382 0-.762-.002-1.143 0-.032.007-.049.042-.044h2.504c.029.003.037-.012.034-.038V3.814c0-.089.013-.078-.076-.078h-2.44c-.07 0-.062.003-.062-.06v-.837c0-.047.004-.093.013-.14a.283.283 0 0 1 .241-.246.717.717 0 0 1 .146-.011h2.484c.024.002.035-.009.036-.033l.003-.038.03-.496c.01-.183.024-.365.034-.548.005-.085.003-.087-.082-.094-.218-.018-.437-.038-.655-.05a17.845 17.845 0 0 0-.657-.026 72.994 72.994 0 0 0-1.756-.016 1.7 1.7 0 0 0-.471.064 1.286 1.286 0 0 0-.817.655c-.099.196-.149.413-.145.633v3.875c0 .072.003.144.011.216a1.27 1.27 0 0 0 .711 1.029c.228.113.48.167.734.158.757-.005 1.515.002 2.272-.042.274-.016.548-.034.82-.053.03-.002.043-.008.04-.041-.008-.104-.012-.208-.019-.312a69.964 69.964 0 0 1-.05-.768ZM16.14 7.415l-.127-1.075c-.004-.03-.014-.04-.044-.037a13.125 13.125 0 0 1-.998.073c-.336.01-.672.02-1.008.016-.116-.001-.233-.014-.347-.039a.746.746 0 0 1-.45-.262c-.075-.1-.132-.211-.167-.33a3.324 3.324 0 0 1-.126-.773 9.113 9.113 0 0 1-.015-.749c0-.285.022-.57.065-.852.023-.158.066-.312.127-.46a.728.728 0 0 1 .518-.443 1.64 1.64 0 0 1 .397-.048c.628-.001 1.255.003 1.882.05.022.001.033-.006.036-.026l.003-.031.06-.55c.019-.177.036-.355.057-.532.004-.034-.005-.046-.04-.056a5.595 5.595 0 0 0-1.213-.21 10.783 10.783 0 0 0-.708-.02c-.24-.003-.48.01-.719.041a3.477 3.477 0 0 0-.625.14 1.912 1.912 0 0 0-.807.497c-.185.2-.33.433-.424.688a4.311 4.311 0 0 0-.24 1.096c-.031.286-.045.572-.042.86-.006.43.024.86.091 1.286.04.25.104.497.193.734.098.279.26.53.473.734.214.205.473.358.756.446.344.11.702.17 1.063.177a8.505 8.505 0 0 0 1.578-.083 6.11 6.11 0 0 0 .766-.18c.03-.008.047-.023.037-.057a.157.157 0 0 1-.003-.025Z"></path><path fill="#AFE229" d="M6.016 6.69a1.592 1.592 0 0 0-.614.21c-.23.132-.422.32-.56.546-.044.072-.287.539-.287.539l-.836 1.528.009.006c.038.025.08.046.123.063.127.046.26.07.395.073.505.023 1.011-.007 1.517-.003.29.009.58.002.869-.022a.886.886 0 0 0 .395-.116.962.962 0 0 0 .312-.286c.056-.083.114-.163.164-.249.24-.408.48-.816.718-1.226.075-.128.148-.257.222-.386l.112-.192a1.07 1.07 0 0 0 .153-.518l-1.304.023s-1.258-.005-1.388.01Z"></path><path fill="#771BFF" d="m2.848 9.044.76-1.39.184-.352c-.124-.067-.245-.14-.367-.21-.346-.204-.706-.384-1.045-.6a.984.984 0 0 1-.244-.207c-.108-.134-.136-.294-.144-.46-.021-.409-.002-.818-.009-1.227-.003-.195 0-.39.003-.585.004-.322.153-.553.427-.713l.833-.488c.22-.13.44-.257.662-.385.05-.029.105-.052.158-.077.272-.128.519-.047.76.085l.044.028c.123.06.242.125.358.196.318.178.635.357.952.537.095.056.187.117.275.184.194.144.254.35.266.578.016.284.007.569.006.853-.001.28.004.558 0 .838.592-.003 1.259 0 1.259 0l.723-.013c-.003-.292-.007-.584-.007-.876 0-.524.015-1.048-.016-1.571-.024-.42-.135-.8-.492-1.067a5.02 5.02 0 0 0-.506-.339A400.52 400.52 0 0 0 5.94.787C5.722.664 5.513.524 5.282.423 5.255.406 5.228.388 5.2.373 4.758.126 4.305-.026 3.807.21c-.097.046-.197.087-.29.14A699.896 699.896 0 0 0 .783 1.948c-.501.294-.773.717-.778 1.31-.004.36-.009.718-.001 1.077.016.754-.017 1.508.024 2.261.016.304.07.6.269.848.127.15.279.28.448.382.622.4 1.283.734 1.92 1.11l.183.109Z"></path></svg></a></div></div></div></div></body></html>

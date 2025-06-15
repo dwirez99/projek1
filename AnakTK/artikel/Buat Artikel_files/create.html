@@ -1,0 +1,644 @@
+<meta name="csrf-token" content="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL">
+<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/96x96.png" sizes="96x96">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/120x120.png" sizes="120x120">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/152x152.png" sizes="152x152">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/167x167.png" sizes="167x167">
+<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/180x180.png" sizes="180x180">
+<link rel="stylesheet" href="http://127.0.0.1:8000/ckeditor/style.css">
+<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/45.0.0/ckeditor5.css" crossorigin>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buat Artikel</title>
+    <link rel="icon" href="http://127.0.0.1:8000/favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/css/style.css">
+    <link rel="icon" href="http://127.0.0.1:8000/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+    .headingArtikel{
+        font-family: "Baloo Thambi 2", system-ui;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-size:80px;
+        color: aliceblue;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        padding: 28px;
+        min-width: 100vw;
+    }
+
+    .containerForm{
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        max-width: 100vw;
+        position: relative;
+        z-index: 1;
+
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding: 28px;
+    }
+
+    input{
+        width: auto;
+        margin-bottom: 18px;
+        padding: 18px;
+        border: 2px solid black;
+        border-radius: 7px;
+
+    }
+
+    .ck.ck-editor__main {
+    z-index: 1;
+    color: black;
+    }
+
+    .ck.ck-editor__editable_inline {
+        min-height: 300px;
+        background-color: white;
+        z-index: 1;
+    }
+
+
+
+</style>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <script src="https://cdn.ckeditor.com/ckeditor5/45.0.0/ckeditor5.umd.js" crossorigin></script>
+
+<script>
+	const {
+		ClassicEditor,
+		Autoformat,
+		AutoImage,
+		AutoLink,
+		Autosave,
+		BalloonToolbar,
+		BlockQuote,
+		Bold,
+		Bookmark,
+		Code,
+		CodeBlock,
+		Essentials,
+		FindAndReplace,
+		FontBackgroundColor,
+		FontColor,
+		FontFamily,
+		FontSize,
+		FullPage,
+		Fullscreen,
+		GeneralHtmlSupport,
+		Heading,
+		Highlight,
+		HorizontalLine,
+		HtmlComment,
+		HtmlEmbed,
+		ImageBlock,
+		ImageCaption,
+		ImageInline,
+		ImageInsert,
+		ImageInsertViaUrl,
+		ImageResize,
+		ImageStyle,
+		ImageTextAlternative,
+		ImageToolbar,
+		ImageUpload,
+		Indent,
+		IndentBlock,
+		Italic,
+		Link,
+		LinkImage,
+		List,
+		ListProperties,
+		MediaEmbed,
+		PageBreak,
+		Paragraph,
+		PasteFromOffice,
+		RemoveFormat,
+		ShowBlocks,
+		SimpleUploadAdapter,
+		SourceEditing,
+		SpecialCharacters,
+		SpecialCharactersArrows,
+		SpecialCharactersCurrency,
+		SpecialCharactersEssentials,
+		SpecialCharactersLatin,
+		SpecialCharactersMathematical,
+		SpecialCharactersText,
+		Strikethrough,
+		Subscript,
+		Superscript,
+		Table,
+		TableCaption,
+		TableCellProperties,
+		TableColumnResize,
+		TableLayout,
+		TableProperties,
+		TableToolbar,
+		TextTransformation,
+		TodoList,
+		Underline
+	} = window.CKEDITOR;
+
+	const LICENSE_KEY =
+		'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzgxOTgzOTksImp0aSI6IjA5MDNiMjJhLWI3YWUtNDVlYi05MWM5LWM1NjhhNmQ5NjI1YSIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIl0sInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCJdLCJ2YyI6ImJkZDc4N2VjIn0.d-BqNP26xkRECdqqLNLBdQG5vIBO7MJQdeqtB_RW0YD2bHclpSsD4G0ZQDyVNtZc1op6VRBzsaOLMZqkAxqu1g';
+
+	const editorConfig = {
+
+		toolbar: {
+			items: [
+				'sourceEditing',
+				'showBlocks',
+				'fullscreen',
+				'|',
+				'heading',
+				'|',
+				'fontSize',
+				'fontFamily',
+				'fontColor',
+				'fontBackgroundColor',
+				'|',
+				'bold',
+				'italic',
+				'underline',
+				'|',
+				'link',
+				'insertImage',
+				'insertTable',
+				'insertTableLayout',
+				'highlight',
+				'blockQuote',
+				'codeBlock',
+				'|',
+				'bulletedList',
+				'numberedList',
+				'todoList',
+				'outdent',
+				'indent'
+			],
+			shouldNotGroupWhenFull: false
+		},
+		plugins: [
+			Autoformat,
+			AutoImage,
+			AutoLink,
+			Autosave,
+			BalloonToolbar,
+			BlockQuote,
+			Bold,
+			Bookmark,
+			Code,
+			CodeBlock,
+			Essentials,
+			FindAndReplace,
+			FontBackgroundColor,
+			FontColor,
+			FontFamily,
+			FontSize,
+			FullPage,
+			Fullscreen,
+			GeneralHtmlSupport,
+			Heading,
+			Highlight,
+			HorizontalLine,
+			HtmlComment,
+			HtmlEmbed,
+			ImageBlock,
+			ImageCaption,
+			ImageInline,
+			ImageInsert,
+			ImageInsertViaUrl,
+			ImageResize,
+			ImageStyle,
+			ImageTextAlternative,
+			ImageToolbar,
+			ImageUpload,
+			Indent,
+			IndentBlock,
+			Italic,
+			Link,
+			LinkImage,
+			List,
+			ListProperties,
+			MediaEmbed,
+			PageBreak,
+			Paragraph,
+			PasteFromOffice,
+			RemoveFormat,
+			ShowBlocks,
+			SimpleUploadAdapter,
+			SourceEditing,
+			SpecialCharacters,
+			SpecialCharactersArrows,
+			SpecialCharactersCurrency,
+			SpecialCharactersEssentials,
+			SpecialCharactersLatin,
+			SpecialCharactersMathematical,
+			SpecialCharactersText,
+			Strikethrough,
+			Subscript,
+			Superscript,
+			Table,
+			TableCaption,
+			TableCellProperties,
+			TableColumnResize,
+			TableLayout,
+			TableProperties,
+			TableToolbar,
+			TextTransformation,
+			TodoList,
+			Underline
+		],
+		balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage', '|', 'bulletedList', 'numberedList'],
+		fontFamily: {
+			supportAllValues: true
+		},
+		fontSize: {
+			options: [10, 12, 14, 'default', 18, 20, 22],
+			supportAllValues: true
+		},
+		fullscreen: {
+			onEnterCallback: container =>
+				container.classList.add(
+					'editor-container',
+					'editor-container_classic-editor',
+					'editor-container_include-fullscreen',
+					'main-container'
+				)
+		},
+		heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph'
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1'
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2'
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3'
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4'
+				},
+				{
+					model: 'heading5',
+					view: 'h5',
+					title: 'Heading 5',
+					class: 'ck-heading_heading5'
+				},
+				{
+					model: 'heading6',
+					view: 'h6',
+					title: 'Heading 6',
+					class: 'ck-heading_heading6'
+				}
+			]
+		},
+		htmlSupport: {
+			allow: [
+				{
+					name: /^.*$/,
+					styles: true,
+					attributes: true,
+					classes: true
+				}
+			]
+		},
+		image: {
+			toolbar: [
+				'toggleImageCaption',
+				'imageTextAlternative',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'|',
+				'resizeImage'
+			]
+		},
+		licenseKey: LICENSE_KEY,
+		link: {
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
+			decorators: {
+				toggleDownloadable: {
+					mode: 'manual',
+					label: 'Downloadable',
+					attributes: {
+						download: 'file'
+					}
+				}
+			}
+		},
+		list: {
+			properties: {
+				styles: true,
+				startIndex: true,
+				reversed: true
+			}
+		},
+		menuBar: {
+			isVisible: true
+		},
+		simpleUpload: {
+			uploadUrl: "http://127.0.0.1:8000/upload?_token=ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL",
+		},
+		table: {
+			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+		}
+	};
+
+	document.addEventListener('DOMContentLoaded', function () {
+		ClassicEditor.create(document.querySelector('#konten'), editorConfig);
+	});
+
+    // Preview gambar thumbnail
+    document.getElementById('thumbnail').addEventListener('change', function (event) {
+        const [file] = this.files;
+        if (file) {
+            const preview = document.getElementById('preview-thumbnail');
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+        }
+    });
+
+	console.log("CKEditor Upload URL: http://127.0.0.1:8000/upload");
+    console.log("CSRF Token: ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL");
+
+</script>
+<script src="http://127.0.0.1:8000/js/navbar.js"></script>
+<script>
+    window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        const footer = document.querySelector("footer");
+        const navbarBottom = navbar.getBoundingClientRect().bottom;
+        const footerTop = footer.getBoundingClientRect().top;
+
+        // Jika bawah navbar melewati atas footer
+        if (navbarBottom >= footerTop) {
+            navbar.classList.add("force-responsive");
+        } else {
+            navbar.classList.remove("force-responsive");
+        }
+    });
+
+
+    </script>
+    
+    <style>
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #F58B05;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border: 2px solid black;
+            transition: background-color 0.3s;
+        }
+
+        .user-menu:hover .user-icon,
+        .user-menu.show .user-icon {
+            background-color: #e07a00;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            bottom: 110%;
+            right: 0;
+            background: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            box-shadow: 7px 7px black;
+            min-width: 180px;
+            z-index: 1100;
+            display: none;
+            flex-direction: column;
+        }
+
+        .user-dropdown.show {
+            display: flex;
+        }
+
+        .user-dropdown a {
+            padding: 10px 15px;
+            color: black;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .user-dropdown a:hover {
+            background-color: #F58B05;
+            color: black;
+        }
+    </style>
+
+<nav class="navbar">
+    <img src="http://127.0.0.1:8000/img/logo-dwp.png" alt="Logo" class="logo" onclick="toggleMenu()"/>
+    <ul class="nav-menu" id="nav">
+        <li><a href="http://127.0.0.1:8000" class="nav-item">Halaman Utama</a></li>
+        <li><a href="/kegiatan" wire:navigate class="nav-item">Kegiatan</a></li>
+        <li><a href="http://127.0.0.1:8000#about" class="nav-item">Tentang Kami</a></li>
+        <li><a href="http://127.0.0.1:8000/guru" class="nav-item">Daftar Guru</a></li>
+                        <li>
+            <a href="#guru" class="nav-item" onclick="toggleDropdownGuru(event)">Guru</a>
+            <div class="dropdown-menu" id="dropdownGuru">
+                <a href="http://127.0.0.1:8000/pesertadidik" wire:navigate>Kelola Peserta Didik</a>
+                <a href="http://127.0.0.1:8000/orangtuas">Biodata Orang Tua</a>
+                <a href=" http://127.0.0.1:8000/statusgizi ">Deteksi Stunting</a>
+                <a href="http://127.0.0.1:8000/artikels">Kelola Kegiatan Instansi</a>
+            </div>
+        </li>
+                
+                <li>
+            <div class="user-menu" id="userMenu" tabindex="0" aria-label="User menu" onclick="toggleUserDropdown(event)">
+                <div class="user-icon" id="userIcon" title="User menu">
+                    GU
+                </div>
+            </div>
+            <div class="user-dropdown" id="userDropdown" role="menu" aria-hidden="true">
+                <a href="#" class="user-name" tabindex="0">Guru User</a>
+                <form method="POST" action="http://127.0.0.1:8000/logout" style="margin: 0;">
+                    <input type="hidden" name="_token" value="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL" autocomplete="off">                    <a href="#" onclick="this.closest('form').submit()" style="display: block; padding: 10px 15px; color: black; text-decoration: none;">
+                        Logout
+                    </a>
+                </form>
+            </div>
+        </li>
+        
+
+
+
+            </ul>
+</nav>
+
+
+    </header>
+
+    <main>
+        
+<div class="headingArtikel" id="tag2">
+    Buat Artikel baru
+</div>
+
+<div class="containerForm">
+    <form action="http://127.0.0.1:8000/artikels" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="ZSBBknL0GjlDmiI5PIdNNcA8emRIJDh0hHBLGSbL" autocomplete="off">    <label for="judul"><h2>Judul Artikel</h2></label>
+    <input type="text" name="judul" placeholder="Judul Artikel" class="judulArtikel">
+
+    <label for="thumbnail"><h2>Thumbnail Artikel:</h2></label>
+    <input type="file" name="thumbnail" class="thumbnailArtikel" id="thumbnail" accept="image/*">
+
+    <label for="konten"><h2>Konten Artikel:</h2></label>
+    <img id="preview-thumbnail" src="#" alt="Preview Thumbnail" style="max-width: 300px; display: none;">
+
+    <textarea name="konten" id="konten" class="kontenArtikel" cols="30" rows="10"></textarea>
+	
+    <button type="submit" class="btn-artikel">Simpan</button>
+    </form>
+</div>
+
+    </main>
+
+    <footer>
+        <footer class="bg-warning text-dark pt-5 pb-3">
+    <div class="container">
+        <div class="row text-start">
+            <div class="col-md-3 mb-4">
+                <img src="http://127.0.0.1:8000/build/assets/logo/GKL33_Dharma Wanita - Koleksilogo.com 3.png" alt="Logo" class="mb-2" style="width: 60px;">
+                <h5 class="fw-bold mt-2">TK DW Lamong</h5>
+                <p class="small mb-0">&copy; 2025–2030 | All Rights Reserved</p>
+                <p class="small">Powered by projek1</p>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold">Menu Utama</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-dark text-decoration-none">Home</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">About</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Blog</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Gallery</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold">Akademik</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-dark text-decoration-none">Guru</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Siswa</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Pengumuman</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Kegiatan</a></li>
+                    <li><a href="#" class="text-dark text-decoration-none">Download</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold">Hubungi Kami</h5>
+                <p class="mb-0">Alamat: Jln Glatik RT 03 RW 03</p>
+                <p class="mb-0">Desa Lamong, Pare Kediri</p>
+                <p class="mb-0">Email: <a href="mailto:tkdwlamongkediri@gmail.com" class="text-dark text-decoration-none">tkdwlamongkediri@gmail.com</a></p>
+                <p class="mb-0">Phone: 021-5725610</p>
+                <p class="mb-2">Fax: 021-5725610</p>
+                <div class="d-flex gap-3">
+                    <a href="#"><img src="http://127.0.0.1:8000/build/assets/logo/youtube.png" alt="YouTube" width="24"></a>
+                    <a href="#"><img src="http://127.0.0.1:8000/build/assets/logo/facebook.png" alt="Facebook" width="24"></a>
+                    <a href="#"><img src="http://127.0.0.1:8000/build/assets/logo/instagram.png" alt="Instagram" width="24"></a>
+                    <a href="#"><img src="http://127.0.0.1:8000/build/assets/logo/whatsapp.png" alt="WhatsApp" width="24"></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+</footer>    </footer>
+
+    
+    <script>
+        function toggleUserDropdown(event) {
+            event.stopPropagation(); // Prevent closing immediately
+
+            const dropdown = document.getElementById('userDropdown');
+            const userMenu = document.getElementById('userMenu');
+
+            // Toggle the .show class
+            dropdown.classList.toggle('show');
+            userMenu.classList.toggle('show');
+        }
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('userDropdown');
+            const userMenu = document.getElementById('userMenu');
+
+            if (!userMenu.contains(event.target)) {
+                dropdown.classList.remove('show');
+                userMenu.classList.remove('show');
+            }
+        });
+
+
+
+    </script>
+
+</body>
+</html>
+

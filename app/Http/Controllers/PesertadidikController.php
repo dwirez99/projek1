@@ -129,10 +129,18 @@ class PesertadidikController extends Controller
         $pesertadidik = Pesertadidik::findOrFail($nis);
 
         $data = $request->all();
+        $oldFotoPath = $pesertadidik->foto; // Simpan path foto lama
 
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto', 'public');
-            $data['foto'] = $foto;
+            // Hapus foto lama jika ada dan BUKAN default.jpg, dan jika pathnya valid
+            if ($oldFotoPath && $oldFotoPath !== 'default.jpg' && Storage::disk('public')->exists('media/' . $oldFotoPath)) {
+                Storage::disk('public')->delete('media/' . $oldFotoPath);
+            }
+            // Simpan file baru di storage/app/public/media/foto
+            // $path akan menjadi 'media/foto/namafileunik.jpg'
+            $path = $request->file('foto')->store('media/foto', 'public');
+            // Simpan 'foto/namafileunik.jpg' ke database
+            $data['foto'] = str_replace('media/', '', $path);
         }
 
         $pesertadidik->update($data);
