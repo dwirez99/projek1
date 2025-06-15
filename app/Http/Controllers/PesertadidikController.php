@@ -33,6 +33,7 @@ class PesertadidikController extends Controller
             $query->where('tahunajar', $request->tahunajar);
         }
 
+        
         // Sorting Nama
         if ($request->sort == 'nama_asc') {
             $query->orderBy('namapd', 'asc');
@@ -41,7 +42,21 @@ class PesertadidikController extends Controller
         } else {
             $query->orderBy('namapd', 'asc'); // Default
         }
-
+        
+        if ($request->status == 'False'){
+            $query->leftJoin('statusgizis', 'pesertadidiks.nis', '=', 'statusgizis.nis')
+        ->whereNull('statusgizis.status')
+        ->select('pesertadidiks.*') // pilih kolom yang diperlukan
+        ->get();
+        } elseif ($request->status == 'True') {
+            $query->leftJoin('statusgizis', 'pesertadidiks.nis', '=', 'statusgizis.nis')
+        ->whereNotNull('statusgizis.status')
+        ->select('pesertadidiks.*') // pilih kolom yang diperlukan
+        ->get();
+        } else {
+            $query->get();
+        }
+        
         $pesertadidiks = $query->paginate(20);
         $orangtuas = Orangtua::all();
 

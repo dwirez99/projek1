@@ -59,6 +59,15 @@
             </div>
 
             <div>
+                <label for="status" class="block text-sm font-medium text-gray-700">Status Pemeriksaan</label>
+                <select name="status" id="status" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="">Semua Status</option>
+                    <option value="True" {{ request('status') == 'True' ? 'selected' : '' }}>Diperiksa</option>
+                    <option value="False" {{ request('status') == 'False' ? 'selected' : '' }}>Belum</option>
+                </select>
+            </div>
+
+            <div>
                 <label for="sort" class="block text-sm font-medium text-gray-700">Urutkan Nama</label>
                 <select name="sort" id="sort" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option value="">Default</option>
@@ -110,7 +119,10 @@
                                         <p><span class="font-medium text-gray-700">Kelas:</span> {{ $pd->kelas }}</p>
                                         <p><span class="font-medium text-gray-700">TB/BB:</span> {{ $pd->tinggibadan ?? '-' }} cm / {{ $pd->beratbadan ?? '-' }} kg</p>
                                         <p><span class="font-medium text-gray-700">No. Telp Ortu:</span> {{ $pd->orangtua->notelportu }}</p>
-                                        <p><span class="font-medium text-gray-700">Status Gizi (Terbaru):</span> <strong class="text-indigo-600">{{ $pd->statusgiziTerbaru->status ?? '-' }}</strong></p>
+                                        <p><span class="font-medium text-gray-700">Status Gizi (Terbaru):</span> <strong class="text-indigo-600">{{ $pd->statusgiziTerbaru->status ?? '-' }} | {{ $pd->statusgiziTerbaru?->tanggalpembuatan 
+                                            ? \Carbon\Carbon::parse($pd->statusgiziTerbaru->tanggalpembuatan)->isoFormat('D MMMM YYYY') 
+                                            : '-' }}
+                                        </strong></p>
                                         <p><span class="font-medium text-gray-700">Z-Score:</span> {{ $pd->statusgiziTerbaru->z_score ?? '-' }}</p>
                                         <p><a href="{{ route('statusgizi.index', ['nis' => $pd->nis]) }}" class="text-blue-600 hover:text-blue-800 hover:underline">Riwayat Status Gizi</a></p>
                                     </div>
