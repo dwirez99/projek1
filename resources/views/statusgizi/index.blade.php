@@ -176,7 +176,7 @@
             chartRef.update();
         } else {
             return new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: chartData,
                 options: {
                     responsive: true,
