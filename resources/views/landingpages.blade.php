@@ -20,7 +20,7 @@
 
   </head>
 
-  <body class="bg-cover bg-center" style="background-image: url('public/build/assets/bg.png'); height: 400px;">
+  <body class="bg-cover bg-center" style="background-color: #00B7FF;">
 
 
     <div id="default-carousel" class="relative h-32 md:h-56 lg:h-96 overflow-hidden rounded-lg bg-gray-200" data-carousel="slide">
