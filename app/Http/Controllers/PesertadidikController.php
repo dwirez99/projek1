@@ -131,7 +131,7 @@ class PesertadidikController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto', 'public');
+            $foto = $request->file('foto')->store('', 'public');
             $data['foto'] = $foto;
         }
 
