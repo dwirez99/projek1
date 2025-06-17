@@ -100,11 +100,10 @@ class PesertadidikController extends Controller
                 $file = $request->file('foto');
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $path = $file->storeAs('foto', $filename, 'public');
-                $validated['foto'] = $filename;
+                $validated['foto'] = $path; // Store the full path including folder
 
                 Log::info('Foto berhasil diupload.', ['path' => $path]);
             }
-
 
             $pd = PesertaDidik::create($validated);
 
@@ -126,18 +125,38 @@ class PesertadidikController extends Controller
 
     public function update(Request $request, $nis)
     {
-        $pesertadidik = Pesertadidik::findOrFail($nis);
+        try {
+            $pesertadidik = Pesertadidik::findOrFail($nis);
 
-        $data = $request->all();
+            $data = $request->all();
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto', 'public');
-            $data['foto'] = $foto;
+            if ($request->hasFile('foto')) {
+                // Delete old file if exists
+                if ($pesertadidik->foto && Storage::exists('public/' . $pesertadidik->foto)) {
+                    Storage::delete('public/' . $pesertadidik->foto);
+                    Log::info("Foto lama dihapus untuk NIS: $nis");
+                }
+
+                // Store new file
+                $file = $request->file('foto');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('foto', $filename, 'public');
+                $data['foto'] = $path;
+
+                Log::info("Foto baru berhasil diunggah ke: $path untuk NIS: $nis");
+            }
+
+            $pesertadidik->update($data);
+
+            return redirect()->back()->with('success', 'Data diperbarui!');
+        } catch (Exception $e) {
+            Log::error('Gagal memperbarui data peserta didik.', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return redirect()->back()->withErrors('Terjadi kesalahan saat memperbarui data.')->withInput();
         }
-
-        $pesertadidik->update($data);
-
-        return redirect()->back()->with('success', 'Data diperbarui!');
     }
 
     public function destroy($nis)
