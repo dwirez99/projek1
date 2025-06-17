@@ -9,7 +9,7 @@ use App\Models\Pesertadidik;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class PesertadidikSeeder extends Seeder
+class PesertaDidikDanOrangtuaSeeder extends Seeder
 {
     public function run(): void
     {
@@ -79,3 +79,4 @@ class PesertadidikSeeder extends Seeder
         }
     }
 }
+?>
