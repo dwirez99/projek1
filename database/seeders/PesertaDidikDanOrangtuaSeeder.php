@@ -1,4 +1,5 @@
 <?php
+<?php
 
 namespace Database\Seeders;
 
@@ -9,29 +10,27 @@ use App\Models\Pesertadidik;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class PesertaDidikDanOrangtuaSeeder extends Seeder
+class PesertadidikSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $kelasList = ['A', 'B'];
+        $namaDepanOrtu = ['Budi', 'Siti', 'Agus', 'Dewi', 'Joko', 'Sri', 'Andi', 'Rina', 'Eko', 'Fitri', 'Tono', 'Yuni', 'Dedi', 'Lina', 'Rudi', 'Maya', 'Hendra', 'Nina'];
+        $namaBelakangOrtu = ['Santoso', 'Wati', 'Saputra', 'Lestari', 'Pratama', 'Utami', 'Wijaya', 'Sari', 'Putra', 'Rahmawati', 'Susilo', 'Handayani', 'Permana', 'Indah', 'Setiawan', 'Anggraini', 'Kusuma', 'Purnama'];
+        $namaDepanAnak = ['Adit', 'Putri', 'Rafi', 'Nadia', 'Dimas', 'Alya', 'Fajar', 'Citra', 'Rizki', 'Intan', 'Bagas', 'Vina', 'Yoga', 'Dina', 'Galih', 'Mega', 'Ilham', 'Salsa'];
+        $namaBelakangAnak = ['Pratama', 'Lestari', 'Saputra', 'Utami', 'Wijaya', 'Sari', 'Putra', 'Rahmawati', 'Susilo', 'Handayani', 'Permana', 'Indah', 'Setiawan', 'Anggraini', 'Kusuma', 'Purnama', 'Santoso', 'Wati'];
         $genderList = ['L', 'P'];
-
-        $totalPerKelas = 9;
-        $tahunAjar = '2024/2025';
 
         $counter = 1;
         foreach ($kelasList as $kelas) {
-            for ($i = 1; $i <= $totalPerKelas; $i++) {
-                // Data orangtua
-                $namaOrtu = "Orangtua {$kelas}{$i}";
-                $nickname = "ortu_{$kelas}{$i}";
-                $notelp = '08123' . str_pad($counter, 6, '0', STR_PAD_LEFT);
-                $alamat = "Jl. Contoh {$kelas}{$i}";
-                $email = "ortu{$kelas}{$i}@mail.com";
-                $username = Str::slug($nickname);
+            for ($i = 0; $i < 9; $i++) {
+                // Nama orangtua random
+                $namaOrtu = $namaDepanOrtu[$i] . ' ' . $namaBelakangOrtu[$i];
+                $nickname = Str::slug($namaDepanOrtu[$i]);
+                $notelp = '0812' . rand(10000000, 99999999);
+                $alamat = "Jl. Mawar No. " . rand(1, 99);
+                $email = Str::slug($namaOrtu) . "@mail.com";
+                $username = Str::slug($nickname . $counter);
 
                 // Buat user
                 $user = User::create([
@@ -40,7 +39,7 @@ class PesertaDidikDanOrangtuaSeeder extends Seeder
                     'email' => $email,
                     'notelp' => $notelp,
                     'alamat' => $alamat,
-                    'password' => Hash::make('password'), // default password
+                    'password' => Hash::make('password'),
                 ]);
                 $user->assignRole('orangtua');
 
@@ -54,8 +53,8 @@ class PesertaDidikDanOrangtuaSeeder extends Seeder
                     'alamat' => $alamat,
                 ]);
 
-                // Data peserta didik
-                $namaAnak = "Anak {$kelas}{$i}";
+                // Nama anak random
+                $namaAnak = $namaDepanAnak[$i] . ' ' . $namaBelakangAnak[$i];
                 $nis = 1000000000 + $counter;
                 $tglLahir = now()->subYears(rand(5, 7))->subDays(rand(0, 365))->format('Y-m-d');
                 $jk = $genderList[$i % 2];
@@ -74,7 +73,6 @@ class PesertaDidikDanOrangtuaSeeder extends Seeder
                     'tinggibadan' => $tinggi,
                     'beratbadan' => $berat,
                     'foto' => $foto,
-                    'tahunajar' => $tahunAjar,
                 ]);
 
                 $counter++;
