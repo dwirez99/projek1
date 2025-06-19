@@ -103,7 +103,7 @@
                     <div class="flex flex-col md:flex-row items-start gap-6">
                         {{-- Kolom Kiri: Foto & Input Foto (saat edit) --}}
                         <div class="flex-shrink-0">
-                            <img src="{{ $pd->foto ? asset('storage/media/' . $pd->foto) : asset('default.jpg') }}"
+                            <img src="{{ $pd->foto ? asset('storage/' . $pd->foto) : asset('default.jpg') }}"
                                  class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg border-2 border-gray-200 shadow-sm" alt="Foto Siswa">
                             <template x-if="edit">
                                 <input type="file" name="foto" class="mt-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 w-full max-w-xs">
