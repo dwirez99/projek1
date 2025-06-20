@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
-use App\Models\StatusGizi;
+use App\Models\Statusgizi;
 use App\Models\Guru;
 use Illuminate\Http\Request;
 
