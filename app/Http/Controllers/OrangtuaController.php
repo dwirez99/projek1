@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orangtua;
 use App\Models\Pesertadidik;
-use App\Models\StatusGizi;
+use App\Models\Statusgizi;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
