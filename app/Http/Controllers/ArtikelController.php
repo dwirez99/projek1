@@ -73,7 +73,7 @@ class ArtikelController extends Controller
         $request->validate([
             'judul' => 'required',
             'konten' => 'required',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png'
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048' // Consistent with store
         ]);
 
         $data = $request->only('judul','konten');

@@ -138,7 +138,7 @@
                 <i class="bi bi-arrow-left-circle-fill"></i>
             </a>
             <div class="img-container">
-                <img src="{{ $pd->foto ? asset('storage/media/' . $pd->foto) : 'https://via.placeholder.com/250x300' }}" alt="Foto">
+                <img src="{{ $pd->foto ? asset('storage/' . $pd->foto) : 'https://via.placeholder.com/250x300' }}" alt="Foto">
             </div>
 
             <div class="info">

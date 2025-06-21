@@ -47,7 +47,7 @@
                 <div class="card overflow-hidden" x-data="{ edit: false }">
                     <div class="row g-0 h-100">
                         <div class="col-md-4">
-                            <img src="{{ $pd->foto ? asset('storage/media/' . $pd->foto) : asset('default.jpg') }}" class="img-fluid h-100" alt="Foto Siswa">
+                            <img src="{{ $pd->foto ? asset('storage/' . $pd->foto) : asset('default.jpg') }}" class="img-fluid h-100" alt="Foto Siswa">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">

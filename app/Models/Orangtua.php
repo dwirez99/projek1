@@ -10,7 +10,7 @@ class Orangtua extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $fillable = ['namaortu', 'notelportu', 'alamat', 'emailortu','nickname'];
+    protected $fillable = ['user_id', 'namaortu', 'notelportu', 'alamat', 'emailortu','nickname'];
 
     public function user()
     {
@@ -23,6 +23,6 @@ class Orangtua extends Model
         return $this->hasMany(Pesertadidik::class, 'idortu');
     }
 
-    
+
 
 }

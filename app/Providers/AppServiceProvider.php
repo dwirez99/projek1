@@ -1,11 +1,12 @@
 <?php
 
-
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
-        \Carbon\Carbon::setLocale('id');
+        Carbon::setLocale('id');
+
+        // Force HTTPS for all URLs
+        URL::forceScheme('https');
+
+        // If you want to only do this in production, keep your existing check
+        // if (config('app.env') !== 'local')
+        // {
+        //     URL::forceScheme('https');
+        // }
     }
 }

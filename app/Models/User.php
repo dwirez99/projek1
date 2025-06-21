@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, HasApiTokens;
 
     protected $fillable = [
         'name',
@@ -42,7 +43,7 @@ class User extends Authenticatable
             ->map(fn(string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
     }
-    
+
     public function orangTua()
     {
         return $this->hasOne(Orangtua::class, 'user_id'); // ganti jika nama kolom foreign key bukan 'user_id'
