@@ -193,11 +193,11 @@ class StatusgiziController extends Controller
         $orangTua = $user->orangtua;
 
         // Ambil semua peserta didik milik orang tua
-        $StatusgiziAnak = \App\Models\Statusgizi::whereHas('pesertaDidik', function ($query) use ($orangTua) {
+        $statusGiziAnak = \App\Models\Statusgizi::whereHas('pesertaDidik', function ($query) use ($orangTua) {
             $query->where('idortu', $orangTua->id);
         })->with('pesertaDidik')->get();
 
-        return view('orangtuas.Statusgizi', compact('StatusgiziAnak'));
+        return view('orangtuas.statusgizi', compact('statusGiziAnak'));
     }
 
     public function chart()
