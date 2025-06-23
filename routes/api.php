@@ -23,6 +23,10 @@ use App\Http\Controllers\Api\UserApiController;
 Route::post('/login', [UserApiController::class, 'login'])->name('api.login');
 Route::post('/register', [UserApiController::class, 'register'])->name('api.register');
 
+// Artikel API Routes (public)
+Route::get('/artikels', [ArtikelApiController::class, 'apiIndex'])->name('api.artikels.index');
+Route::get('/artikels/{artikel}', [ArtikelApiController::class, 'apiShow'])->name('api.artikels.show');
+
 // Protected routes (authentication required)
 Route::middleware('auth:sanctum')->group(function () {
     // User routes
@@ -32,10 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/profile', [UserApiController::class, 'updateProfile'])->name('api.profile.update');
     Route::post('/change-password', [UserApiController::class, 'changePassword'])->name('api.change_password');
 
-    // Artikel API Routes
-    Route::get('/artikels', [ArtikelApiController::class, 'apiIndex'])->name('api.artikels.index');
+    // Artikel API Routes (protected: create, update, delete)
     Route::post('/artikels', [ArtikelApiController::class, 'apiStore'])->name('api.artikels.store');
-    Route::get('/artikels/{artikel}', [ArtikelApiController::class, 'apiShow'])->name('api.artikels.show');
     Route::put('/artikels/{artikel}', [ArtikelApiController::class, 'apiUpdate'])->name('api.artikels.update');
     Route::patch('/artikels/{artikel}', [ArtikelApiController::class, 'apiUpdate'])->name('api.artikels.patch');
     Route::delete('/artikels/{artikel}', [ArtikelApiController::class, 'apiDestroy'])->name('api.artikels.destroy');
