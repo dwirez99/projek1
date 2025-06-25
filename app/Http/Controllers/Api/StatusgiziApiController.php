@@ -338,7 +338,7 @@ class StatusgiziApiController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'ids' => 'required|array',
-                'ids.*' => 'integer|exists:statusgizis,idstatus'
+                'ids.*' => 'integer|exists:status_gizis,idstatus'
             ]);
 
             if ($validator->fails()) {

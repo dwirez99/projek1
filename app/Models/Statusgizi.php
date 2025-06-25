@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class statusgizi extends Model
+class StatusGizi extends Model
 {
     use HasFactory;
 
+    protected $table = 'status_gizis';
     protected $primaryKey = 'idstatus';
     protected $fillable = [
         'nis',

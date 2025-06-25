@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Statusgizi;
+use App\Models\StatusGizi;
 
 class Pesertadidik extends Model
 {
@@ -36,7 +36,7 @@ class Pesertadidik extends Model
 
     public function statusgizi()
     {
-        return $this->hasOne(Statusgizi::class, 'nis', 'nis');
+        return $this->hasOne(StatusGizi::class, 'nis', 'nis');
     }
 
     public function statusgiziTerbaru()
