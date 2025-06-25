@@ -47,6 +47,15 @@ class PesertadidikApiController extends Controller
         ]);
     }
 
+    private function uploadFoto(Request $request)
+    {
+        if ($request->hasFile('foto')) {
+            // Simpan file ke folder 'foto' di storage/app/public/foto
+            return $request->file('foto')->store('foto', 'public');
+        }
+        return null;
+    }
+
     public function store(Request $request)
     {
         try {
@@ -67,11 +76,9 @@ class PesertadidikApiController extends Controller
 
             $validated['nis'] = $nis;
 
-            if ($request->hasFile('foto')) {
-                $file = $request->file('foto');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('foto', $filename, 'public');
-                $validated['foto'] = $filename;
+            $fotoPath = $this->uploadFoto($request);
+            if ($fotoPath) {
+                $validated['foto'] = $fotoPath;
             }
 
             $pd = Pesertadidik::create($validated);
@@ -95,9 +102,9 @@ class PesertadidikApiController extends Controller
         $pesertadidik = Pesertadidik::findOrFail($nis);
         $data = $request->all();
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto', 'public');
-            $data['foto'] = $foto;
+        $fotoPath = $this->uploadFoto($request);
+        if ($fotoPath) {
+            $data['foto'] = $fotoPath;
         }
 
         $pesertadidik->update($data);
