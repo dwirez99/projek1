@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use App\Models\Pesertadidik;
-use App\Models\Statusgizi;
+use App\Models\statusgizi;
 use App\Models\Orangtua;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -12,12 +12,12 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class StatusgiziController extends Controller
+class statusgiziController extends Controller
 {
     public function create($nis)
     {
         $pd = Pesertadidik::findOrFail($nis);
-        return view('Statusgizi.create', compact('pd'));
+        return view('statusgizi.create', compact('pd'));
     }
 
     public function hitung(Request $request)
@@ -144,7 +144,7 @@ class StatusgiziController extends Controller
         Log::info("NIS: $request->nis, IMT: $imt, Umur: $umurTahun-$umurBulan, Z: $z_score");
         Log::info("Z-Score: {$z_score}, Status gizi: {$status}");
 
-        return view('Statusgizi.create', [
+        return view('statusgizi.create', [
             'pd' => $pd,
             'z_score' => number_format($z_score, 3),
             'status_gizi' => $status
@@ -158,7 +158,7 @@ class StatusgiziController extends Controller
             'status_gizi' => 'required|string',
         ]);
 
-        Statusgizi::create([
+        statusgizi::create([
             'nis' => $request->nis,
             'z_score' => $request->z_score,
             'status' => $request->status_gizi,
@@ -171,7 +171,7 @@ class StatusgiziController extends Controller
 
     public function destroy($nis)
     {
-        $status = Statusgizi::where('nis', $nis)->firstOrFail();
+        $status = statusgizi::where('nis', $nis)->firstOrFail();
         $status->delete();
 
         return redirect()->back()->with('success', 'Data status gizi berhasil dihapus.');
@@ -180,8 +180,8 @@ class StatusgiziController extends Controller
 
     public function index()
     {
-        $status = Statusgizi::with('pesertaDidik')->get();
-        return view('Statusgizi.index', compact('status'));
+        $status = statusgizi::with('pesertaDidik')->get();
+        return view('statusgizi.index', compact('status'));
     }
 
     public function indexOrtu()
@@ -193,22 +193,22 @@ class StatusgiziController extends Controller
         $orangTua = $user->orangtua;
 
         // Ambil semua peserta didik milik orang tua
-        $statusGiziAnak = \App\Models\Statusgizi::whereHas('pesertaDidik', function ($query) use ($orangTua) {
+        $statusgiziAnak = \App\Models\statusgizi::whereHas('pesertaDidik', function ($query) use ($orangTua) {
             $query->where('idortu', $orangTua->id);
         })->with('pesertaDidik')->get();
 
-        return view('orangtuas.statusgizi', compact('statusGiziAnak'));
+        return view('orangtuas.statusgizi', compact('statusgiziAnak'));
     }
 
     public function chart()
     {
         // Ambil bulan unik dari data
-        $bulanList = \App\Models\Statusgizi::selectRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") as bulan')
+        $bulanList = \App\Models\statusgizi::selectRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") as bulan')
             ->distinct()
             ->orderBy('bulan', 'desc')
             ->pluck('bulan');
 
-        return view('Statusgizi.chart', compact('bulanList'));
+        return view('statusgizi.chart', compact('bulanList'));
     }
 
     public function chartData(Request $request)
@@ -218,7 +218,7 @@ class StatusgiziController extends Controller
             $bulan = now()->format('Y-m');
         }
 
-        $data = \App\Models\Statusgizi::with('pesertaDidik')
+        $data = \App\Models\statusgizi::with('pesertaDidik')
             ->whereRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") = ?', [$bulan])
             ->get();
 
@@ -250,7 +250,7 @@ class StatusgiziController extends Controller
 
         if ($ids) {
             $idArray = explode(',', $ids);
-            $status = Statusgizi::with('pesertaDidik')
+            $status = statusgizi::with('pesertaDidik')
                 ->whereIn('idstatus', $idArray)
                 ->get();
 
@@ -259,22 +259,22 @@ class StatusgiziController extends Controller
                 return $status->firstWhere('idstatus', $id);
             })->filter();
         } else {
-            $status = Statusgizi::with('pesertaDidik')
+            $status = statusgizi::with('pesertaDidik')
                 ->orderBy('tanggalpembuatan', 'asc')
                 ->get();
         }
 
-        $pdf = Pdf::loadView('Statusgizi.pdf', [
+        $pdf = Pdf::loadView('statusgizi.pdf', [
             'filteredStatus' => $status->values()
         ])->setPaper('A4', 'landscape');
 
-        return $pdf->download('Laporan_Statusgizi_' . now()->format('dmY') . '.pdf');
+        return $pdf->download('Laporan_statusgizi_' . now()->format('dmY') . '.pdf');
     }
 
     public function bulkDelete(Request $request)
     {
         $nis = explode(',', $request->selected_nis);
-        Statusgizi::whereIn('nis', $nis)->delete();
+        statusgizi::whereIn('nis', $nis)->delete();
         return redirect()->back()->with('success', 'Data yang dipilih berhasil dihapus.');
     }
 }

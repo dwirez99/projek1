@@ -70,7 +70,7 @@ class PesertadidikApiController extends Controller
             if ($request->hasFile('foto')) {
                 $file = $request->file('foto');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('media', $filename, 'public');
+                $path = $file->storeAs('foto', $filename, 'public');
                 $validated['foto'] = $filename;
             }
 
