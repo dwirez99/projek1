@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\StatusGizi;
+use App\Models\Statusgizi;
 use App\Models\Pesertadidik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +18,7 @@ class StatusgiziApiController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = StatusGizi::with('pesertadidik');
+            $query = Statusgizi::with('pesertadidik');
 
             // Filter by status
             if ($request->has('status')) {
@@ -41,9 +41,9 @@ class StatusgiziApiController extends Controller
             }
 
             // Pagination
-            $statusGizi = $query->orderBy('tanggalpembuatan', 'desc');
+            $Statusgizi = $query->orderBy('tanggalpembuatan', 'desc');
 
-            return response()->json($statusGizi);
+            return response()->json($Statusgizi);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to retrieve status gizi data',
@@ -71,7 +71,7 @@ class StatusgiziApiController extends Controller
                 ], 422);
             }
 
-            $statusGizi = StatusGizi::create([
+            $Statusgizi = Statusgizi::create([
                 'nis' => $request->nis,
                 'z_score' => $request->z_score,
                 'status' => $request->status,
@@ -80,7 +80,7 @@ class StatusgiziApiController extends Controller
 
             return response()->json([
                 'message' => 'Status gizi berhasil disimpan',
-                'data' => $statusGizi->load('pesertadidik')
+                'data' => $Statusgizi->load('pesertadidik')
             ], 201);
 
         } catch (\Exception $e) {
@@ -97,8 +97,8 @@ class StatusgiziApiController extends Controller
     public function show($id)
     {
         try {
-            $statusGizi = StatusGizi::with('pesertadidik')->findOrFail($id);
-            return response()->json(['data' => $statusGizi]);
+            $Statusgizi = Statusgizi::with('pesertadidik')->findOrFail($id);
+            return response()->json(['data' => $Statusgizi]);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Status gizi not found',
@@ -113,7 +113,7 @@ class StatusgiziApiController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $statusGizi = StatusGizi::findOrFail($id);
+            $Statusgizi = Statusgizi::findOrFail($id);
 
             $validator = Validator::make($request->all(), [
                 'nis' => 'sometimes|exists:pesertadidiks,nis',
@@ -128,11 +128,11 @@ class StatusgiziApiController extends Controller
                 ], 422);
             }
 
-            $statusGizi->update($request->only(['nis', 'z_score', 'status']));
+            $Statusgizi->update($request->only(['nis', 'z_score', 'status']));
 
             return response()->json([
                 'message' => 'Status gizi berhasil diupdate',
-                'data' => $statusGizi->load('pesertadidik')
+                'data' => $Statusgizi->load('pesertadidik')
             ]);
 
         } catch (\Exception $e) {
@@ -149,8 +149,8 @@ class StatusgiziApiController extends Controller
     public function destroy($id)
     {
         try {
-            $statusGizi = StatusGizi::findOrFail($id);
-            $statusGizi->delete();
+            $Statusgizi = Statusgizi::findOrFail($id);
+            $Statusgizi->delete();
 
             return response()->json([
                 'message' => 'Status gizi berhasil dihapus'
@@ -315,12 +315,12 @@ class StatusgiziApiController extends Controller
     public function getByNis($nis)
     {
         try {
-            $statusGizi = StatusGizi::with('pesertadidik')
+            $Statusgizi = Statusgizi::with('pesertadidik')
                 ->where('nis', $nis)
                 ->orderBy('tanggalpembuatan', 'desc')
                 ->get();
 
-            return response()->json(['data' => $statusGizi]);
+            return response()->json(['data' => $Statusgizi]);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to retrieve status gizi',
@@ -337,7 +337,7 @@ class StatusgiziApiController extends Controller
         try {
             $bulan = $request->get('bulan', now()->format('Y-m'));
 
-            $data = StatusGizi::with('pesertadidik')
+            $data = Statusgizi::with('pesertadidik')
                 ->whereRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") = ?', [$bulan])
                 ->get();
 
@@ -391,7 +391,7 @@ class StatusgiziApiController extends Controller
                 ], 422);
             }
 
-            $deletedCount = StatusGizi::whereIn('idstatus', $request->ids)->delete();
+            $deletedCount = Statusgizi::whereIn('idstatus', $request->ids)->delete();
 
             return response()->json([
                 'message' => "Berhasil menghapus $deletedCount data status gizi"
