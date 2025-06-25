@@ -36,7 +36,7 @@ class Pesertadidik extends Model
 
     public function statusgizi()
     {
-        return $this->hasOne(StatusGizi::class, 'nis', 'nis');
+        return $this->hasOne(Statusgizi::class, 'nis', 'nis');
     }
 
     public function statusgiziTerbaru()
