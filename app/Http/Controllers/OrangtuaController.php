@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orangtua;
 use App\Models\Pesertadidik;
-use App\Models\StatusGizi;
+use App\Models\Statusgizi;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -157,7 +157,7 @@ class OrangtuaController extends Controller
         // Logging untuk mengecek apakah relasi berhasil
         if (!$orangTua) {
             Log::warning("Data orangtua tidak ditemukan untuk user_id: {$user->id}");
-            return redirect()->route('orangtua.index')->with('error', 'Orangtua tidak ditemukan untuk pengguna ini.');
+            return redirect()->route('home')->with('error', 'Profil orang tua tidak ditemukan.');
         }
 
         Log::info("Orangtua ditemukan dengan ID: {$orangTua->id}");

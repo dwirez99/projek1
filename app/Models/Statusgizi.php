@@ -9,11 +9,12 @@ class Statusgizi extends Model
 {
     use HasFactory;
 
+    protected $table = 'status_gizis';
     protected $primaryKey = 'idstatus';
     protected $fillable = [
-        'nis', 
-        'z_score', 
-        'status', 
+        'nis',
+        'z_score',
+        'status',
         'tanggalpembuatan',
     ];
 
