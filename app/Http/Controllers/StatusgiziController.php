@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use App\Models\Pesertadidik;
-use App\Models\StatusGizi;
+use App\Models\Statusgizi;
 use App\Models\Orangtua;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -158,7 +158,7 @@ class StatusgiziController extends Controller
             'status_gizi' => 'required|string',
         ]);
 
-        StatusGizi::create([
+        Statusgizi::create([
             'nis' => $request->nis,
             'z_score' => $request->z_score,
             'status' => $request->status_gizi,
@@ -171,7 +171,7 @@ class StatusgiziController extends Controller
 
     public function destroy($nis)
     {
-        $status = StatusGizi::where('nis', $nis)->firstOrFail();
+        $status = Statusgizi::where('nis', $nis)->firstOrFail();
         $status->delete();
 
         return redirect()->back()->with('success', 'Data status gizi berhasil dihapus.');
@@ -180,7 +180,7 @@ class StatusgiziController extends Controller
 
     public function index()
     {
-        $status = StatusGizi::with('pesertaDidik')->get();
+        $status = Statusgizi::with('pesertaDidik')->get();
         return view('statusgizi.index', compact('status'));
     }
 
@@ -193,7 +193,7 @@ class StatusgiziController extends Controller
         $orangTua = $user->orangtua;
 
         // Ambil semua peserta didik milik orang tua
-        $statusGiziAnak = \App\Models\StatusGizi::whereHas('pesertaDidik', function ($query) use ($orangTua) {
+        $statusGiziAnak = \App\Models\Statusgizi::whereHas('pesertaDidik', function ($query) use ($orangTua) {
             $query->where('idortu', $orangTua->id);
         })->with('pesertaDidik')->get();
 
@@ -203,7 +203,7 @@ class StatusgiziController extends Controller
     public function chart()
     {
         // Ambil bulan unik dari data
-        $bulanList = \App\Models\StatusGizi::selectRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") as bulan')
+        $bulanList = \App\Models\Statusgizi::selectRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") as bulan')
             ->distinct()
             ->orderBy('bulan', 'desc')
             ->pluck('bulan');
@@ -218,7 +218,7 @@ class StatusgiziController extends Controller
             $bulan = now()->format('Y-m');
         }
 
-        $data = \App\Models\StatusGizi::with('pesertaDidik')
+        $data = \App\Models\Statusgizi::with('pesertaDidik')
             ->whereRaw('DATE_FORMAT(tanggalpembuatan, "%Y-%m") = ?', [$bulan])
             ->get();
 
@@ -250,7 +250,7 @@ class StatusgiziController extends Controller
 
         if ($ids) {
             $idArray = explode(',', $ids);
-            $status = StatusGizi::with('pesertaDidik')
+            $status = Statusgizi::with('pesertaDidik')
                 ->whereIn('idstatus', $idArray)
                 ->get();
 
@@ -259,7 +259,7 @@ class StatusgiziController extends Controller
                 return $status->firstWhere('idstatus', $id);
             })->filter();
         } else {
-            $status = StatusGizi::with('pesertaDidik')
+            $status = Statusgizi::with('pesertaDidik')
                 ->orderBy('tanggalpembuatan', 'asc')
                 ->get();
         }
@@ -274,7 +274,7 @@ class StatusgiziController extends Controller
     public function bulkDelete(Request $request)
     {
         $nis = explode(',', $request->selected_nis);
-        StatusGizi::whereIn('nis', $nis)->delete();
+        Statusgizi::whereIn('nis', $nis)->delete();
         return redirect()->back()->with('success', 'Data yang dipilih berhasil dihapus.');
     }
 }
